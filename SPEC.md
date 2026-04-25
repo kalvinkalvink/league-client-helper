@@ -1,0 +1,377 @@
+# SPEC: LolClientHelper (.NET MAUI)
+
+## 1. Project Overview
+
+| Attribute | Value |
+|-----------|-------|
+| **Project Name** | LolClientHelper |
+| **Type** | Desktop Application |
+| **Framework** | .NET MAUI (.NET 9) |
+| **Supported Platform** | Windows 10+ only |
+| **Core Function** | League of Legends client automation via LCU API |
+
+## 2. Technology Stack
+
+| Component | Technology |
+|-----------|------------|
+| **Framework** | .NET MAUI 9 |
+| **Language** | C# 12 |
+| **Target Platform** | Windows (`net9.0-windows10.0.19041.0`) |
+| **Architecture** | MVVM |
+| **HTTP Client** | HttpClient (System.Net.Http) |
+| **JSON** | System.Text.Json |
+| **Dependency Injection** | Microsoft.Extensions.DependencyInjection |
+| **Settings Persistence** | JSON file in `%APPDATA%\LolClientHelper\` |
+| **Process Query** | `Get-CimInstance Win32_Process` |
+| **Logging** | Rolling file logs in `%APPDATA%\LolClientHelper\logs\` |
+
+## 3. LCU API Authentication
+
+### 3.1 Token Retrieval (Windows)
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name='LeagueClientUx.exe'" | Select-Object -ExpandProperty CommandLine
+```
+
+Parses:
+- `--app-port=XXXX`
+- `--remoting-auth-token=YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY`
+
+### 3.2 Authentication
+
+- **URL**: `https://127.0.0.1:{PORT}`
+- **Auth**: Basic Auth with `"riot:{TOKEN}"` (Base64)
+- **SSL**: Bypass for self-signed localhost certificate
+
+### 3.3 Connection & Retry Logic
+
+**Initial Connection:**
+1. Find `LeagueClientUx.exe` process
+2. Parse `--app-port` and `--remoting-auth-token`
+3. If not found → retry every 10 seconds indefinitely
+4. Log: `"Waiting for League client to start..."` (WARNING level)
+
+**Reconnection:**
+1. If LCU connection fails during operation (network error, 401, 5xx)
+2. Wait 10 seconds before retry
+3. Max 3 retries with 10s interval
+4. Log each retry attempt
+5. After max retries → show "Connection Lost" status, stop retrying
+
+**Heartbeat:**
+- Ping `/lol-login/v1/session` every 30 seconds to verify connection
+
+## 4. Game Flow States
+
+| State | Description |
+|-------|-------------|
+| `None` | In lobby / Main menu |
+| `Matchmaking` | Searching for match |
+| `ReadyCheck` | Match found |
+| `ChampSelect` | Champion selection |
+| `InProgress` | Game in progress |
+| `PreEndOfGame` | Post-game honors |
+| `WaitingForStats` | Stats page |
+| `EndOfGame` | Can queue again |
+| `Reconnect` | Reconnection required |
+
+## 5. LCU API Endpoints
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/lol-gameflow/v1/gameflow-phase` | GET | Game state polling |
+| `/lol-matchmaking/v1/ready-check/accept` | POST | Accept match |
+| `/lol-lobby/v2/lobby/matchmaking/search` | POST | Start queue |
+| `/lol-gameflow/v1/reconnect` | POST | Reconnect |
+| `/lol-honor-v2/v1/honor-player/` | POST | Skip honors |
+| `/lol-lobby/v2/play-again` | POST | Queue again |
+| `/lol-lobby/v2/received-invitations` | GET | Pending invites |
+| `/lol-login/v1/session` | GET | Login session |
+| `/lol-summoner/v1/current-summoner` | GET | Summoner info |
+| `/lol-chat/v1/me` | PUT | Set rank/status |
+| `/lol-ranked/v1/ranked-stats/{puuid}` | GET | Rank info |
+| `/lol-match-history/v1/products/lol/{puuid}/matches` | GET | Match history |
+
+## 6. Features
+
+### 6.1 Auto Features
+
+| Feature | Default | Setting Key |
+|---------|---------|-------------|
+| Auto Accept Match | On | `AutoAcceptMatch` |
+| Auto Skip Honors | On | `AutoSkipHonors` |
+| Auto Play Again | On | `AutoPlayAgain` |
+| Auto Reconnect | Off | `AutoReconnect` |
+| Auto Accept Invite | On | `AutoAcceptInvite` |
+
+### 6.2 Rank Settings
+
+| Setting | Options | Default |
+|---------|---------|---------|
+| Queue Type | RANKED_SOLO_5x5, RANKED_FLEX_SR, RANKED_FLEX_TT, RANKED_TFT | RANKED_SOLO_5x5 |
+| Tier | IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER | CHALLENGER |
+| Division | IV, III, II, I | I |
+
+### 6.3 Friend Management
+
+- View online friends
+- Invite all friends to lobby
+- Auto-accept incoming game invites
+
+## 7. Logging System
+
+### 7.1 File Location
+
+```
+%APPDATA%\LolClientHelper\logs\log-{date}.txt
+```
+
+### 7.2 Log Levels
+
+| Level | Use Case |
+|-------|----------|
+| DEBUG | API requests/responses, token parsing, state changes |
+| INFO | Connection status, feature triggers, settings changes |
+| WARNING | Retry attempts, non-fatal errors |
+| ERROR | API failures, process detection failures |
+
+### 7.3 Log Format
+
+```
+[2026-04-25 12:00:00.123] [INFO] [MainService] Connected to LCU on port 12345
+[2026-04-25 12:00:01.456] [DEBUG] [LcuApi] GET /lol-gameflow/v1/gameflow-phase -> 200 OK
+[2026-04-25 12:00:01.789] [INFO] [GameState] State changed: None -> ReadyCheck
+[2026-04-25 12:00:01.790] [INFO] [AutoAccept] Triggered - accepting match
+[2026-04-25 12:00:02.012] [DEBUG] [LcuApi] POST /lol-matchmaking/v1/ready-check/accept -> 204 No Content
+```
+
+### 7.4 Rolling Policy
+
+- Keep last 7 days of logs
+- Auto-delete logs older than 7 days
+- One file per day
+
+## 8. Dark Theme
+
+### 8.1 Color Palette
+
+| Element | Dark Color | Light Color |
+|---------|-----------|-------------|
+| Background | #1E1E1E | #FFFFFF |
+| Surface | #2D2D2D | #F5F5F5 |
+| Primary | #00D4FF (LoL blue) | #00D4FF |
+| Text Primary | #FFFFFF | #000000 |
+| Text Secondary | #AAAAAA | #666666 |
+| Border | #3D3D3D | #E0E0E0 |
+| Accent | #C89B3C (LoL gold) | #C89B3C |
+| Error | #FF4444 | #FF4444 |
+| Success | #00CC66 | #00CC66 |
+
+### 8.2 Theme Options
+
+- **Auto**: Follow system theme
+- **Light**: Force light theme
+- **Dark**: Force dark theme (default)
+
+## 9. Architecture
+
+```
+LolClientHelper/
+├── App.xaml(.cs)                    # App entry, DI setup
+├── MauiProgram.cs                   # MAUI configuration
+├── AppShell.xaml(.cs)               # Shell navigation
+├── MainPage.xaml(.cs)               # Main UI
+├── SettingsPage.xaml(.cs)           # Settings page
+│
+├── Services/
+│   ├── LcuApiService.cs              # LCU HTTP client
+│   ├── GameStateService.cs           # Game state polling
+│   ├── LeagueProcessService.cs       # Process detection & token parsing
+│   ├── SettingsService.cs            # Settings persistence
+│   └── LoggingService.cs             # Logging
+│
+├── Models/
+│   ├── GameStatus.cs                 # Game flow enum
+│   ├── LcuCredentials.cs             # Port + Token
+│   ├── SummonerInfo.cs               # Summoner data
+│   ├── AppSettings.cs                # User settings model
+│   ├── LogEntry.cs                   # Log entry model
+│   ├── Friend.cs                     # Friend data
+│   └── Invitation.cs                 # Invite data
+│
+└── ViewModels/
+    ├── MainViewModel.cs              # Main page logic
+    └── SettingsViewModel.cs           # Settings management
+```
+
+## 10. Settings Service
+
+### 10.1 File Location
+
+```
+%APPDATA%\LolClientHelper\settings.json
+```
+
+### 10.2 Data Model
+
+```csharp
+public class AppSettings
+{
+    // Window State
+    public double WindowX { get; set; } = 100;
+    public double WindowY { get; set; } = 100;
+    public double WindowWidth { get; set; } = 400;
+    public double WindowHeight { get; set; } = 600;
+
+    // Auto Features
+    public bool AutoAcceptMatch { get; set; } = true;
+    public bool AutoSkipHonors { get; set; } = true;
+    public bool AutoPlayAgain { get; set; } = true;
+    public bool AutoReconnect { get; set; } = false;
+    public bool AutoAcceptInvite { get; set; } = true;
+
+    // Rank Settings
+    public string QueueType { get; set; } = "RANKED_SOLO_5x5";
+    public string Tier { get; set; } = "CHALLENGER";
+    public string Division { get; set; } = "I";
+
+    // Advanced Settings
+    public int PollIntervalMs { get; set; } = 500;
+    public bool MinimizeToTray { get; set; } = false;
+    public bool StartMinimized { get; set; } = false;
+    public bool StartWithWindows { get; set; } = false;
+
+    // Appearance
+    public string Theme { get; set; } = "Dark";  // Auto, Light, Dark
+
+    // Debug
+    public bool DebugLogging { get; set; } = false;
+}
+```
+
+### 10.3 Interface
+
+```csharp
+public interface ISettingsService
+{
+    AppSettings Load();
+    void Save(AppSettings settings);
+    void RestoreWindowPosition(Window window);
+    void SaveWindowPosition(Window window);
+    AppSettings Current { get; }
+}
+```
+
+### 10.4 Behavior
+
+1. **On App Start**:
+   - Load settings from JSON file
+   - Restore window position/size
+   - Apply settings to all services
+
+2. **On Setting Change**:
+   - Save immediately to disk
+   - Notify affected services
+
+3. **On App Close**:
+   - Save window position
+   - Persist all settings
+
+4. **Defaults**: If file missing/corrupt, use default values
+
+## 11. UI Structure
+
+### 11.1 Main Window
+
+```
++-------------------------------------+
+|  LolClientHelper          [x][-][x] |
++-------------------------------------+
+|  Status: Connected / Not Found     |
++-------------------------------------+
+|  Auto Features                      |
+|  +-------------------------------+  |
+|  | [x] Auto Accept Match         |  |
+|  | [x] Auto Skip Honors          |  |
+|  | [x] Auto Play Again           |  |
+|  | [ ] Auto Reconnect            |  |
+|  | [x] Auto Accept Invite        |  |
+|  +-------------------------------+  |
++-------------------------------------+
+|  Rank Settings                      |
+|  Queue: [RANKED_SOLO_5x5     v]    |
+|  Tier:  [CHALLENGER         v]      |
+|  Div:   [I                 v]       |
++-------------------------------------+
+|  Friend Actions                     |
+|  [Invite All Friends]               |
++-------------------------------------+
+|  Log Output                         |
+|  +-------------------------------+  |
+|  | [12:00:00] Connected to LCU    |  |
+|  | [12:00:01] Auto-accepting...   |  |
+|  +-------------------------------+  |
++-------------------------------------+
+```
+
+- **[x]** = Open Settings page (gear icon)
+- **[-]** = Minimize
+- **[x]** = Close
+
+### 11.2 Settings Page (Modal)
+
+```
++-------------------------------------+
+|  Settings                    [x]    |
++-------------------------------------+
+|  General                            |
+|  + Poll Interval (ms): [500    v]  |
+|  | [ ] Start minimized            |
+|  | [ ] Minimize to system tray    |
+|                                     |
+|  Appearance                         |
+|  | Theme: [Dark              v]     |
+|  |   Auto / Light / Dark          |
+|                                     |
+|  Debug                              |
+|  | [ ] Enable debug logging       |
+|                                     |
+|  Advanced                           |
+|  | [ ] Start with Windows         |
+|                                     |
+|  Reset                              |
+|  [Reset to Defaults]                |
++-------------------------------------+
+```
+
+## 12. Dependencies (NuGet)
+
+- `Microsoft.Maui.Controls` (via .NET MAUI)
+- `Microsoft.Extensions.DependencyInjection`
+- `Microsoft.Extensions.Logging`
+- `CommunityToolkit.Mvvm`
+
+## 13. Build Configuration
+
+| Setting | Value |
+|---------|-------|
+| Target Framework | `net9.0-windows10.0.19041.0` |
+| Min Windows Version | 10.0.17763.0 |
+| Output Type | Exe |
+| Windows Package Type | None |
+
+## 14. Configuration Defaults
+
+| Setting | Default |
+|---------|---------|
+| Poll Interval | 500ms |
+| Default Queue | RANKED_SOLO_5x5 |
+| Default Tier | CHALLENGER |
+| Default Division | I |
+| Theme | Dark |
+| Debug Logging | false |
+| Start Minimized | false |
+| Minimize to Tray | false |
+| Start with Windows | false |
+| Window Position | Centered |
+| Window Size | 400x600 |

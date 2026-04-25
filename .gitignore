@@ -1,0 +1,68 @@
+## --- .NET / C# ---
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.userosscache
+*.sln.doccache
+
+## --- MAUI Specific ---
+# Ignore generated platforms artifacts
+Platforms/Android/Generated/
+Platforms/iOS/Generated/
+
+## --- Visual Studio ---
+.vs/
+[Vv]isual[Ss]tudio/
+$RECYCLE.BIN/
+*.suo
+*.user
+*.userosscache
+*.sln.doccache
+*.cache
+*.publish.xml
+
+## --- VS Code ---
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+## --- macOS / iOS / Catalyst ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.Trashes
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.pbxuser
+*.xcuserdatad
+*-IPHONE
+DerivedData/
+build/
+
+## --- Android ---
+*.apk
+*.aab
+*.dex
+*.keystore
+!public.keystore # Only if you want to track a public dev keystore
+progard/
+
+## --- Tooling & Packages ---
+.nuget/
+packages/
+*.nupkg
+# Restore logs
+project.assets.json
+project.lock.json
+
+## --- OS Files ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
