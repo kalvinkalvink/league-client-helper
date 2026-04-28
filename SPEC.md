@@ -75,6 +75,13 @@ Parses:
 | `EndOfGame` | Can queue again |
 | `Reconnect` | Reconnection required |
 
+**State Tracking**: App polls `/lol-gameflow/v1/gameflow-phase` at interval defined in settings (default 500ms) to detect state changes.
+
+**State Change Handling**:
+- None → Matchmaking: Auto start game enabled → poll search endpoint
+- ReadyCheck → None: Auto accept match → POST accept
+- InProgress → PreEndOfGame: Auto reenter lobby enabled → POST honor, then POST play-again
+
 ## 5. LCU API Endpoints
 
 | Endpoint | Method | Purpose |
@@ -86,6 +93,9 @@ Parses:
 | `/lol-honor-v2/v1/honor-player/` | POST | Skip honors |
 | `/lol-lobby/v2/play-again` | POST | Queue again |
 | `/lol-lobby/v2/received-invitations` | GET | Pending invites |
+| `/lol-lobby/v2/received-invitations/{id}/accept` | POST | Accept invitation |
+| `/lol-lobby/v2/lobby/invitations` | POST | Invite friends to lobby |
+| `/lol-chat/v1/friends` | GET | Friend list |
 | `/lol-login/v1/session` | GET | Login session |
 | `/lol-summoner/v1/current-summoner` | GET | Summoner info |
 | `/lol-chat/v1/me` | PUT | Set rank/status |
@@ -96,15 +106,17 @@ Parses:
 
 ### 6.1 Auto Features
 
-| Feature | Default | Setting Key |
-|---------|---------|-------------|
-| Auto Start Game | Off | `AutoStartGame` |
-| Auto Accept Match | On | `AutoAcceptMatch` |
-| Auto Skip Like | On | `AutoSkipLike` |
-| Auto Reenter Lobby | On | `AutoReenterLobby` |
-| Auto Accept Game Invite | On | `AutoAcceptInvite` |
+| Feature | Default | Setting Key | Behavior |
+|---------|---------|-------------|----------|
+| Auto Start Game | Off | `AutoStartGame` | Polls `/lol-lobby/v2/lobby/matchmaking/search` until it succeeds or fails due to unmet requirements |
+| Auto Accept Match | On | `AutoAcceptMatch` | POST to `/lol-matchmaking/v1/ready-check/accept` on ready check |
+| Auto Skip Like | On | `AutoSkipLike` | POST with empty body to `/lol-honor-v2/v1/honor-player/` after game ends |
+| Auto Reenter Lobby | On | `AutoReenterLobby` | When game status changes from InProgress → PreEndOfGame, call honor API then `/lol-lobby/v2/play-again` |
+| Auto Accept Game Invite | On | `AutoAcceptInvite` | GET `/lol-lobby/v2/received-invitations`, then POST accept for each |
 
-### 6.2 Rank Settings
+### 6.2 Rank (Fake Rank) Settings
+
+Used for displaying fake rank when others hover over your profile.
 
 | Setting | Options | Default |
 |---------|---------|---------|
@@ -112,10 +124,16 @@ Parses:
 | Tier | IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER | CHALLENGER |
 | Division | IV, III, II, I | I |
 
+**API**: PUT `/lol-chat/v1/me`
+```json
+{"lol": {"rankedLeagueQueue": "...", "rankedLeagueTier": "...", "rankedLeagueDivision": "..."}}
+```
+
 ### 6.3 Friend Management
 
-- View online friends
-- Invite all friends to lobby
+- Get friends from `/lol-chat/v1/friends`
+- Extract unique friend groups from each friend's `groupName` field
+- Invite all friends (filtered by selected group) via POST to `/lol-lobby/v2/lobby/invitations`
 - Auto-accept incoming game invites
 
 ## 7. Logging System
@@ -220,8 +238,8 @@ public class AppSettings
     // Window State
     public double WindowX { get; set; } = 100;
     public double WindowY { get; set; } = 100;
-    public double WindowWidth { get; set; } = 400;
-    public double WindowHeight { get; set; } = 600;
+    public double WindowWidth { get; set; } = 1000;
+    public double WindowHeight { get; set; } = 800;
 
     // Game Auto
     public bool AutoStartGame { get; set; } = false;
@@ -239,7 +257,7 @@ public class AppSettings
     public string QueueType { get; set; } = "RANKED_SOLO_5x5";
     public string Tier { get; set; } = "CHALLENGER";
     public string Division { get; set; } = "I";
-    public string Status { get; set; } = "Online";
+    public string Status { get; set; } = "chat";
 
     // Advanced Settings
     public int PollIntervalMs { get; set; } = 500;
@@ -278,6 +296,7 @@ public interface ISettingsService
    - Load settings from JSON file
    - Restore window position/size
    - Apply settings to all services
+   - If Language not set in settings, auto-detect from system locale (fallback to English)
 
 2. **On Setting Change**:
    - Save immediately to disk
@@ -291,12 +310,16 @@ public interface ISettingsService
 
 ## 11. UI Structure
 
-### 11.1 Main Window
+### 11.1 Main Window (Resizable)
+
+- Default size: 1000x800
+- Minimum size: 400x600
+- Regular Windows title bar with native controls (minimize, maximize, close)
+- Toolbar below title bar with File and Settings buttons
 
 ```
 +-------------------------------------+
-| [File]                              |
-| [Settings]                         |
+| [File] [Settings]                 |
 +-------------------------------------+
 | +--------+ +-----------------------+ |
 | | Tabs   | | Tab Content          | |
@@ -313,11 +336,17 @@ public interface ISettingsService
 | | Status | |                       | |
 | +--------+ +-----------------------+ |
 +-------------------------------------+
+| Status: Connecting... (right align) |
++-------------------------------------+
 ```
 
-- **File** button in title bar (opens file menu)
-- **Settings** button in title bar (opens settings popup window)
+- **File** button: Opens dropdown menu with "Settings" option
+- **Settings** button: Opens settings popup window directly
 - **Tabs** on the left side, vertical navigation
+- **Status bar**: Bottom of window, displays connection status (right-aligned)
+  - "Connecting..." when LCU not found
+  - "Connected" when connected
+  - Current game state (e.g., "In Game", "Lobby", "Champ Select", "Matchmaking")
 
 ### 11.2 Tab Contents
 
@@ -376,9 +405,11 @@ public interface ISettingsService
 - **Game Mode dropdown**: RANKED_SOLO_5x5, RANKED_FLEX_SR, RANKED_FLEX_TT, RANKED_TFT
 - **Ranking dropdown**: IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER
 - **Level dropdown**: IV, III, II, I
-- **Status dropdown**: Online, Offline, Gaming, AFK, Mobile Online
+- **Status dropdown**: chat, away, dnd, offline, mobile (Online, In Game, AFK, Offline, Mobile Online)
+- Status changes are applied immediately when user selects from dropdown
+- Uses LCU API: PUT `/lol-chat/v1/me` with `availability` field
 
-### 11.3 Settings Window (Modal Popup)
+### 11.3 Settings Window (Separate Non-Modal Window)
 
 ```
 +-------------------------------------+
@@ -386,6 +417,7 @@ public interface ISettingsService
 +-------------------------------------+
 |  General                            |
 |  + Poll Interval (ms): [500    v]  |
+|  + Language:      [English    v]   |
 |                                     |
 |  Appearance                         |
 |  | Theme: [Dark              v]     |
@@ -400,14 +432,16 @@ public interface ISettingsService
 ```
 
 - **Poll Interval**: Polling interval in milliseconds (default: 500ms)
+- **Language**: Dropdown to select language (English, 简体中文, 繁體中文)
 - **Theme**: Auto / Light / Dark (default: Dark)
 - **Change ranking on start**: Whether to change game ranking settings on app start
+- This window can stay open while using the main window
 
 ### 11.4 Title Bar Controls
 
-- **File** button: Opens file menu (with options like Exit)
-- **Settings** button: Opens settings popup window
-- Standard window controls: Minimize, Maximize, Close
+- **File** button: Opens dropdown menu with "Settings" option
+- **Settings** button: Opens settings popup window directly
+- Standard window controls: Minimize, Maximize, Close (native Windows title bar)
 
 ## 12. Dependencies (NuGet)
 
@@ -434,18 +468,6 @@ public interface ISettingsService
 | English | en |
 | Chinese (Simplified) | zh-CN |
 | Chinese (Traditional) | zh-TW |
-| Japanese | ja |
-| Korean | ko |
-| Thai | th |
-| Vietnamese | vi |
-| Indonesian | id |
-| Malay | ms |
-| Filipino | tl |
-| Russian | ru |
-| Turkish | tr |
-| Polish | pl |
-| Portuguese (Brazil) | pt-BR |
-| Spanish (Latin America) | es-AR |
 
 ### 14.2 Translation Keys
 
@@ -454,7 +476,6 @@ public interface ISettingsService
   "app.title": "LolClientHelper",
   "menu.file": "File",
   "menu.settings": "Settings",
-  "menu.exit": "Exit",
   
   "tab.game_auto": "Game Auto",
   "tab.main_page": "Main Page",
@@ -467,6 +488,7 @@ public interface ISettingsService
   "setting.theme_light": "Light",
   "setting.theme_dark": "Dark",
   "setting.change_ranking_on_start": "Change ranking on start",
+  "setting.language": "Language",
   "setting.reset": "Reset to Defaults",
   
   "checkbox.auto_start_game": "Auto Start Game",
@@ -504,11 +526,11 @@ public interface ISettingsService
   "division.ii": "II",
   "division.i": "I",
   
-  "status.online": "Online",
+  "status.chat": "Online",
+  "status.away": "Away",
+  "status.dnd": "In Game",
   "status.offline": "Offline",
-  "status.gaming": "Gaming",
-  "status.afk": "AFK",
-  "status.mobile_online": "Mobile Online",
+  "status.mobile": "Mobile Online",
   
   "window.settings": "Settings",
   "button.close": "Close"
@@ -530,10 +552,7 @@ Resources/
 ├── Strings/
 │   ├── Strings.en.resx (default)
 │   ├── Strings.zh-CN.resx
-│   ├── Strings.zh-TW.resx
-│   ├── Strings.ja.resx
-│   ├── Strings.ko.resx
-│   └── ...
+│   └── Strings.zh-TW.resx
 ```
 
 ## 15. Configuration Defaults
@@ -550,4 +569,4 @@ Resources/
 | Minimize to Tray | false |
 | Start with Windows | false |
 | Window Position | Centered |
-| Window Size | 400x600 |
+| Window Size | 1000x800 |
