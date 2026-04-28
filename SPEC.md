@@ -43,6 +43,37 @@ Parses:
 - **Auth**: Basic Auth with `"riot:{TOKEN}"` (Base64)
 - **SSL**: Bypass for self-signed localhost certificate
 
+**SSL Bypass Implementation:**
+```csharp
+var handler = new HttpClientHandler();
+handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+{
+    // Accept all certificates for localhost/127.0.0.1
+    if (message.RequestUri.Host == "127.0.0.1" || message.RequestUri.Host == "localhost")
+        return true;
+    return errors == SslPolicyErrors.None;
+};
+var httpClient = new HttpClient(handler);
+```
+
+### 3.3 Process Query (Requires Admin)
+
+**Important:** Querying another process's CommandLine requires administrative privileges.
+
+**app.manifest:**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+    </security>
+  </trustInfo>
+</assembly>
+```
+
+This ensures the app runs with elevated privileges to query LeagueClientUx.exe process details.
+
 ### 3.3 Connection & Retry Logic
 
 **Initial Connection:**
@@ -114,13 +145,28 @@ Parses:
 
 Connect to: `wss://127.0.0.1:{base_port}/`
 
+**Implementation:**
+- Use `System.Net.WebSockets.ClientWebSocket` for the connection
+- WAMP uses a specific message format for subscriptions
+- Send subscribe message as JSON array: `[5, "topic_name"]`
+
+**WAMP Message Format:**
+```csharp
+// Subscribe message structure
+[5, "OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST"]
+
+// Example WAMP handshake and subscribe:
+await ws.SendAsync(Encoding.UTF8.GetBytes("[1,\"wamp\",2,\"\""+realm+"\"]"), ...);  // Hello
+await ws.SendAsync(Encoding.UTF8.GetBytes("[5,\"OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST\"]"), ...);  // Subscribe
+```
+
 | Topic | Event | Description |
 |-------|-------|-------------|
 | `OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST` | gameflow phase changed | Real-time game state tracking |
 | `OnJsonApiEvent_lol-matchmaking_v1_ready-check_*` | ready check received | Auto-accept when match found |
 | `OnJsonApiEvent_guilds_jwt-token-received_*` | token refresh | Auto-reconnect on token refresh |
 
-**Implementation:**
+**Behavior:**
 - Use WebSocket for game state tracking (real-time, low latency)
 - Fall back to HTTP polling if WebSocket connection fails
 - Handle reconnection automatically on WebSocket disconnect
