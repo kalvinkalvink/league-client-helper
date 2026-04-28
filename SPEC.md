@@ -51,6 +51,11 @@ Parses:
 3. If not found → retry every 10 seconds indefinitely
 4. Log: `"Waiting for League client to start..."` (WARNING level)
 
+**WebSocket Connection (WAMP):**
+- Connect to `wss://127.0.0.1:{port}/` using the base port (app-port + 1 typically)
+- Authenticate with the same riot token
+- Subscribe to game flow events for real-time state tracking
+
 **Reconnection:**
 1. If LCU connection fails during operation (network error, 401, 5xx)
 2. Wait 10 seconds before retry
@@ -59,7 +64,8 @@ Parses:
 5. After max retries → show "Connection Lost" status, stop retrying
 
 **Heartbeat:**
-- Ping `/lol-login/v1/session` every 30 seconds to verify connection
+- For WebSocket: monitor connection state
+- For HTTP fallback: Ping `/lol-login/v1/session` every 30 seconds
 
 ## 4. Game Flow States
 
@@ -84,9 +90,11 @@ Parses:
 
 ## 5. LCU API Endpoints
 
+### 5.1 HTTP Endpoints
+
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
-| `/lol-gameflow/v1/gameflow-phase` | GET | Game state polling |
+| `/lol-gameflow/v1/gameflow-phase` | GET | Game state polling (fallback) |
 | `/lol-matchmaking/v1/ready-check/accept` | POST | Accept match |
 | `/lol-lobby/v2/lobby/matchmaking/search` | POST | Start queue |
 | `/lol-gameflow/v1/reconnect` | POST | Reconnect |
@@ -101,6 +109,21 @@ Parses:
 | `/lol-chat/v1/me` | PUT | Set rank/status |
 | `/lol-ranked/v1/ranked-stats/{puuid}` | GET | Rank info |
 | `/lol-match-history/v1/products/lol/{puuid}/matches` | GET | Match history |
+
+### 5.2 WebSocket (WAMP) Subscriptions
+
+Connect to: `wss://127.0.0.1:{base_port}/`
+
+| Topic | Event | Description |
+|-------|-------|-------------|
+| `OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST` | gameflow phase changed | Real-time game state tracking |
+| `OnJsonApiEvent_lol-matchmaking_v1_ready-check_*` | ready check received | Auto-accept when match found |
+| `OnJsonApiEvent_guilds_jwt-token-received_*` | token refresh | Auto-reconnect on token refresh |
+
+**Implementation:**
+- Use WebSocket for game state tracking (real-time, low latency)
+- Fall back to HTTP polling if WebSocket connection fails
+- Handle reconnection automatically on WebSocket disconnect
 
 ## 6. Features
 
@@ -197,29 +220,34 @@ Used for displaying fake rank when others hover over your profile.
 LolClientHelper/
 ├── App.xaml(.cs)                    # App entry, DI setup
 ├── MauiProgram.cs                   # MAUI configuration
-├── AppShell.xaml(.cs)               # Shell navigation
-├── MainPage.xaml(.cs)               # Main UI
-├── SettingsPage.xaml(.cs)           # Settings page
+├── MainWindow.xaml(.cs)             # Main window
+├── SettingsWindow.xaml(.cs)           # Settings window (non-modal)
 │
 ├── Services/
-│   ├── LcuApiService.cs              # LCU HTTP client
-│   ├── GameStateService.cs           # Game state polling
-│   ├── LeagueProcessService.cs       # Process detection & token parsing
-│   ├── SettingsService.cs            # Settings persistence
-│   └── LoggingService.cs             # Logging
+│   ├── LcuApiService.cs           # LCU HTTP client
+│   ├── GameStateService.cs        # Game state (WebSocket + HTTP fallback)
+│   ├── LeagueProcessService.cs     # Process detection & token parsing
+│   ├── SettingsService.cs         # Settings persistence
+│   ├── LoggingService.cs          # Logging
+│   └── WebSocketService.cs       # WAMP WebSocket client for real-time events
 │
 ├── Models/
-│   ├── GameStatus.cs                 # Game flow enum
-│   ├── LcuCredentials.cs             # Port + Token
+│   ├── GameState.cs                 # Game flow enum
+│   ├── LcuCredentials.cs            # Port + Token
 │   ├── SummonerInfo.cs               # Summoner data
-│   ├── AppSettings.cs                # User settings model
-│   ├── LogEntry.cs                   # Log entry model
-│   ├── Friend.cs                     # Friend data
-│   └── Invitation.cs                 # Invite data
+│   ├── AppSettings.cs               # User settings model
+│   ├── Friend.cs                   # Friend data
+│   └── Invitation.cs               # Invitation data
 │
-└── ViewModels/
-    ├── MainViewModel.cs              # Main page logic
-    └── SettingsViewModel.cs           # Settings management
+├── ViewModels/
+│   ├── MainViewModel.cs             # Main page logic
+│   └── SettingsViewModel.cs         # Settings management
+│
+└── Resources/
+    └── Strings/                    # Localization
+        ├── Strings.en.resx
+        ├── Strings.zh-CN.resx
+        └── Strings.zh-TW.resx
 ```
 
 ## 10. Settings Service
@@ -261,9 +289,7 @@ public class AppSettings
 
     // Advanced Settings
     public int PollIntervalMs { get; set; } = 500;
-    public bool MinimizeToTray { get; set; } = false;
     public bool StartMinimized { get; set; } = false;
-    public bool StartWithWindows { get; set; } = false;
 
     // Appearance
     public string Theme { get; set; } = "Dark";  // Auto, Light, Dark
@@ -305,8 +331,7 @@ public interface ISettingsService
 3. **On App Close**:
    - Save window position
    - Persist all settings
-
-4. **Defaults**: If file missing/corrupt, use default values
+   - Close application (no tray)
 
 ## 11. UI Structure
 
@@ -431,10 +456,36 @@ public interface ISettingsService
 +-------------------------------------+
 ```
 
-- **Poll Interval**: Polling interval in milliseconds (default: 500ms)
+- **Poll Interval**: Polling interval in milliseconds (fallback when WebSocket fails)
 - **Language**: Dropdown to select language (English, 简体中文, 繁體中文)
 - **Theme**: Auto / Light / Dark (default: Dark)
 - **Change ranking on start**: Whether to change game ranking settings on app start
+- Window is a **singleton**: only one instance allowed, focus existing if already open
+
+### 11.4 Window Management
+
+- **Main Window**: Standard Windows title bar (native min/max/close)
+- **Settings Window**: 
+  - Separate non-modal window that can stay open while using main window
+  - **Singleton pattern**: Only one instance allowed
+  - If user clicks Settings while window is open, focus the existing window instead of creating a new one
+  - Track window instance in a static field to prevent spawning multiple windows
+  ```csharp
+  private static SettingsWindow? _instance;
+  public static void Show()
+  {
+      if (_instance == null || _instance.IsClosed)
+      {
+          _instance = new SettingsWindow();
+          _instance.Closed += (s, e) => _instance = null;
+          _instance.Show();
+      }
+      else
+      {
+          _instance.Activate();
+      }
+  }
+  ```
 - This window can stay open while using the main window
 
 ### 11.4 Title Bar Controls
@@ -566,7 +617,5 @@ Resources/
 | Theme | Dark |
 | Debug Logging | false |
 | Start Minimized | false |
-| Minimize to Tray | false |
-| Start with Windows | false |
 | Window Position | Centered |
 | Window Size | 1000x800 |
