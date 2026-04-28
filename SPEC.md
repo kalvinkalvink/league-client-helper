@@ -98,11 +98,11 @@ Parses:
 
 | Feature | Default | Setting Key |
 |---------|---------|-------------|
+| Auto Start Game | Off | `AutoStartGame` |
 | Auto Accept Match | On | `AutoAcceptMatch` |
-| Auto Skip Honors | On | `AutoSkipHonors` |
-| Auto Play Again | On | `AutoPlayAgain` |
-| Auto Reconnect | Off | `AutoReconnect` |
-| Auto Accept Invite | On | `AutoAcceptInvite` |
+| Auto Skip Like | On | `AutoSkipLike` |
+| Auto Reenter Lobby | On | `AutoReenterLobby` |
+| Auto Accept Game Invite | On | `AutoAcceptInvite` |
 
 ### 6.2 Rank Settings
 
@@ -223,17 +223,23 @@ public class AppSettings
     public double WindowWidth { get; set; } = 400;
     public double WindowHeight { get; set; } = 600;
 
-    // Auto Features
+    // Game Auto
+    public bool AutoStartGame { get; set; } = false;
     public bool AutoAcceptMatch { get; set; } = true;
-    public bool AutoSkipHonors { get; set; } = true;
-    public bool AutoPlayAgain { get; set; } = true;
-    public bool AutoReconnect { get; set; } = false;
+    public bool AutoSkipLike { get; set; } = true;
+    public bool AutoReenterLobby { get; set; } = true;
+
+    // Main Page
     public bool AutoAcceptInvite { get; set; } = true;
 
-    // Rank Settings
+    // Lobby
+    public string FriendFilterGroup { get; set; } = "All";
+
+    // Game Status - Ranking
     public string QueueType { get; set; } = "RANKED_SOLO_5x5";
     public string Tier { get; set; } = "CHALLENGER";
     public string Division { get; set; } = "I";
+    public string Status { get; set; } = "Online";
 
     // Advanced Settings
     public int PollIntervalMs { get; set; } = 500;
@@ -243,6 +249,10 @@ public class AppSettings
 
     // Appearance
     public string Theme { get; set; } = "Dark";  // Auto, Light, Dark
+    public bool ChangeRankingOnStart { get; set; } = false;
+
+    // Localization
+    public string Language { get; set; } = "en";
 
     // Debug
     public bool DebugLogging { get; set; } = false;
@@ -285,40 +295,90 @@ public interface ISettingsService
 
 ```
 +-------------------------------------+
-|  LolClientHelper          [x][-][x] |
+| [File]                              |
+| [Settings]                         |
 +-------------------------------------+
-|  Status: Connected / Not Found     |
-+-------------------------------------+
-|  Auto Features                      |
-|  +-------------------------------+  |
-|  | [x] Auto Accept Match         |  |
-|  | [x] Auto Skip Honors          |  |
-|  | [x] Auto Play Again           |  |
-|  | [ ] Auto Reconnect            |  |
-|  | [x] Auto Accept Invite        |  |
-|  +-------------------------------+  |
-+-------------------------------------+
-|  Rank Settings                      |
-|  Queue: [RANKED_SOLO_5x5     v]    |
-|  Tier:  [CHALLENGER         v]      |
-|  Div:   [I                 v]       |
-+-------------------------------------+
-|  Friend Actions                     |
-|  [Invite All Friends]               |
-+-------------------------------------+
-|  Log Output                         |
-|  +-------------------------------+  |
-|  | [12:00:00] Connected to LCU    |  |
-|  | [12:00:01] Auto-accepting...   |  |
-|  +-------------------------------+  |
+| +--------+ +-----------------------+ |
+| | Tabs   | | Tab Content          | |
+| |        | |                       | |
+| | Game   | | [Content area        | |
+| | Auto   | |  based on            | |
+| |        | |  selected tab]        | |
+| | Main   | |                       | |
+| | Page   | |                       | |
+| |        | |                       | |
+| | Lobby  | |                       | |
+| |        | |                       | |
+| | Game   | |                       | |
+| | Status | |                       | |
+| +--------+ +-----------------------+ |
 +-------------------------------------+
 ```
 
-- **[x]** = Open Settings page (gear icon)
-- **[-]** = Minimize
-- **[x]** = Close
+- **File** button in title bar (opens file menu)
+- **Settings** button in title bar (opens settings popup window)
+- **Tabs** on the left side, vertical navigation
 
-### 11.2 Settings Page (Modal)
+### 11.2 Tab Contents
+
+#### 11.2.1 Game Auto Tab
+
+```
++-------------------------------+
+| Game Auto                    |
++-------------------------------+
+| [x] Auto Start Game          |
+| [x] Auto Accept Match        |
+| [x] Auto Skip Like           |
+| [x] Auto Reenter Lobby       |
++-------------------------------+
+```
+
+#### 11.2.2 Main Page Tab
+
+```
++-------------------------------+
+| Main Page                     |
++-------------------------------+
+| [x] Auto Accept Game Invite   |
++-------------------------------+
+```
+
+#### 11.2.3 Lobby Tab
+
+```
++-------------------------------+
+| Lobby                         |
++-------------------------------+
+| [Invite All Friends]          |
+| Filter: [All              v]  |
++-------------------------------+
+```
+
+- **Invite All Friends** button: invites all online friends to lobby
+- **Filter dropdown**: filters friends by group (default: "All")
+  - Options: All, Custom groups from friend's list
+
+#### 11.2.4 Game Status Tab
+
+```
++-------------------------------+
+| Game Status                   |
++-------------------------------+
+| Game Mode:  [Select         v] |
+| Ranking:   [Select         v] |
+| Level:     [Select         v] |
+|                               |
+| Status:   [Select         v]  |
++-------------------------------+
+```
+
+- **Game Mode dropdown**: RANKED_SOLO_5x5, RANKED_FLEX_SR, RANKED_FLEX_TT, RANKED_TFT
+- **Ranking dropdown**: IRON, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, MASTER, GRANDMASTER, CHALLENGER
+- **Level dropdown**: IV, III, II, I
+- **Status dropdown**: Online, Offline, Gaming, AFK, Mobile Online
+
+### 11.3 Settings Window (Modal Popup)
 
 ```
 +-------------------------------------+
@@ -326,23 +386,28 @@ public interface ISettingsService
 +-------------------------------------+
 |  General                            |
 |  + Poll Interval (ms): [500    v]  |
-|  | [ ] Start minimized            |
-|  | [ ] Minimize to system tray    |
 |                                     |
 |  Appearance                         |
 |  | Theme: [Dark              v]     |
 |  |   Auto / Light / Dark          |
 |                                     |
-|  Debug                              |
-|  | [ ] Enable debug logging       |
-|                                     |
 |  Advanced                           |
-|  | [ ] Start with Windows         |
+|  | [x] Change ranking on start    |
 |                                     |
 |  Reset                              |
 |  [Reset to Defaults]                |
 +-------------------------------------+
 ```
+
+- **Poll Interval**: Polling interval in milliseconds (default: 500ms)
+- **Theme**: Auto / Light / Dark (default: Dark)
+- **Change ranking on start**: Whether to change game ranking settings on app start
+
+### 11.4 Title Bar Controls
+
+- **File** button: Opens file menu (with options like Exit)
+- **Settings** button: Opens settings popup window
+- Standard window controls: Minimize, Maximize, Close
 
 ## 12. Dependencies (NuGet)
 
@@ -360,7 +425,118 @@ public interface ISettingsService
 | Output Type | Exe |
 | Windows Package Type | None |
 
-## 14. Configuration Defaults
+## 14. i18n (Internationalization)
+
+### 14.1 Supported Languages
+
+| Language | Code |
+|----------|------|
+| English | en |
+| Chinese (Simplified) | zh-CN |
+| Chinese (Traditional) | zh-TW |
+| Japanese | ja |
+| Korean | ko |
+| Thai | th |
+| Vietnamese | vi |
+| Indonesian | id |
+| Malay | ms |
+| Filipino | tl |
+| Russian | ru |
+| Turkish | tr |
+| Polish | pl |
+| Portuguese (Brazil) | pt-BR |
+| Spanish (Latin America) | es-AR |
+
+### 14.2 Translation Keys
+
+```json
+{
+  "app.title": "LolClientHelper",
+  "menu.file": "File",
+  "menu.settings": "Settings",
+  "menu.exit": "Exit",
+  
+  "tab.game_auto": "Game Auto",
+  "tab.main_page": "Main Page",
+  "tab.lobby": "Lobby",
+  "tab.game_status": "Game Status",
+  
+  "setting.poll_interval": "Poll Interval (ms)",
+  "setting.theme": "Theme",
+  "setting.theme_auto": "Auto",
+  "setting.theme_light": "Light",
+  "setting.theme_dark": "Dark",
+  "setting.change_ranking_on_start": "Change ranking on start",
+  "setting.reset": "Reset to Defaults",
+  
+  "checkbox.auto_start_game": "Auto Start Game",
+  "checkbox.auto_accept_match": "Auto Accept Match",
+  "checkbox.auto_skip_like": "Auto Skip Like",
+  "checkbox.auto_reenter_lobby": "Auto Reenter Lobby",
+  "checkbox.auto_accept_game_invite": "Auto Accept Game Invite",
+  
+  "button.invite_all_friends": "Invite All Friends",
+  "filter.all": "All",
+  "filter.group": "Filter by Group",
+  
+  "dropdown.game_mode": "Game Mode",
+  "dropdown.ranking": "Ranking",
+  "dropdown.level": "Level",
+  "dropdown.status": "Status",
+  
+  "queue.ranked_solo_5x5": "Ranked Solo",
+  "queue.ranked_flex_sr": "Ranked Flex SR",
+  "queue.ranked_flex_tt": "Ranked Flex TT",
+  "queue.ranked_tft": "Ranked TFT",
+  
+  "tier.iron": "Iron",
+  "tier.bronze": "Bronze",
+  "tier.silver": "Silver",
+  "tier.gold": "Gold",
+  "tier.platinum": "Platinum",
+  "tier.diamond": "Diamond",
+  "tier.master": "Master",
+  "tier.grandmaster": "Grandmaster",
+  "tier.challenger": "Challenger",
+  
+  "division.iv": "IV",
+  "division.iii": "III",
+  "division.ii": "II",
+  "division.i": "I",
+  
+  "status.online": "Online",
+  "status.offline": "Offline",
+  "status.gaming": "Gaming",
+  "status.afk": "AFK",
+  "status.mobile_online": "Mobile Online",
+  
+  "window.settings": "Settings",
+  "button.close": "Close"
+}
+```
+
+### 14.3 Translation Loading
+
+- Default language: English (en)
+- Language detection order:
+  1. Use saved preference from settings
+  2. Fall back to system locale
+  3. Fall back to English if translation not found
+
+### 14.4 Translation File Format
+
+```
+Resources/
+├── Strings/
+│   ├── Strings.en.resx (default)
+│   ├── Strings.zh-CN.resx
+│   ├── Strings.zh-TW.resx
+│   ├── Strings.ja.resx
+│   ├── Strings.ko.resx
+│   └── ...
+```
+
+## 15. Configuration Defaults
 
 | Setting | Default |
 |---------|---------|
