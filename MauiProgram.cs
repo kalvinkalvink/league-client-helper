@@ -1,4 +1,6 @@
 using LolClientHelper.Services;
+using LolClientHelper.ViewModels;
+using LolClientHelper.Views;
 using Microsoft.Extensions.Logging;
 
 namespace LolClientHelper;
@@ -33,6 +35,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<ILcuApiService, LcuApiService>();
         builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
         builder.Services.AddSingleton<IGameStateService, GameStateService>();
+        builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
+        builder.Services.AddSingleton<IWindowService, WindowService>();
+
+        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<SettingsWindow>();
 
         // -----------------------------------------------------------------
         // Debug logging from Microsoft.Extensions.Logging (dev builds only)
