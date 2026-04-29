@@ -28,6 +28,12 @@ public static class MauiProgram
         // Settings — singleton; loaded once at startup.
         builder.Services.AddSingleton<ISettingsService, SettingsService>();
 
+        // LCU communication layer (spec sections 3, 4, 5).
+        builder.Services.AddSingleton<ILeagueProcessService, LeagueProcessService>();
+        builder.Services.AddSingleton<ILcuApiService, LcuApiService>();
+        builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
+        builder.Services.AddSingleton<IGameStateService, GameStateService>();
+
         // -----------------------------------------------------------------
         // Debug logging from Microsoft.Extensions.Logging (dev builds only)
         // -----------------------------------------------------------------
