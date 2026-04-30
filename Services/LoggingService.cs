@@ -29,6 +29,9 @@ public sealed class LoggingService : ILoggingService, IDisposable
     /// <inheritdoc/>
     public bool IsDebugEnabled { get; set; }
 
+    /// <inheritdoc/>
+    public event EventHandler<LogEntry>? LogEntryWritten;
+
     // -------------------------------------------------------------------------
     // Construction
     // -------------------------------------------------------------------------
@@ -84,6 +87,7 @@ public sealed class LoggingService : ILoggingService, IDisposable
         var now = DateTime.Now;
         var today = DateOnly.FromDateTime(now);
         var line = $"[{now:yyyy-MM-dd HH:mm:ss.fff}] [{level}] [{source}] {message}";
+        var entry = new LogEntry(now, level, source, message);
 
         lock (_lock)
         {
@@ -107,6 +111,12 @@ public sealed class LoggingService : ILoggingService, IDisposable
                 // Swallow — logging must never crash the application.
             }
         }
+
+        // Console output.
+        Console.WriteLine(line);
+
+        // Raise event for UI.
+        LogEntryWritten?.Invoke(this, entry);
     }
 
     // -------------------------------------------------------------------------
@@ -121,7 +131,7 @@ public sealed class LoggingService : ILoggingService, IDisposable
         {
             _writer = new StreamWriter(path, append: true, System.Text.Encoding.UTF8)
             {
-                AutoFlush = false
+                AutoFlush = true
             };
         }
         catch

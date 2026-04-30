@@ -9,6 +9,7 @@ namespace LolClientHelper.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private const string LogSource = "MainViewModel";
+    private const int MaxLogEntries = 1000;
 
     private readonly ISettingsService _settings;
     private readonly ILcuApiService _api;
@@ -35,11 +36,13 @@ public partial class MainViewModel : ObservableObject
     public ObservableCollection<string> Tiers { get; } = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
     public ObservableCollection<string> Divisions { get; } = ["IV", "III", "II", "I"];
     public ObservableCollection<string> StatusOptions { get; } = ["chat", "away", "dnd", "offline", "mobile"];
+    public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
     public bool IsGameAutoTab => SelectedTab == "GameAuto";
     public bool IsMainPageTab => SelectedTab == "MainPage";
     public bool IsLobbyTab => SelectedTab == "Lobby";
     public bool IsGameStatusTab => SelectedTab == "GameStatus";
+    public bool IsLogsTab => SelectedTab == "Logs";
 
     public MainViewModel(
         ISettingsService settings,
@@ -70,6 +73,7 @@ public partial class MainViewModel : ObservableObject
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
         _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
+        _log.LogEntryWritten += OnLogEntryWritten;
     }
 
     public string L(string key) => _localization.Get(key);
@@ -80,6 +84,7 @@ public partial class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(IsMainPageTab));
         OnPropertyChanged(nameof(IsLobbyTab));
         OnPropertyChanged(nameof(IsGameStatusTab));
+        OnPropertyChanged(nameof(IsLogsTab));
     }
 
     partial void OnAutoStartGameChanged(bool value) => Save(s => s.AutoStartGame = value);
@@ -139,12 +144,30 @@ public partial class MainViewModel : ObservableObject
             .OrderBy(g => g, StringComparer.OrdinalIgnoreCase)
             .ToList();
 
-        MainThread.BeginInvokeOnMainThread(() =>
+        var dispatcher = Application.Current?.Dispatcher;
+        dispatcher?.Dispatch(() =>
         {
             FriendGroups.Clear();
             FriendGroups.Add("All");
             foreach (var group in groups)
                 FriendGroups.Add(group);
+        });
+    }
+
+    [RelayCommand]
+    private void ClearLogs()
+    {
+        LogEntries.Clear();
+    }
+
+    private void OnLogEntryWritten(object? sender, LogEntry entry)
+    {
+        var dispatcher = Application.Current?.Dispatcher;
+        dispatcher?.Dispatch(() =>
+        {
+            LogEntries.Add(entry);
+            while (LogEntries.Count > MaxLogEntries)
+                LogEntries.RemoveAt(0);
         });
     }
 

@@ -3,13 +3,12 @@
   <assemblyIdentity version="1.0.0.0" name="LolClientHelper.WinUI.app"/>
 
   <!-- Require admin to query LeagueClientUx.exe CommandLine (spec section 3.3) -->
-  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+  <!--<trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
       </requestedPrivileges>
     </security>
-  </trustInfo>
+  </trustInfo>-->
 
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
     <windowsSettings>

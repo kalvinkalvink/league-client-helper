@@ -1,6 +1,15 @@
 namespace LolClientHelper.Services;
 
 /// <summary>
+/// Represents a single log entry.
+/// </summary>
+/// <param name="Timestamp">When the log was written.</param>
+/// <param name="Level">Log level (DEBUG, INFO, WARNING, ERROR).</param>
+/// <param name="Source">Component that wrote the log.</param>
+/// <param name="Message">Log message.</param>
+public sealed record LogEntry(DateTime Timestamp, string Level, string Source, string Message);
+
+/// <summary>
 /// Provides structured, rolling-file logging.
 /// Spec section 7.
 /// </summary>
@@ -23,4 +32,7 @@ public interface ILoggingService
     /// Mirrors <see cref="Models.AppSettings.DebugLogging"/>.
     /// </summary>
     bool IsDebugEnabled { get; set; }
+
+    /// <summary>Raised when a log entry is written.</summary>
+    event EventHandler<LogEntry>? LogEntryWritten;
 }
