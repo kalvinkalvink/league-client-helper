@@ -6,9 +6,11 @@ namespace LolClientHelper.Models;
 /// </summary>
 public enum GameState
 {
+    Unknown,
     /// <summary>In lobby / main menu.</summary>
-    None,
+    MainMenu,
 
+    Lobby,
     /// <summary>Searching for a match.</summary>
     Matchmaking,
 

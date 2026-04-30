@@ -33,7 +33,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
         _webSocketService = webSocketService;
     }
 
-    public GameState CurrentState { get; private set; } = GameState.None;
+    public GameState CurrentState { get; private set; } = GameState.Unknown;
     public bool IsRunning => _runCts is not null;
     public event EventHandler<GameState>? GameStateChanged;
 
@@ -178,7 +178,8 @@ public sealed class GameStateService : IGameStateService, IDisposable
     {
         return raw.Trim('"') switch
         {
-            "None" => GameState.None,
+            "None" => GameState.MainMenu,
+            "Lobby" => GameState.Lobby,
             "Matchmaking" => GameState.Matchmaking,
             "ReadyCheck" => GameState.ReadyCheck,
             "ChampSelect" => GameState.ChampSelect,
@@ -187,7 +188,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
             "WaitingForStats" => GameState.WaitingForStats,
             "EndOfGame" => GameState.EndOfGame,
             "Reconnect" => GameState.Reconnect,
-            _ => GameState.None
+            _ => GameState.Unknown
         };
     }
 
