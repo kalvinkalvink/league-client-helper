@@ -28,7 +28,9 @@
 		<!-- Windows minimum version (spec section 13) -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<BaseOutputPath>D:\pc_backup\programming_project\csharp\LolClientHelper\bin\dev</BaseOutputPath>
+		<BuildTimestamp>$([System.DateTime]::Now.ToString("yyyyMMdd_HHmmss"))</BuildTimestamp>
+		<BaseOutputPath>D:\pc_backup\programming_project\csharp\LolClientHelper\bin\dev2</BaseOutputPath>
+		<SignAssembly>True</SignAssembly>
 	</PropertyGroup>
 
 	<ItemGroup>

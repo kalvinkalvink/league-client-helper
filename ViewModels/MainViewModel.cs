@@ -151,6 +151,8 @@ public partial class MainViewModel : ObservableObject
             FriendGroups.Add("All");
             foreach (var group in groups)
                 FriendGroups.Add(group);
+
+            FriendFilterGroup = "All";
         });
     }
 

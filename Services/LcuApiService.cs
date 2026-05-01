@@ -90,7 +90,8 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
 
     public Task InviteFriendsAsync(IEnumerable<long> summonerIds, CancellationToken ct = default)
     {
-        var payload = JsonSerializer.SerializeToUtf8Bytes(summonerIds ?? []);
+        var ids = (summonerIds ?? []).ToList();
+        var payload = JsonSerializer.Serialize(ids.Select(id => new { toSummonerId = id }));
         return SendJsonAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/invitations", payload, ct);
     }
 
@@ -109,7 +110,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
 
     public Task UpdateChatMeAsync(string queueType, string tier, string division, string availability, CancellationToken ct = default)
     {
-        var payload = JsonSerializer.SerializeToUtf8Bytes(new
+        var payload = JsonSerializer.Serialize(new
         {
             availability,
             lol = new
@@ -158,11 +159,15 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     }
 
     private Task SendNoBodyAsync(HttpMethod method, string endpoint, CancellationToken ct) =>
-        SendJsonAsync(method, endpoint, [], ct);
+        SendJsonAsync(method, endpoint, "{}", ct);
 
-    private async Task SendJsonAsync(HttpMethod method, string endpoint, byte[] payload, CancellationToken ct)
+    private Task SendJsonAsync(HttpMethod method, string endpoint, byte[] payload, CancellationToken ct) =>
+        SendJsonAsync(method, endpoint, Encoding.UTF8.GetString(payload), ct);
+
+    private async Task SendJsonAsync(HttpMethod method, string endpoint, string jsonPayload, CancellationToken ct)
     {
         EnsureConfigured();
+        var payload = Encoding.UTF8.GetBytes(jsonPayload);
 
         using var req = new HttpRequestMessage(method, endpoint)
         {
