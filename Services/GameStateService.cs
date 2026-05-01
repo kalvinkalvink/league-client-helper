@@ -8,6 +8,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     private const string LogSource = "GameStateService";
     private const string TopicGameflow = "OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST";
     private const string TopicReadyCheck = "OnJsonApiEvent_lol-matchmaking_v1_ready-check_*";
+    private const int MaxPollingFailuresBeforeRefresh = 5;
 
     private readonly ILoggingService _log;
     private readonly ISettingsService _settings;
@@ -18,6 +19,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     private Task? _pollingTask;
     private Task? _wsReceiveTask;
     private bool _disposed;
+    private int _consecutivePollingFailures;
 
     public GameStateService(
         ILoggingService log,
@@ -46,16 +48,21 @@ public sealed class GameStateService : IGameStateService, IDisposable
         var runToken = _runCts.Token;
         _webSocketService.MessageReceived += OnWebSocketMessageReceived;
 
-        var credentials = await _leagueProcessService.WaitForCredentialsAsync(ct: runToken).ConfigureAwait(false);
-        _lcuApiService.Configure(credentials);
+        await InitializeLcuApiServiceAsync(runToken).ConfigureAwait(false);
 
-        var wsConnected = await TryConnectWebSocketAsync(credentials, runToken).ConfigureAwait(false);
+        var wsConnected = await TryConnectWebSocketAsync(_lcuApiService.Credentials, runToken).ConfigureAwait(false);
         if (!wsConnected)
         {
             _log.Warning(LogSource, "WebSocket unavailable, using HTTP polling fallback.");
         }
 
         _pollingTask = RunPollingLoopAsync(runToken);
+    }
+
+    private async Task InitializeLcuApiServiceAsync(CancellationToken ct)
+    {
+        var credentials = await _leagueProcessService.WaitForCredentialsAsync(ct: ct).ConfigureAwait(false);
+        _lcuApiService.Configure(credentials);
     }
 
     public async Task StopAsync(CancellationToken ct = default)
@@ -115,10 +122,27 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 var phase = await _lcuApiService.GetGameflowPhaseRawAsync(ct).ConfigureAwait(false);
                 var state = ParseGameState(phase);
                 UpdateState(state);
+                _consecutivePollingFailures = 0;
             }
             catch (Exception ex)
             {
-                _log.Warning(LogSource, $"Polling failed: {ex.Message}");
+                _consecutivePollingFailures++;
+                _log.Warning(LogSource, $"Polling failed ({_consecutivePollingFailures}/{MaxPollingFailuresBeforeRefresh}): {ex.Message}");
+
+                if (_consecutivePollingFailures >= MaxPollingFailuresBeforeRefresh)
+                {
+                    _log.Warning(LogSource, "Max consecutive failures reached, re-fetching LCU credentials...");
+                    try
+                    {
+                        await InitializeLcuApiServiceAsync(ct).ConfigureAwait(false);
+                        _log.Info(LogSource, $"Re-configured LCU API with new credentials (port {_lcuApiService.Credentials?.Port})");
+                        _consecutivePollingFailures = 0;
+                    }
+                    catch (Exception reFetchEx)
+                    {
+                        _log.Error(LogSource, "Failed to re-fetch credentials", reFetchEx);
+                    }
+                }
             }
 
             try
@@ -136,7 +160,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     {
         if (string.IsNullOrWhiteSpace(rawMessage))
             return;
-
+        Console.WriteLine($"Raw Sender {sender}");
         try
         {
             using var doc = JsonDocument.Parse(rawMessage);

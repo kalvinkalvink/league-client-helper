@@ -6,6 +6,7 @@ namespace LolClientHelper.Services;
 public interface ILcuApiService
 {
     bool IsConfigured { get; }
+    LcuCredentials? Credentials { get; }
 
     void Configure(LcuCredentials credentials);
 

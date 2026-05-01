@@ -14,7 +14,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
 
     private readonly ILoggingService _log;
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
     private LcuCredentials? _credentials;
     private bool _disposed;
 
@@ -31,18 +31,23 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     }
 
     public bool IsConfigured => _credentials is not null;
+    public LcuCredentials? Credentials => _credentials;
 
     public void Configure(LcuCredentials credentials)
     {
         ArgumentNullException.ThrowIfNull(credentials);
         _credentials = credentials;
 
+        // Dispose old HttpClient and create new one to avoid immutability issues
+        // (HttpClient properties cannot be modified after first request)
+        _httpClient.Dispose();
+        var handler = new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = ValidateLocalCertificate
+        };
+        _httpClient = new HttpClient(handler, disposeHandler: true);
+        _httpClient.Timeout = TimeSpan.FromSeconds(10);
         _httpClient.BaseAddress = new Uri(credentials.BaseUrl);
-        _httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Basic", credentials.BasicAuthHeader);
-        _httpClient.DefaultRequestHeaders.Accept.Clear();
-        _httpClient.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
 
         _log.Info(LogSource, $"Configured API client for {credentials.BaseUrl}");
     }
@@ -131,6 +136,8 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     {
         EnsureConfigured();
         using var req = new HttpRequestMessage(HttpMethod.Get, endpoint);
+        req.Headers.Authorization =
+            new AuthenticationHeaderValue("Basic", _credentials!.BasicAuthHeader);
         using var rsp = await _httpClient.SendAsync(req, ct).ConfigureAwait(false);
         var content = await rsp.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
 
@@ -162,6 +169,8 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             Content = new ByteArrayContent(payload)
         };
         req.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        req.Headers.Authorization =
+            new AuthenticationHeaderValue("Basic", _credentials!.BasicAuthHeader);
 
         using var rsp = await _httpClient.SendAsync(req, ct).ConfigureAwait(false);
         if (!rsp.IsSuccessStatusCode)
