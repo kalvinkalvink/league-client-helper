@@ -72,8 +72,14 @@ public partial class MainViewModel : ObservableObject
         Status = s.Status;
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
+        _gameStateService.ApiConfigured += OnApiConfigured;
         _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
         _log.LogEntryWritten += OnLogEntryWritten;
+    }
+
+    private async void OnApiConfigured(object? sender, EventArgs e)
+    {
+        await RefreshFriendsAsync().ConfigureAwait(false);
     }
 
     public string L(string key) => _localization.Get(key);

@@ -38,6 +38,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     public GameState CurrentState { get; private set; } = GameState.Unknown;
     public bool IsRunning => _runCts is not null;
     public event EventHandler<GameState>? GameStateChanged;
+    public event EventHandler? ApiConfigured;
 
     public async Task StartAsync(CancellationToken ct = default)
     {
@@ -63,6 +64,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     {
         var credentials = await _leagueProcessService.WaitForCredentialsAsync(ct: ct).ConfigureAwait(false);
         _lcuApiService.Configure(credentials);
+        ApiConfigured?.Invoke(this, EventArgs.Empty);
     }
 
     public async Task StopAsync(CancellationToken ct = default)
