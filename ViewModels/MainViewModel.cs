@@ -35,7 +35,7 @@ public partial class MainViewModel : ObservableObject
     public ObservableCollection<string> QueueTypes { get; } = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_TFT"];
     public ObservableCollection<string> Tiers { get; } = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
     public ObservableCollection<string> Divisions { get; } = ["IV", "III", "II", "I"];
-    public ObservableCollection<string> StatusOptions { get; } = ["chat", "away", "dnd", "offline", "mobile"];
+    public ObservableCollection<string> StatusOptions { get; } = ["chat", "away", "offline", "mobile"];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
     public bool IsGameAutoTab => SelectedTab == "GameAuto";
