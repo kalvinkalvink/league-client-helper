@@ -9,6 +9,7 @@ public interface IGameStateService
 
     event EventHandler<GameState>? GameStateChanged;
     event EventHandler? ApiConfigured;
+    event EventHandler? InvitationReceived;
 
     Task StartAsync(CancellationToken ct = default);
     Task StopAsync(CancellationToken ct = default);

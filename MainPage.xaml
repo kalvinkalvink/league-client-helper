@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
-             xmlns:services="clr-namespace:LolClientHelper.Services"
-             x:Class="LolClientHelper.MainPage"
-             x:DataType="viewModels:MainViewModel"
-             Title="LolClientHelper">
-    <ContentPage.Resources>
-        <DataTemplate x:Key="LogEntryTemplate" x:DataType="services:LogEntry">
-            <Label Text="{Binding Message}" FontSize="10" />
-        </DataTemplate>
-    </ContentPage.Resources>
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+              x:Class="LolClientHelper.MainPage"
+              x:DataType="viewModels:MainViewModel"
+              Title="LolClientHelper">
     <Grid Padding="12" RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
             <Button Text="File" Command="{Binding OpenSettingsCommand}" />
@@ -63,7 +57,7 @@
                     <VerticalStackLayout IsVisible="{Binding IsLogsTab}">
                         <Button Text="Clear Logs" Command="{Binding ClearLogsCommand}" />
                         <ScrollView>
-                            <CollectionView ItemsSource="{Binding LogEntries}" ItemTemplate="{StaticResource LogEntryTemplate}" />
+                            <Editor IsReadOnly="True" Text="{Binding LogText, Mode=OneWay}" AutoSize="TextChanges" FontSize="10" />
                         </ScrollView>
                     </VerticalStackLayout>
                 </VerticalStackLayout>

@@ -6,8 +6,7 @@ namespace LolClientHelper.Services;
 public sealed class GameStateService : IGameStateService, IDisposable
 {
     private const string LogSource = "GameStateService";
-    private const string TopicGameflow = "OnJsonApiEvent_lol-gameflow_v1_gameflow_phase_POST";
-    private const string TopicReadyCheck = "OnJsonApiEvent_lol-matchmaking_v1_ready-check_*";
+    private const string TopicAllEvents = "OnJsonApiEvent";
     private const int MaxPollingFailuresBeforeRefresh = 5;
 
     private readonly ILoggingService _log;
@@ -39,6 +38,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     public bool IsRunning => _runCts is not null;
     public event EventHandler<GameState>? GameStateChanged;
     public event EventHandler? ApiConfigured;
+    public event EventHandler? InvitationReceived;
 
     public async Task StartAsync(CancellationToken ct = default)
     {
@@ -48,6 +48,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
         _runCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         var runToken = _runCts.Token;
         _webSocketService.MessageReceived += OnWebSocketMessageReceived;
+        InvitationReceived += OnInvitationReceived;
 
         await InitializeLcuApiServiceAsync(runToken).ConfigureAwait(false);
 
@@ -74,6 +75,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
 
         _runCts.Cancel();
         _webSocketService.MessageReceived -= OnWebSocketMessageReceived;
+        InvitationReceived -= OnInvitationReceived;
 
         var tasks = new[] { _pollingTask, _wsReceiveTask }.Where(t => t is not null).Cast<Task>().ToArray();
         if (tasks.Length > 0)
@@ -100,8 +102,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
         try
         {
             await _webSocketService.ConnectAsync(credentials, ct).ConfigureAwait(false);
-            await _webSocketService.SubscribeAsync(TopicGameflow, ct).ConfigureAwait(false);
-            await _webSocketService.SubscribeAsync(TopicReadyCheck, ct).ConfigureAwait(false);
+            await _webSocketService.SubscribeAsync(TopicAllEvents, ct).ConfigureAwait(false);
 
             _wsReceiveTask = Task.Run(() => _webSocketService.StartReceivingAsync(ct), ct);
             return true;
@@ -169,7 +170,14 @@ public sealed class GameStateService : IGameStateService, IDisposable
             if (doc.RootElement.ValueKind != JsonValueKind.Array || doc.RootElement.GetArrayLength() < 3)
                 return;
 
-            // LCU json-api events typically contain event payload at index 2.
+            var msgType = doc.RootElement[0].GetInt32();
+            if (msgType != 8)
+                return;
+
+            var topic = doc.RootElement[1].GetString();
+            if (!string.Equals(topic, "OnJsonApiEvent", StringComparison.OrdinalIgnoreCase))
+                return;
+
             var eventPayload = doc.RootElement[2];
             if (!eventPayload.TryGetProperty("uri", out var uriElement))
                 return;
@@ -182,10 +190,32 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 var state = ParseGameState(dataElement.GetString() ?? string.Empty);
                 UpdateState(state);
             }
+
+            if (uri.Contains("/lol-lobby/v2/received-invitations", StringComparison.OrdinalIgnoreCase))
+            {
+                _log.Debug(LogSource, $"WS: Received invitation event");
+                InvitationReceived?.Invoke(this, EventArgs.Empty);
+            }
         }
         catch (Exception ex)
         {
-            _log.Debug(LogSource, $"Ignored non-gameflow WS message: {ex.Message}");
+            _log.Debug(LogSource, $"Ignored WS message: {ex.Message}");
+        }
+    }
+
+    private async void OnInvitationReceived(object? sender, EventArgs e)
+    {
+        if (!_settings.Current.AutoAcceptInvite)
+            return;
+
+        try { await Task.Delay(500).ConfigureAwait(false); }
+        catch { return; }
+
+        var invitations = await _lcuApiService.GetReceivedInvitationsAsync().ConfigureAwait(false);
+        foreach (var inv in invitations)
+        {
+            await _lcuApiService.AcceptInvitationAsync(inv.InvitationId).ConfigureAwait(false);
+            _log.Info(LogSource, $"Accepted invitation from {inv.InvitationId}");
         }
     }
 

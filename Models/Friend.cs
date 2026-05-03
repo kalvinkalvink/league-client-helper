@@ -18,7 +18,7 @@ public sealed class Friend
     [JsonPropertyName("groupName")]
     public string GroupName { get; init; } = string.Empty;
 
-    /// <summary>Availability: chat, away, dnd, offline, mobile.</summary>
+    /// <summary>Availability: chat, away, offline, mobile.</summary>
     [JsonPropertyName("availability")]
     public string Availability { get; init; } = string.Empty;
 

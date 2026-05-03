@@ -29,10 +29,11 @@ public sealed class WebSocketService : IWebSocketService, IDisposable
         _socket.Options.RemoteCertificateValidationCallback = (_, _, _, _) => true;
         _socket.Options.SetRequestHeader("Authorization", $"Basic {credentials.BasicAuthHeader}");
 
-        var wsUri = new Uri($"wss://127.0.0.1:{credentials.Port}/");
+        var wsUri = new Uri($"wss://riot:{credentials.BasicAuthHeader}@127.0.0.1:{credentials.Port}/");
         await _socket.ConnectAsync(wsUri, ct).ConfigureAwait(false);
 
         // WAMP hello handshake required before subscriptions.
+        //[0,"31186ece",1,"WAMP-1.0-RiotRemoting"]
         await SendRawAsync("[1,\"wamp\",2,{\"roles\":{}}]", ct).ConfigureAwait(false);
         _log.Info(LogSource, $"Connected to WAMP socket at {wsUri}");
     }

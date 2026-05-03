@@ -30,6 +30,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] private string status = "chat";
     [ObservableProperty] private string connectionStatus = "Connecting...";
     [ObservableProperty] private string selectedTab = "GameAuto";
+    [ObservableProperty] private string logText = string.Empty;
+
+    private readonly System.Text.StringBuilder _logBuilder = new();
 
     public ObservableCollection<string> FriendGroups { get; } = ["All"];
     public ObservableCollection<string> QueueTypes { get; } = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_TFT"];
@@ -165,6 +168,8 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void ClearLogs()
     {
+        _logBuilder.Clear();
+        LogText = string.Empty;
         LogEntries.Clear();
     }
 
@@ -173,6 +178,8 @@ public partial class MainViewModel : ObservableObject
         var dispatcher = Application.Current?.Dispatcher;
         dispatcher?.Dispatch(() =>
         {
+            _logBuilder.AppendLine(entry.ToString());
+            LogText = _logBuilder.ToString();
             LogEntries.Add(entry);
             while (LogEntries.Count > MaxLogEntries)
                 LogEntries.RemoveAt(0);

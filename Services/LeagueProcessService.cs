@@ -59,7 +59,7 @@ public sealed partial class LeagueProcessService : ILeagueProcessService
             var creds = await TryGetCredentialsAsync(ct).ConfigureAwait(false);
             if (creds is not null)
             {
-                _log.Info(LogSource, $"Connected to LCU on port {creds.Port}");
+                _log.Info(LogSource, $"Connected to LCU on port {creds.Port}, token: {creds.Token}");
                 return creds;
             }
 
