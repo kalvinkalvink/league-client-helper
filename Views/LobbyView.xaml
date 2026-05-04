@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             x:Class="LolClientHelper.Views.LobbyView"
+             x:DataType="viewModels:LobbyViewModel">
+    <Border Style="{DynamicResource GlassCard}" Padding="16">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="Lobby" Style="{DynamicResource GlassTitle}" />
+            
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="Invite All Friends" 
+                        Style="{DynamicResource GlassButtonPrimary}" 
+                        Command="{Binding InviteAllFriendsCommand}" />
+                <Button Text="Refresh Friends" 
+                        Style="{DynamicResource GlassButton}" 
+                        Command="{Binding RefreshFriendsCommand}" />
+            </HorizontalStackLayout>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Filter" Style="{DynamicResource GlassLabel}" />
+                    <Picker ItemsSource="{Binding FriendGroups}" 
+                            SelectedItem="{Binding FriendFilterGroup}" 
+                            Style="{DynamicResource GlassPicker}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

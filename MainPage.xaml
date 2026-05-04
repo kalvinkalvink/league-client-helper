@@ -1,71 +1,108 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
-              x:Class="LolClientHelper.MainPage"
-              x:DataType="viewModels:MainViewModel"
-              Title="LolClientHelper">
-    <Grid Padding="12" RowDefinitions="Auto,*,Auto" ColumnDefinitions="*">
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
-            <Button Text="File" Command="{Binding OpenSettingsCommand}" />
-            <Button Grid.Column="1" Text="Settings" Command="{Binding OpenSettingsCommand}" />
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             xmlns:views="clr-namespace:LolClientHelper.Views"
+             x:Class="LolClientHelper.MainPage"
+             x:DataType="viewModels:MainViewModel"
+             Title="LolClientHelper">
+    
+    <ContentPage.Resources>
+        <DataTemplate x:Key="GameAutoTemplate">
+            <views:GameAutoView />
+        </DataTemplate>
+        <DataTemplate x:Key="MainPageTemplate">
+            <views:MainPageTabView />
+        </DataTemplate>
+        <DataTemplate x:Key="LobbyTemplate">
+            <views:LobbyView />
+        </DataTemplate>
+        <DataTemplate x:Key="GameStatusTemplate">
+            <views:GameStatusView />
+        </DataTemplate>
+        <DataTemplate x:Key="LogsTemplate">
+            <views:LogsView />
+        </DataTemplate>
+        <DataTemplate x:Key="SettingsTemplate">
+            <views:SettingsView />
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*">
+        <!-- Main Content -->
+        <Grid Grid.Row="0" Margin="16" RowDefinitions="*,Auto">
+            <Grid ColumnDefinitions="200,*" ColumnSpacing="16">
+                <!-- Sidebar -->
+                <Border Grid.Column="0" 
+        BackgroundColor="{AppThemeBinding Light={DynamicResource GlassSurface}, Dark={DynamicResource GlassSurfaceDark}}"
+        Stroke="{AppThemeBinding Light={DynamicResource GlassBorderBrush}, Dark={DynamicResource GlassBorderDarkBrush}}"
+        StrokeThickness="1"
+        StrokeShape="Rectangle"
+        Padding="8">
+                    <VerticalStackLayout Spacing="4">
+                        <Button Text="Game Auto" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="GameAuto" />
+                        <Button Text="Main Page" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="MainPage" />
+                        <Button Text="Lobby" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="Lobby" />
+                        <Button Text="Game Status" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="GameStatus" />
+                        <Button Text="Logs" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="Logs" />
+                        <Button Text="Settings" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="Settings" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Content Area -->
+                <ScrollView Grid.Column="1">
+                    <Grid>
+                        <ContentView IsVisible="{Binding IsGameAutoTab}">
+                            <views:GameAutoView BindingContext="{Binding GameAutoVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsMainPageTab}">
+                            <views:MainPageTabView BindingContext="{Binding MainPageTabVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsLobbyTab}">
+                            <views:LobbyView BindingContext="{Binding LobbyVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsGameStatusTab}">
+                            <views:GameStatusView BindingContext="{Binding GameStatusVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsLogsTab}">
+                            <views:LogsView BindingContext="{Binding LogsVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsSettingsTab}">
+                            <views:SettingsView BindingContext="{Binding SettingsVM}" />
+                        </ContentView>
+                    </Grid>
+                </ScrollView>
+            </Grid>
+
+            <!-- Footer -->
+            <Label Grid.Row="1" 
+                   HorizontalOptions="End" 
+                   Text="{Binding ConnectionStatus}" 
+                   Style="{DynamicResource GlassLabel}" 
+                   Margin="0,8,0,0" />
         </Grid>
-
-        <Grid Grid.Row="1" Margin="0,12,0,12" ColumnDefinitions="180,*" ColumnSpacing="12">
-            <VerticalStackLayout Spacing="8">
-                <Button Text="Game Auto" Command="{Binding SetTabCommand}" CommandParameter="GameAuto" />
-                <Button Text="Main Page" Command="{Binding SetTabCommand}" CommandParameter="MainPage" />
-                <Button Text="Lobby" Command="{Binding SetTabCommand}" CommandParameter="Lobby" />
-                <Button Text="Game Status" Command="{Binding SetTabCommand}" CommandParameter="GameStatus" />
-                <Button Text="Logs" Command="{Binding SetTabCommand}" CommandParameter="Logs" />
-            </VerticalStackLayout>
-
-            <ScrollView Grid.Column="1">
-                <VerticalStackLayout Spacing="12">
-                    <VerticalStackLayout IsVisible="{Binding IsGameAutoTab}" Spacing="8">
-                        <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AutoStartGame}" /><Label VerticalOptions="Center" Text="Auto Start Game" /></HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AutoAcceptMatch}" /><Label VerticalOptions="Center" Text="Auto Accept Match" /></HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AutoSkipLike}" /><Label VerticalOptions="Center" Text="Auto Skip Like" /></HorizontalStackLayout>
-                        <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AutoReenterLobby}" /><Label VerticalOptions="Center" Text="Auto Reenter Lobby" /></HorizontalStackLayout>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout IsVisible="{Binding IsMainPageTab}" Spacing="8">
-                        <HorizontalStackLayout Spacing="8"><CheckBox IsChecked="{Binding AutoAcceptInvite}" /><Label VerticalOptions="Center" Text="Auto Accept Game Invite" /></HorizontalStackLayout>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout IsVisible="{Binding IsLobbyTab}" Spacing="8">
-                        <HorizontalStackLayout Spacing="8">
-                            <Button Text="Invite All Friends" Command="{Binding InviteAllFriendsCommand}" />
-                            <Button Text="Refresh Friends" Command="{Binding RefreshFriendsCommand}" />
-                        </HorizontalStackLayout>
-                        <Label Text="Filter" />
-                        <Picker ItemsSource="{Binding FriendGroups}" SelectedItem="{Binding FriendFilterGroup}" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout IsVisible="{Binding IsGameStatusTab}" Spacing="8">
-                        <Label Text="Game Mode" />
-                        <Picker ItemsSource="{Binding QueueTypes}" SelectedItem="{Binding QueueType}" />
-                        <Label Text="Ranking" />
-                        <Picker ItemsSource="{Binding Tiers}" SelectedItem="{Binding Tier}" />
-                        <Label Text="Level" />
-                        <Picker ItemsSource="{Binding Divisions}" SelectedItem="{Binding Division}" />
-                        <Label Text="Status" />
-                        <Picker ItemsSource="{Binding StatusOptions}" SelectedItem="{Binding Status}" />
-                        <Button Text="Apply Rank/Status" Command="{Binding ApplyFakeRankCommand}" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout IsVisible="{Binding IsLogsTab}">
-                        <Button Text="Clear Logs" Command="{Binding ClearLogsCommand}" />
-                        <ScrollView>
-                            <Editor IsReadOnly="True" Text="{Binding LogText, Mode=OneWay}" AutoSize="TextChanges" FontSize="10" />
-                        </ScrollView>
-                    </VerticalStackLayout>
-                </VerticalStackLayout>
-            </ScrollView>
-        </Grid>
-
-        <Label Grid.Row="2"
-               HorizontalOptions="End"
-               Text="{Binding ConnectionStatus}" />
     </Grid>
 </ContentPage>

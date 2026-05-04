@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<?xaml-comp compile="true" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
@@ -435,6 +434,93 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    </Style>
+
+    <!-- Glassmorphism Styles -->
+
+    <!-- Glass Card - Main container for content -->
+    <Style x:Key="GlassCard" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource GlassSurface}, Dark={StaticResource GlassSurfaceDark}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource GlassBorderBrush}, Dark={StaticResource GlassBorderDarkBrush}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="Rectangle" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Radius="15" Opacity="0.3" Offset="0,4" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Glass Item - Inner container for form elements -->
+    <Style x:Key="GlassItem" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+        <Setter Property="StrokeShape" Value="Rectangle" />
+        <Setter Property="Padding" Value="12" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+
+    <!-- Glass Title -->
+    <Style x:Key="GlassTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+    </Style>
+
+    <!-- Glass Label -->
+    <Style x:Key="GlassLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+    </Style>
+
+    <!-- Glass Button -->
+    <Style x:Key="GlassButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!-- Glass Button Primary -->
+    <Style x:Key="GlassButtonPrimary" TargetType="Button">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentPurple}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Glass Picker -->
+    <Style x:Key="GlassPicker" TargetType="Picker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <!-- Glass Editor -->
+    <Style x:Key="GlassEditor" TargetType="Editor">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <!-- Glass Sidebar Button -->
+    <Style x:Key="GlassSidebarButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+
+    <!-- Glass Sidebar Button Selected -->
+    <Style x:Key="GlassSidebarButtonSelected" TargetType="Button" BasedOn="{StaticResource GlassSidebarButton}">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentPurple}" />
+        <Setter Property="TextColor" Value="White" />
     </Style>
 
 </ResourceDictionary>

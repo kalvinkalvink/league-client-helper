@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -25,6 +25,8 @@
     <Color x:Key="Gray400">#919191</Color>
     <Color x:Key="Gray500">#6E6E6E</Color>
     <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray700">#323232</Color>
+    <Color x:Key="Gray800">#282828</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
@@ -40,6 +42,46 @@
     <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
     <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray700Brush" Color="{StaticResource Gray700}"/>
+    <SolidColorBrush x:Key="Gray800Brush" Color="{StaticResource Gray800}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- Glassmorphism Light Mode Colors -->
+    <Color x:Key="GlassBackground">#F5F5F5</Color>
+    <Color x:Key="GlassSurface">#CCFFFFFF</Color>
+    <Color x:Key="GlassBorder">#40FFFFFF</Color>
+    <Color x:Key="GlassText">#1F1F1F</Color>
+    <Color x:Key="GlassTextSecondary">#666666</Color>
+
+    <!-- Glassmorphism Dark Mode Colors -->
+    <Color x:Key="GlassBackgroundDark">#1A1A2E</Color>
+    <Color x:Key="GlassSurfaceDark">#CC16213E</Color>
+    <Color x:Key="GlassBorderDark">#40FFFFFF</Color>
+    <Color x:Key="GlassTextDark">#FFFFFF</Color>
+    <Color x:Key="GlassTextSecondaryDark">#B0B0B0</Color>
+
+    <!-- Accent Gradient Colors -->
+    <Color x:Key="AccentPurple">#8B5CF6</Color>
+    <Color x:Key="AccentBlue">#3B82F6</Color>
+    <Color x:Key="AccentCyan">#06B6D4</Color>
+
+    <!-- Glassmorphism Brushes Light -->
+    <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackground}"/>
+    <SolidColorBrush x:Key="GlassSurfaceBrush" Color="{StaticResource GlassSurface}"/>
+    <SolidColorBrush x:Key="GlassBorderBrush" Color="{StaticResource GlassBorder}"/>
+    <SolidColorBrush x:Key="GlassTextBrush" Color="{StaticResource GlassText}"/>
+    <SolidColorBrush x:Key="GlassTextSecondaryBrush" Color="{StaticResource GlassTextSecondary}"/>
+
+    <!-- Glassmorphism Brushes Dark -->
+    <SolidColorBrush x:Key="GlassBackgroundDarkBrush" Color="{StaticResource GlassBackgroundDark}"/>
+    <SolidColorBrush x:Key="GlassSurfaceDarkBrush" Color="{StaticResource GlassSurfaceDark}"/>
+    <SolidColorBrush x:Key="GlassBorderDarkBrush" Color="{StaticResource GlassBorderDark}"/>
+    <SolidColorBrush x:Key="GlassTextDarkBrush" Color="{StaticResource GlassTextDark}"/>
+    <SolidColorBrush x:Key="GlassTextSecondaryDarkBrush" Color="{StaticResource GlassTextSecondaryDark}"/>
+
+    <!-- Accent Brushes -->
+    <SolidColorBrush x:Key="AccentPurpleBrush" Color="{StaticResource AccentPurple}"/>
+    <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource AccentBlue}"/>
+    <SolidColorBrush x:Key="AccentCyanBrush" Color="{StaticResource AccentCyan}"/>
 </ResourceDictionary>

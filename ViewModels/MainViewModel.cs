@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LolClientHelper.Models;
@@ -8,84 +7,53 @@ namespace LolClientHelper.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
-    private const string LogSource = "MainViewModel";
-    private const int MaxLogEntries = 1000;
-
-    private readonly ISettingsService _settings;
-    private readonly ILcuApiService _api;
     private readonly IGameStateService _gameStateService;
-    private readonly ILocalizationService _localization;
-    private readonly IWindowService _windowService;
     private readonly ILoggingService _log;
 
-    [ObservableProperty] private bool autoStartGame;
-    [ObservableProperty] private bool autoAcceptMatch;
-    [ObservableProperty] private bool autoSkipLike;
-    [ObservableProperty] private bool autoReenterLobby;
-    [ObservableProperty] private bool autoAcceptInvite;
-    [ObservableProperty] private string friendFilterGroup = "All";
-    [ObservableProperty] private string queueType = "RANKED_SOLO_5x5";
-    [ObservableProperty] private string tier = "CHALLENGER";
-    [ObservableProperty] private string division = "I";
-    [ObservableProperty] private string status = "chat";
-    [ObservableProperty] private string connectionStatus = "Connecting...";
     [ObservableProperty] private string selectedTab = "GameAuto";
-    [ObservableProperty] private string logText = string.Empty;
+    [ObservableProperty] private string connectionStatus = "Connecting...";
 
-    private readonly System.Text.StringBuilder _logBuilder = new();
-
-    public ObservableCollection<string> FriendGroups { get; } = ["All"];
-    public ObservableCollection<string> QueueTypes { get; } = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_TFT"];
-    public ObservableCollection<string> Tiers { get; } = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
-    public ObservableCollection<string> Divisions { get; } = ["IV", "III", "II", "I"];
-    public ObservableCollection<string> StatusOptions { get; } = ["chat", "away", "offline", "mobile"];
-    public ObservableCollection<LogEntry> LogEntries { get; } = [];
+    public GameAutoViewModel GameAutoVM { get; }
+    public MainPageTabViewModel MainPageTabVM { get; }
+    public LobbyViewModel LobbyVM { get; }
+    public GameStatusViewModel GameStatusVM { get; }
+    public LogsViewModel LogsVM { get; }
+    public SettingsViewModel SettingsVM { get; }
 
     public bool IsGameAutoTab => SelectedTab == "GameAuto";
     public bool IsMainPageTab => SelectedTab == "MainPage";
     public bool IsLobbyTab => SelectedTab == "Lobby";
     public bool IsGameStatusTab => SelectedTab == "GameStatus";
     public bool IsLogsTab => SelectedTab == "Logs";
+    public bool IsSettingsTab => SelectedTab == "Settings";
 
     public MainViewModel(
-        ISettingsService settings,
-        ILcuApiService api,
+        GameAutoViewModel gameAutoVM,
+        MainPageTabViewModel mainPageTabVM,
+        LobbyViewModel lobbyVM,
+        GameStatusViewModel gameStatusVM,
+        LogsViewModel logsVM,
+        SettingsViewModel settingsVM,
         IGameStateService gameStateService,
-        ILocalizationService localization,
-        IWindowService windowService,
         ILoggingService log)
     {
-        _settings = settings;
-        _api = api;
+        GameAutoVM = gameAutoVM;
+        MainPageTabVM = mainPageTabVM;
+        LobbyVM = lobbyVM;
+        GameStatusVM = gameStatusVM;
+        LogsVM = logsVM;
+        SettingsVM = settingsVM;
         _gameStateService = gameStateService;
-        _localization = localization;
-        _windowService = windowService;
         _log = log;
-
-        var s = _settings.Current;
-        AutoStartGame = s.AutoStartGame;
-        AutoAcceptMatch = s.AutoAcceptMatch;
-        AutoSkipLike = s.AutoSkipLike;
-        AutoReenterLobby = s.AutoReenterLobby;
-        AutoAcceptInvite = s.AutoAcceptInvite;
-        FriendFilterGroup = s.FriendFilterGroup;
-        QueueType = s.QueueType;
-        Tier = s.Tier;
-        Division = s.Division;
-        Status = s.Status;
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
         _gameStateService.ApiConfigured += OnApiConfigured;
-        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
-        _log.LogEntryWritten += OnLogEntryWritten;
     }
 
     private async void OnApiConfigured(object? sender, EventArgs e)
     {
-        await RefreshFriendsAsync().ConfigureAwait(false);
+        await LobbyVM.RefreshFriendsCommand.ExecuteAsync(null);
     }
-
-    public string L(string key) => _localization.Get(key);
 
     partial void OnSelectedTabChanged(string value)
     {
@@ -94,107 +62,38 @@ public partial class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(IsLobbyTab));
         OnPropertyChanged(nameof(IsGameStatusTab));
         OnPropertyChanged(nameof(IsLogsTab));
+        OnPropertyChanged(nameof(IsSettingsTab));
     }
-
-    partial void OnAutoStartGameChanged(bool value) => Save(s => s.AutoStartGame = value);
-    partial void OnAutoAcceptMatchChanged(bool value) => Save(s => s.AutoAcceptMatch = value);
-    partial void OnAutoSkipLikeChanged(bool value) => Save(s => s.AutoSkipLike = value);
-    partial void OnAutoReenterLobbyChanged(bool value) => Save(s => s.AutoReenterLobby = value);
-    partial void OnAutoAcceptInviteChanged(bool value) => Save(s => s.AutoAcceptInvite = value);
-    partial void OnFriendFilterGroupChanged(string value) => Save(s => s.FriendFilterGroup = value);
-    partial void OnQueueTypeChanged(string value) => Save(s => s.QueueType = value);
-    partial void OnTierChanged(string value) => Save(s => s.Tier = value);
-    partial void OnDivisionChanged(string value) => Save(s => s.Division = value);
-    partial void OnStatusChanged(string value) => Save(s => s.Status = value);
-
-    [RelayCommand]
-    private void OpenSettings() => _windowService.ShowSettingsWindow();
 
     [RelayCommand]
     private void SetTab(string tab) => SelectedTab = tab;
 
     [RelayCommand]
-    private async Task ApplyFakeRankAsync()
+    private void New()
     {
-        if (!_api.IsConfigured)
-            return;
-
-        await _api.UpdateChatMeAsync(QueueType, Tier, Division, Status).ConfigureAwait(false);
-        _log.Info(LogSource, "Fake rank/status updated.");
+        _log.Info("MainViewModel", "New command executed");
     }
 
     [RelayCommand]
-    private async Task InviteAllFriendsAsync()
+    private void Open()
     {
-        if (!_api.IsConfigured)
-            return;
-
-        var friends = await _api.GetFriendsAsync().ConfigureAwait(false);
-        var filtered = friends
-            .Where(f => !string.Equals(f.Availability, "offline", StringComparison.OrdinalIgnoreCase))
-            .Where(f => FriendFilterGroup == "All" || string.Equals(f.GroupName, FriendFilterGroup, StringComparison.OrdinalIgnoreCase))
-            .Select(f => f.SummonerId)
-            .Distinct()
-            .ToArray();
-
-        await _api.InviteFriendsAsync(filtered).ConfigureAwait(false);
-        _log.Info(LogSource, $"Invited {filtered.Length} friends.");
+        _log.Info("MainViewModel", "Open command executed");
     }
 
     [RelayCommand]
-    private async Task RefreshFriendsAsync()
+    private void Save()
     {
-        if (!_api.IsConfigured)
-            return;
-
-        var groups = (await _api.GetFriendsAsync().ConfigureAwait(false))
-            .Select(f => string.IsNullOrWhiteSpace(f.GroupName) ? "Ungrouped" : f.GroupName)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(g => g, StringComparer.OrdinalIgnoreCase)
-            .ToList();
-
-        var dispatcher = Application.Current?.Dispatcher;
-        dispatcher?.Dispatch(() =>
-        {
-            FriendGroups.Clear();
-            FriendGroups.Add("All");
-            foreach (var group in groups)
-                FriendGroups.Add(group);
-
-            FriendFilterGroup = "All";
-        });
+        _log.Info("MainViewModel", "Save command executed");
     }
 
     [RelayCommand]
-    private void ClearLogs()
+    private static void Exit()
     {
-        _logBuilder.Clear();
-        LogText = string.Empty;
-        LogEntries.Clear();
-    }
-
-    private void OnLogEntryWritten(object? sender, LogEntry entry)
-    {
-        var dispatcher = Application.Current?.Dispatcher;
-        dispatcher?.Dispatch(() =>
-        {
-            _logBuilder.AppendLine(entry.ToString());
-            LogText = _logBuilder.ToString();
-            LogEntries.Add(entry);
-            while (LogEntries.Count > MaxLogEntries)
-                LogEntries.RemoveAt(0);
-        });
+        Application.Current.Quit();
     }
 
     private void OnGameStateChanged(object? sender, GameState state)
     {
         ConnectionStatus = state.ToString();
-    }
-
-    private void Save(Action<AppSettings> mutate)
-    {
-        var current = _settings.Current;
-        mutate(current);
-        _settings.Save(current);
     }
 }

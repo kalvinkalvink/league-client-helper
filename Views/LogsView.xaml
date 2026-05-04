@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             x:Class="LolClientHelper.Views.LogsView"
+             x:DataType="viewModels:LogsViewModel">
+    <Border Style="{DynamicResource GlassCard}" Padding="16">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="Logs" Style="{DynamicResource GlassTitle}" />
+            
+            <Button Text="Clear Logs" 
+                    Style="{DynamicResource GlassButton}" 
+                    Command="{Binding ClearLogsCommand}" />
+
+            <Border Style="{DynamicResource GlassItem}">
+                <ScrollView>
+                    <Editor IsReadOnly="True" 
+                            Text="{Binding LogText, Mode=OneWay}" 
+                            AutoSize="TextChanges" 
+                            FontSize="10"
+                            Style="{DynamicResource GlassEditor}" />
+                </ScrollView>
+            </Border>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

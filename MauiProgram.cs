@@ -38,8 +38,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
         builder.Services.AddSingleton<IWindowService, WindowService>();
 
-        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<GameAutoViewModel>();
+        builder.Services.AddSingleton<MainPageTabViewModel>();
+        builder.Services.AddSingleton<LobbyViewModel>();
+        builder.Services.AddSingleton<GameStatusViewModel>();
+        builder.Services.AddSingleton<LogsViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<SettingsWindow>();
 

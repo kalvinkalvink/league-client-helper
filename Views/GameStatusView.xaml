@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             x:Class="LolClientHelper.Views.GameStatusView"
+             x:DataType="viewModels:GameStatusViewModel">
+    <Border Style="{DynamicResource GlassCard}" Padding="16">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="Game Status" Style="{DynamicResource GlassTitle}" />
+            
+            <Border Style="{DynamicResource GlassItem}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Game Mode" Style="{DynamicResource GlassLabel}" />
+                    <Picker ItemsSource="{Binding QueueTypes}" 
+                            SelectedItem="{Binding QueueType}" 
+                            Style="{DynamicResource GlassPicker}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Ranking" Style="{DynamicResource GlassLabel}" />
+                    <Picker ItemsSource="{Binding Tiers}" 
+                            SelectedItem="{Binding Tier}" 
+                            Style="{DynamicResource GlassPicker}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Level" Style="{DynamicResource GlassLabel}" />
+                    <Picker ItemsSource="{Binding Divisions}" 
+                            SelectedItem="{Binding Division}" 
+                            Style="{DynamicResource GlassPicker}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Status" Style="{DynamicResource GlassLabel}" />
+                    <Picker ItemsSource="{Binding StatusOptions}" 
+                            SelectedItem="{Binding Status}" 
+                            Style="{DynamicResource GlassPicker}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Apply Rank/Status" 
+                    Style="{DynamicResource GlassButtonPrimary}" 
+                    Command="{Binding ApplyFakeRankCommand}" />
+        </VerticalStackLayout>
+    </Border>
+</ContentView>
