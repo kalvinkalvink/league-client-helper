@@ -20,8 +20,9 @@
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding FilterLabel}" Style="{DynamicResource GlassLabel}" />
-                    <Picker ItemsSource="{Binding FriendGroups}" 
-                            SelectedItem="{Binding FriendFilterGroup}" 
+                    <Picker ItemsSource="{Binding FriendGroupItems}" 
+                            ItemDisplayBinding="{Binding Display}"
+                            SelectedItem="{Binding SelectedFriendGroupItem}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>

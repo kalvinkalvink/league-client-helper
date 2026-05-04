@@ -25,6 +25,34 @@
   <data name="setting.language" xml:space="preserve"><value>語言</value></data>
   <data name="setting.reset" xml:space="preserve"><value>恢復預設設定</value></data>
   <data name="setting.auto_reconnect" xml:space="preserve"><value>自動重連</value></data>
+  <data name="queue.solo" xml:space="preserve"><value>單雙排位</value></data>
+  <data name="queue.flex5" xml:space="preserve"><value>靈活排位5v5</value></data>
+  <data name="queue.flex3" xml:space="preserve"><value>靈活排位3v3</value></data>
+  <data name="queue.tft" xml:space="preserve"><value>雲頂之弈</value></data>
+  <data name="tier.iron" xml:space="preserve"><value>黑鐵</value></data>
+  <data name="tier.bronze" xml:space="preserve"><value>黃銅</value></data>
+  <data name="tier.silver" xml:space="preserve"><value>白銀</value></data>
+  <data name="tier.gold" xml:space="preserve"><value>黃金</value></data>
+  <data name="tier.platinum" xml:space="preserve"><value>鉑金</value></data>
+  <data name="tier.diamond" xml:space="preserve"><value>鑽石</value></data>
+  <data name="tier.master" xml:space="preserve"><value>大師</value></data>
+  <data name="tier.grandmaster" xml:space="preserve"><value>宗師</value></data>
+  <data name="tier.challenger" xml:space="preserve"><value>王者</value></data>
+  <data name="division.iv" xml:space="preserve"><value>IV級</value></data>
+  <data name="division.iii" xml:space="preserve"><value>III級</value></data>
+  <data name="division.ii" xml:space="preserve"><value>II級</value></data>
+  <data name="division.i" xml:space="preserve"><value>I級</value></data>
+  <data name="status.online" xml:space="preserve"><value>在線</value></data>
+  <data name="status.away" xml:space="preserve"><value>離開</value></data>
+  <data name="status.offline" xml:space="preserve"><value>離線</value></data>
+  <data name="status.mobile" xml:space="preserve"><value>手機</value></data>
+  <data name="language.en" xml:space="preserve"><value>英語</value></data>
+  <data name="language.zh-CN" xml:space="preserve"><value>簡體中文</value></data>
+  <data name="language.zh-TW" xml:space="preserve"><value>繁體中文</value></data>
+  <data name="theme.auto" xml:space="preserve"><value>自動</value></data>
+  <data name="theme.light" xml:space="preserve"><value>淺色</value></data>
+  <data name="theme.dark" xml:space="preserve"><value>深色</value></data>
+  <data name="filter.all" xml:space="preserve"><value>全部</value></data>
   <data name="game_auto.start_game" xml:space="preserve"><value>自動開始遊戲</value></data>
   <data name="game_auto.accept_match" xml:space="preserve"><value>自動接受匹配</value></data>
   <data name="game_auto.skip_like" xml:space="preserve"><value>自動跳過點讚</value></data>

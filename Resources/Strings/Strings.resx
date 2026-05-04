@@ -25,6 +25,34 @@
   <data name="setting.language" xml:space="preserve"><value>Language</value></data>
   <data name="setting.reset" xml:space="preserve"><value>Reset to Defaults</value></data>
   <data name="setting.auto_reconnect" xml:space="preserve"><value>Auto Reconnect</value></data>
+  <data name="queue.solo" xml:space="preserve"><value>Ranked Solo/Duo</value></data>
+  <data name="queue.flex5" xml:space="preserve"><value>Ranked Flex 5v5</value></data>
+  <data name="queue.flex3" xml:space="preserve"><value>Ranked Flex 3v3</value></data>
+  <data name="queue.tft" xml:space="preserve"><value>Ranked TFT</value></data>
+  <data name="tier.iron" xml:space="preserve"><value>Iron</value></data>
+  <data name="tier.bronze" xml:space="preserve"><value>Bronze</value></data>
+  <data name="tier.silver" xml:space="preserve"><value>Silver</value></data>
+  <data name="tier.gold" xml:space="preserve"><value>Gold</value></data>
+  <data name="tier.platinum" xml:space="preserve"><value>Platinum</value></data>
+  <data name="tier.diamond" xml:space="preserve"><value>Diamond</value></data>
+  <data name="tier.master" xml:space="preserve"><value>Master</value></data>
+  <data name="tier.grandmaster" xml:space="preserve"><value>Grandmaster</value></data>
+  <data name="tier.challenger" xml:space="preserve"><value>Challenger</value></data>
+  <data name="division.iv" xml:space="preserve"><value>Division IV</value></data>
+  <data name="division.iii" xml:space="preserve"><value>Division III</value></data>
+  <data name="division.ii" xml:space="preserve"><value>Division II</value></data>
+  <data name="division.i" xml:space="preserve"><value>Division I</value></data>
+  <data name="status.online" xml:space="preserve"><value>Online</value></data>
+  <data name="status.away" xml:space="preserve"><value>Away</value></data>
+  <data name="status.offline" xml:space="preserve"><value>Offline</value></data>
+  <data name="status.mobile" xml:space="preserve"><value>Mobile</value></data>
+  <data name="language.en" xml:space="preserve"><value>English</value></data>
+  <data name="language.zh-CN" xml:space="preserve"><value>简体中文</value></data>
+  <data name="language.zh-TW" xml:space="preserve"><value>繁體中文</value></data>
+  <data name="theme.auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="theme.light" xml:space="preserve"><value>Light</value></data>
+  <data name="theme.dark" xml:space="preserve"><value>Dark</value></data>
+  <data name="filter.all" xml:space="preserve"><value>All</value></data>
   <data name="game_auto.start_game" xml:space="preserve"><value>Auto Start Game</value></data>
   <data name="game_auto.accept_match" xml:space="preserve"><value>Auto Accept Match</value></data>
   <data name="game_auto.skip_like" xml:space="preserve"><value>Auto Skip Like</value></data>

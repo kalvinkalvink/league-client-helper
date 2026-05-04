@@ -40,7 +40,7 @@
         StrokeShape="Rectangle"
         Padding="8">
                     <VerticalStackLayout Spacing="4">
-                        <Button Text="Game Auto" 
+                        <Button Text="{Binding GameAutoTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="GameAuto">
@@ -51,7 +51,7 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="Main Page" 
+                        <Button Text="{Binding MainPageTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="MainPage">
@@ -62,7 +62,7 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="Lobby" 
+                        <Button Text="{Binding LobbyTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="Lobby">
@@ -73,7 +73,7 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="Game Status" 
+                        <Button Text="{Binding GameStatusTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="GameStatus">
@@ -84,7 +84,7 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="Logs" 
+                        <Button Text="{Binding LogsTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="Logs">
@@ -95,7 +95,7 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="Settings" 
+                        <Button Text="{Binding SettingsTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
                                 CommandParameter="Settings">

@@ -21,8 +21,9 @@
                 <Border Style="{DynamicResource GlassItem}">
                     <VerticalStackLayout Spacing="8">
                         <Label Text="{Binding LanguageLabel}" Style="{DynamicResource GlassLabel}" />
-                        <Picker ItemsSource="{Binding Languages}" 
-                                SelectedItem="{Binding Language}" 
+                        <Picker ItemsSource="{Binding LanguageItems}" 
+                                ItemDisplayBinding="{Binding Display}"
+                                SelectedItem="{Binding SelectedLanguageItem}" 
                                 Style="{DynamicResource GlassPicker}" />
                     </VerticalStackLayout>
                 </Border>
@@ -30,8 +31,9 @@
                 <Border Style="{DynamicResource GlassItem}">
                     <VerticalStackLayout Spacing="8">
                         <Label Text="{Binding ThemeLabel}" Style="{DynamicResource GlassLabel}" />
-                        <Picker ItemsSource="{Binding Themes}" 
-                                SelectedItem="{Binding Theme}" 
+                        <Picker ItemsSource="{Binding ThemeItems}" 
+                                ItemDisplayBinding="{Binding Display}"
+                                SelectedItem="{Binding SelectedThemeItem}" 
                                 Style="{DynamicResource GlassPicker}" />
                     </VerticalStackLayout>
                 </Border>

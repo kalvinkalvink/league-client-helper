@@ -12,28 +12,54 @@ public partial class SettingsViewModel : ObservableObject
     private readonly ILocalizationService _localization;
 
     [ObservableProperty] private int pollIntervalMs;
-    [ObservableProperty] private string language = "en";
-    [ObservableProperty] private string theme = "Dark";
+    [ObservableProperty] private LocalizedItem? selectedLanguageItem;
+    [ObservableProperty] private LocalizedItem? selectedThemeItem;
     [ObservableProperty] private bool changeRankingOnStart;
     [ObservableProperty] private bool autoReconnect;
 
     public ObservableCollection<int> PollIntervals { get; } = [250, 500, 1000, 2000];
-    public ObservableCollection<string> Themes { get; } = ["Auto", "Light", "Dark"];
-    public ObservableCollection<string> Languages { get; } = ["en", "zh-CN", "zh-TW"];
+    public ObservableCollection<LocalizedItem> LanguageItems { get; } = [];
+    public ObservableCollection<LocalizedItem> ThemeItems { get; } = [];
 
     public SettingsViewModel(ISettingsService settings, ILocalizationService localization)
     {
         _settings = settings;
         _localization = localization;
 
+        // Initialize collections with localized display text
+        LanguageItems = new ObservableCollection<LocalizedItem>
+        {
+            new() { Display = _localization.Get("language.en"), Value = "en" },
+            new() { Display = _localization.Get("language.zh-CN"), Value = "zh-CN" },
+            new() { Display = _localization.Get("language.zh-TW"), Value = "zh-TW" }
+        };
+        ThemeItems = new ObservableCollection<LocalizedItem>
+        {
+            new() { Display = _localization.Get("theme.auto"), Value = "Auto" },
+            new() { Display = _localization.Get("theme.light"), Value = "Light" },
+            new() { Display = _localization.Get("theme.dark"), Value = "Dark" }
+        };
+
         var s = _settings.Current;
         PollIntervalMs = s.PollIntervalMs;
-        Language = s.Language;
-        Theme = s.Theme;
         ChangeRankingOnStart = s.ChangeRankingOnStart;
         AutoReconnect = s.AutoReconnect;
 
-        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
+        // Set selected items based on saved values
+        SelectedLanguageItem = LanguageItems.FirstOrDefault(x => x.Value == s.Language) ?? LanguageItems[0];
+        SelectedThemeItem = ThemeItems.FirstOrDefault(x => x.Value == s.Theme) ?? ThemeItems[0];
+
+        _localization.LanguageChanged += (_, _) =>
+        {
+            // Update display text for all items
+            LanguageItems[0].Display = _localization.Get("language.en");
+            LanguageItems[1].Display = _localization.Get("language.zh-CN");
+            LanguageItems[2].Display = _localization.Get("language.zh-TW");
+            ThemeItems[0].Display = _localization.Get("theme.auto");
+            ThemeItems[1].Display = _localization.Get("theme.light");
+            ThemeItems[2].Display = _localization.Get("theme.dark");
+            OnPropertyChanged(string.Empty);
+        };
     }
 
     public string PollIntervalLabel => _localization.Get("setting.poll_interval");
@@ -45,21 +71,27 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnPollIntervalMsChanged(int value) => Save(s => s.PollIntervalMs = value);
 
-    partial void OnLanguageChanged(string value)
+    partial void OnSelectedLanguageItemChanged(LocalizedItem? value)
     {
-        Save(s => s.Language = value);
-        _localization.SetLanguage(value);
+        if (value is null) return;
+        Save(s => s.Language = value.Value);
+        _localization.SetLanguage(value.Value);
     }
 
-    partial void OnThemeChanged(string value)
+    partial void OnSelectedThemeItemChanged(LocalizedItem? value)
     {
-        Save(s => s.Theme = value);
-        Application.Current!.UserAppTheme = value switch
+        if (value is null) return;
+        Save(s => s.Theme = value.Value);
+        
+        if (Application.Current is not null)
         {
-            "Light" => AppTheme.Light,
-            "Dark" => AppTheme.Dark,
-            _ => AppTheme.Unspecified
-        };
+            Application.Current.UserAppTheme = value.Value switch
+            {
+                "Light" => AppTheme.Light,
+                "Dark" => AppTheme.Dark,
+                _ => AppTheme.Unspecified
+            };
+        }
     }
 
     partial void OnChangeRankingOnStartChanged(bool value) => Save(s => s.ChangeRankingOnStart = value);
@@ -70,10 +102,10 @@ public partial class SettingsViewModel : ObservableObject
     {
         var defaults = new AppSettings();
         PollIntervalMs = defaults.PollIntervalMs;
-        Language = defaults.Language;
-        Theme = defaults.Theme;
         ChangeRankingOnStart = defaults.ChangeRankingOnStart;
         AutoReconnect = defaults.AutoReconnect;
+        SelectedLanguageItem = LanguageItems.FirstOrDefault(x => x.Value == defaults.Language) ?? LanguageItems[0];
+        SelectedThemeItem = ThemeItems.FirstOrDefault(x => x.Value == defaults.Theme) ?? ThemeItems[0];
         _settings.Save(defaults);
     }
 

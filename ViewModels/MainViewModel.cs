@@ -9,6 +9,7 @@ public partial class MainViewModel : ObservableObject
 {
     private readonly IGameStateService _gameStateService;
     private readonly ILoggingService _log;
+    private readonly ILocalizationService _localization;
 
     [ObservableProperty] private string selectedTab = "GameAuto";
     [ObservableProperty] private string connectionStatus = "Connecting...";
@@ -27,6 +28,13 @@ public partial class MainViewModel : ObservableObject
     public bool IsLogsTab => SelectedTab == "Logs";
     public bool IsSettingsTab => SelectedTab == "Settings";
 
+    public string GameAutoTabText => _localization.Get("tab.game_auto");
+    public string MainPageTabText => _localization.Get("tab.main_page");
+    public string LobbyTabText => _localization.Get("tab.lobby");
+    public string GameStatusTabText => _localization.Get("tab.game_status");
+    public string LogsTabText => _localization.Get("tab.logs");
+    public string SettingsTabText => _localization.Get("menu.settings");
+
     public MainViewModel(
         GameAutoViewModel gameAutoVM,
         MainPageTabViewModel mainPageTabVM,
@@ -35,7 +43,8 @@ public partial class MainViewModel : ObservableObject
         LogsViewModel logsVM,
         SettingsViewModel settingsVM,
         IGameStateService gameStateService,
-        ILoggingService log)
+        ILoggingService log,
+        ILocalizationService localization)
     {
         GameAutoVM = gameAutoVM;
         MainPageTabVM = mainPageTabVM;
@@ -45,14 +54,32 @@ public partial class MainViewModel : ObservableObject
         SettingsVM = settingsVM;
         _gameStateService = gameStateService;
         _log = log;
+        _localization = localization;
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
         _gameStateService.ApiConfigured += OnApiConfigured;
+        _localization.LanguageChanged += (_, _) =>
+        {
+            OnPropertyChanged(nameof(GameAutoTabText));
+            OnPropertyChanged(nameof(MainPageTabText));
+            OnPropertyChanged(nameof(LobbyTabText));
+            OnPropertyChanged(nameof(GameStatusTabText));
+            OnPropertyChanged(nameof(LogsTabText));
+            OnPropertyChanged(nameof(SettingsTabText));
+        };
     }
 
-    private async void OnApiConfigured(object? sender, EventArgs e)
+    private void OnApiConfigured(object? sender, EventArgs e)
     {
-        await LobbyVM.RefreshFriendsCommand.ExecuteAsync(null);
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher?.IsDispatchRequired == true)
+        {
+            dispatcher.Dispatch(() => LobbyVM.RefreshFriendsCommand.ExecuteAsync(null));
+        }
+        else
+        {
+            LobbyVM.RefreshFriendsCommand.ExecuteAsync(null);
+        }
     }
 
     partial void OnSelectedTabChanged(string value)

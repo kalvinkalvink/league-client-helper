@@ -12,12 +12,14 @@
                     SelectedItem="{Binding PollIntervalMs}" />
 
             <Label Text="{Binding LanguageLabel}" />
-            <Picker ItemsSource="{Binding Languages}"
-                    SelectedItem="{Binding Language}" />
+            <Picker ItemsSource="{Binding LanguageItems}"
+                    ItemDisplayBinding="{Binding Display}"
+                    SelectedItem="{Binding SelectedLanguageItem}" />
 
             <Label Text="{Binding ThemeLabel}" />
-            <Picker ItemsSource="{Binding Themes}"
-                    SelectedItem="{Binding Theme}" />
+            <Picker ItemsSource="{Binding ThemeItems}"
+                    ItemDisplayBinding="{Binding Display}"
+                    SelectedItem="{Binding SelectedThemeItem}" />
 
             <HorizontalStackLayout Spacing="8">
                 <CheckBox IsChecked="{Binding ChangeRankingOnStart}" />

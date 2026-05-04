@@ -6,12 +6,12 @@
              x:DataType="viewModels:MainPageTabViewModel">
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <VerticalStackLayout Spacing="16">
-            <Label Text="Main Page" Style="{DynamicResource GlassTitle}" />
+            <Label Text="{Binding MainPageLabel}" Style="{DynamicResource GlassTitle}" />
             
             <Border Style="{DynamicResource GlassItem}">
                 <HorizontalStackLayout Spacing="12">
                     <CheckBox IsChecked="{Binding AutoAcceptInvite}" />
-                    <Label VerticalOptions="Center" Text="Auto Accept Game Invite" Style="{DynamicResource GlassLabel}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoAcceptInviteLabel}" Style="{DynamicResource GlassLabel}" />
                 </HorizontalStackLayout>
             </Border>
         </VerticalStackLayout>

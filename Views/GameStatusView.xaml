@@ -11,8 +11,9 @@
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding GameModeLabel}" Style="{DynamicResource GlassLabel}" />
-                    <Picker ItemsSource="{Binding QueueTypes}" 
-                            SelectedItem="{Binding QueueType}" 
+                    <Picker ItemsSource="{Binding QueueTypeItems}" 
+                            ItemDisplayBinding="{Binding Display}"
+                            SelectedItem="{Binding SelectedQueueTypeItem}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
@@ -20,8 +21,9 @@
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding RankingLabel}" Style="{DynamicResource GlassLabel}" />
-                    <Picker ItemsSource="{Binding Tiers}" 
-                            SelectedItem="{Binding Tier}" 
+                    <Picker ItemsSource="{Binding TierItems}" 
+                            ItemDisplayBinding="{Binding Display}"
+                            SelectedItem="{Binding SelectedTierItem}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
@@ -29,8 +31,9 @@
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding LevelLabel}" Style="{DynamicResource GlassLabel}" />
-                    <Picker ItemsSource="{Binding Divisions}" 
-                            SelectedItem="{Binding Division}" 
+                    <Picker ItemsSource="{Binding DivisionItems}" 
+                            ItemDisplayBinding="{Binding Display}"
+                            SelectedItem="{Binding SelectedDivisionItem}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
@@ -38,8 +41,9 @@
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding StatusLabel}" Style="{DynamicResource GlassLabel}" />
-                    <Picker ItemsSource="{Binding StatusOptions}" 
-                            SelectedItem="{Binding Status}" 
+                    <Picker ItemsSource="{Binding StatusItems}" 
+                            ItemDisplayBinding="{Binding Display}"
+                            SelectedItem="{Binding SelectedStatusItem}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
