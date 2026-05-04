@@ -26,6 +26,9 @@ public sealed class SettingsService : ISettingsService
         WriteIndented = true
     };
 
+    private const string LogSource = "SettingsService";
+    private readonly ILoggingService _log;
+
     // -------------------------------------------------------------------------
     // State
     // -------------------------------------------------------------------------
@@ -34,6 +37,16 @@ public sealed class SettingsService : ISettingsService
 
     /// <inheritdoc/>
     public AppSettings Current => _current;
+
+    // -------------------------------------------------------------------------
+    // Constructor
+    // -------------------------------------------------------------------------
+
+    public SettingsService(ILoggingService log)
+    {
+        _log = log ?? throw new ArgumentNullException(nameof(log));
+        Load();
+    }
 
     // -------------------------------------------------------------------------
     // ISettingsService
@@ -49,15 +62,18 @@ public sealed class SettingsService : ISettingsService
             if (!File.Exists(SettingsFilePath))
             {
                 _current = new AppSettings();
+                _log.Info(LogSource, "No settings file found, using default settings.");
                 return _current;
             }
 
             var json = File.ReadAllText(SettingsFilePath);
             _current = JsonSerializer.Deserialize<AppSettings>(json, SerializerOptions)
                        ?? new AppSettings();
+            _log.Info(LogSource, $"Successfully loaded settings from {SettingsFilePath}");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _log.Warning(LogSource, $"Failed to load settings: {ex.Message}");
             // If the file is corrupt or unreadable, fall back to defaults.
             _current = new AppSettings();
         }
@@ -77,9 +93,11 @@ public sealed class SettingsService : ISettingsService
             EnsureDirectoryExists();
             var json = JsonSerializer.Serialize(settings, SerializerOptions);
             File.WriteAllText(SettingsFilePath, json);
+            _log.Debug(LogSource, $"Successfully saved settings to {SettingsFilePath}");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _log.Warning(LogSource, $"Failed to save settings: {ex.Message}");
             // Non-fatal — the app continues with in-memory settings.
         }
     }

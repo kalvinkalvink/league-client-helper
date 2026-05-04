@@ -22,7 +22,7 @@ namespace LolClientHelper
             _gameStateService = gameStateService;
             _mainPage = mainPage;
 
-            var settings = _settingsService.Load();
+            var settings = _settingsService.Current;
             _localizationService.SetLanguage(settings.Language);
             UserAppTheme = settings.Theme switch
             {
