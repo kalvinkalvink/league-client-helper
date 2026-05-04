@@ -208,8 +208,8 @@ public sealed class GameStateService : IGameStateService, IDisposable
         if (!_settings.Current.AutoAcceptInvite)
             return;
 
-        try { await Task.Delay(500).ConfigureAwait(false); }
-        catch { return; }
+        //try { await Task.Delay(500).ConfigureAwait(false); }
+        //catch { return; }
 
         var invitations = await _lcuApiService.GetReceivedInvitationsAsync().ConfigureAwait(false);
         foreach (var inv in invitations)
@@ -228,6 +228,40 @@ public sealed class GameStateService : IGameStateService, IDisposable
         CurrentState = nextState;
         _log.Info(LogSource, $"State changed: {previous} -> {nextState}");
         GameStateChanged?.Invoke(this, nextState);
+
+        if (nextState == GameState.ReadyCheck && _settings.Current.AutoAcceptMatch)
+        {
+            _log.Info(LogSource, "Auto-accepting ready check...");
+            _ = _lcuApiService.AcceptReadyCheckAsync().ConfigureAwait(false);
+        }
+
+        if (nextState == GameState.PreEndOfGame && _settings.Current.AutoSkipLike)
+        {
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(500).ConfigureAwait(false);
+                    await _lcuApiService.SkipHonorAsync().ConfigureAwait(false);
+                    _log.Info(LogSource, "Skipped honor");
+                }
+                catch (Exception ex) { _log.Warning(LogSource, $"Skip honor failed: {ex.Message}"); }
+            });
+        }
+
+        if (nextState == GameState.EndOfGame && _settings.Current.AutoReenterLobby)
+        {
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(500).ConfigureAwait(false);
+                    await _lcuApiService.PlayAgainAsync().ConfigureAwait(false);
+                    _log.Info(LogSource, "Play again queued");
+                }
+                catch (Exception ex) { _log.Warning(LogSource, $"Play again failed: {ex.Message}"); }
+            });
+        }
     }
 
     private static GameState ParseGameState(string raw)

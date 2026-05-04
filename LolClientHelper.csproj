@@ -24,13 +24,20 @@
 
 		<!-- No MSIX packaging (spec section 13) -->
 		<WindowsPackageType>None</WindowsPackageType>
-
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 		<!-- Windows minimum version (spec section 13) -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<BuildTimestamp>$([System.DateTime]::Now.ToString("yyyyMMdd_HHmmss"))</BuildTimestamp>
-		<BaseOutputPath>D:\pc_backup\programming_project\csharp\LolClientHelper\bin\dev2</BaseOutputPath>
+		<BaseOutputPath>D:\pc_backup\programming_project\csharp\LolClientHelper\bin\dev1</BaseOutputPath>
 		<SignAssembly>True</SignAssembly>
+		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+		<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	</PropertyGroup>
 
 	<ItemGroup>
