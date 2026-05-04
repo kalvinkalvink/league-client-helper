@@ -75,9 +75,12 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     {
         try
         {
-            var sessionJson = await GetStringAsync("/lol-login/v1/session", ct).ConfigureAwait(false);
+            var sessionJson = await GetStringAsync("/lol-gameflow/v1/session", ct).ConfigureAwait(false);
             using var sessionDoc = JsonDocument.Parse(sessionJson);
-            var gameId = sessionDoc.RootElement.GetProperty("gameId").GetInt64();
+            var gameId = sessionDoc.RootElement
+                .GetProperty("gameData")
+                .GetProperty("gameId")
+                .GetInt64();
             var payload = JsonSerializer.Serialize(new { gameId = gameId, honorType = "OPT_OUT", summonerId = 0L, puuid = "" });
             await SendJsonAsync(HttpMethod.Post, "/lol-honor-v2/v1/honor-player/", payload, ct).ConfigureAwait(false);
         }
