@@ -15,6 +15,7 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private string language = "en";
     [ObservableProperty] private string theme = "Dark";
     [ObservableProperty] private bool changeRankingOnStart;
+    [ObservableProperty] private bool autoReconnect;
 
     public ObservableCollection<int> PollIntervals { get; } = [250, 500, 1000, 2000];
     public ObservableCollection<string> Themes { get; } = ["Auto", "Light", "Dark"];
@@ -30,6 +31,7 @@ public partial class SettingsViewModel : ObservableObject
         Language = s.Language;
         Theme = s.Theme;
         ChangeRankingOnStart = s.ChangeRankingOnStart;
+        AutoReconnect = s.AutoReconnect;
 
         _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
@@ -38,6 +40,7 @@ public partial class SettingsViewModel : ObservableObject
     public string LanguageLabel => _localization.Get("setting.language");
     public string ThemeLabel => _localization.Get("setting.theme");
     public string ChangeRankingOnStartLabel => _localization.Get("setting.change_ranking_on_start");
+    public string AutoReconnectLabel => _localization.Get("setting.auto_reconnect");
     public string ResetButtonLabel => _localization.Get("setting.reset");
 
     partial void OnPollIntervalMsChanged(int value) => Save(s => s.PollIntervalMs = value);
@@ -60,6 +63,7 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     partial void OnChangeRankingOnStartChanged(bool value) => Save(s => s.ChangeRankingOnStart = value);
+    partial void OnAutoReconnectChanged(bool value) => Save(s => s.AutoReconnect = value);
 
     [RelayCommand]
     private void ResetToDefaults()
@@ -69,6 +73,7 @@ public partial class SettingsViewModel : ObservableObject
         Language = defaults.Language;
         Theme = defaults.Theme;
         ChangeRankingOnStart = defaults.ChangeRankingOnStart;
+        AutoReconnect = defaults.AutoReconnect;
         _settings.Save(defaults);
     }
 

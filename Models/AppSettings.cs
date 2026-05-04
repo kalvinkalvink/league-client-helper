@@ -32,6 +32,9 @@ public sealed class AppSettings
     /// <summary>Automatically return to lobby after a game ends.</summary>
     public bool AutoReenterLobby { get; set; } = true;
 
+    /// <summary>Automatically reconnect to a disconnected game.</summary>
+    public bool AutoReconnect { get; set; } = false;
+
     // -------------------------------------------------------------------------
     // Main Page
     // -------------------------------------------------------------------------

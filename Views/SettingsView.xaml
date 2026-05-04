@@ -45,6 +45,15 @@
                     </HorizontalStackLayout>
                 </Border>
 
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding AutoReconnect}" />
+                        <Label VerticalOptions="Center" 
+                               Text="{Binding AutoReconnectLabel}" 
+                               Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+
                 <Button Text="{Binding ResetButtonLabel}" 
                         Style="{DynamicResource GlassButton}" 
                         Command="{Binding ResetToDefaultsCommand}" />

@@ -24,4 +24,5 @@
   <data name="setting.change_ranking_on_start" xml:space="preserve"><value>Change ranking on start</value></data>
   <data name="setting.language" xml:space="preserve"><value>Language</value></data>
   <data name="setting.reset" xml:space="preserve"><value>Reset to Defaults</value></data>
+  <data name="setting.auto_reconnect" xml:space="preserve"><value>Auto Reconnect</value></data>
 </root>

@@ -262,6 +262,12 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 catch (Exception ex) { _log.Warning(LogSource, $"Play again failed: {ex.Message}"); }
             });
         }
+
+        if (nextState == GameState.Reconnect && _settings.Current.AutoReconnect)
+        {
+            _log.Info(LogSource, "Auto-reconnecting to game...");
+            _ = _lcuApiService.ReconnectAsync().ConfigureAwait(false);
+        }
     }
 
     private static GameState ParseGameState(string raw)
