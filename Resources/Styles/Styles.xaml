@@ -511,7 +511,9 @@
     <Style x:Key="GlassSidebarButton" TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="48" />
         <Setter Property="Padding" Value="16,12" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="CornerRadius" Value="10" />

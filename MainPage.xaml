@@ -43,27 +43,69 @@
                         <Button Text="Game Auto" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="GameAuto" />
+                                CommandParameter="GameAuto">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGameAutoTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="Main Page" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="MainPage" />
+                                CommandParameter="MainPage">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsMainPageTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="Lobby" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="Lobby" />
+                                CommandParameter="Lobby">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsLobbyTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="Game Status" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="GameStatus" />
+                                CommandParameter="GameStatus">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGameStatusTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="Logs" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="Logs" />
+                                CommandParameter="Logs">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsLogsTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="Settings" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
-                                CommandParameter="Settings" />
+                                CommandParameter="Settings">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsSettingsTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                     </VerticalStackLayout>
                 </Border>
 
