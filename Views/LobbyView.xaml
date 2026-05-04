@@ -6,20 +6,20 @@
              x:DataType="viewModels:LobbyViewModel">
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <VerticalStackLayout Spacing="16">
-            <Label Text="Lobby" Style="{DynamicResource GlassTitle}" />
+            <Label Text="{Binding LobbyLabel}" Style="{DynamicResource GlassTitle}" />
             
             <HorizontalStackLayout Spacing="12">
-                <Button Text="Invite All Friends" 
+                <Button Text="{Binding InviteAllFriendsLabel}" 
                         Style="{DynamicResource GlassButtonPrimary}" 
                         Command="{Binding InviteAllFriendsCommand}" />
-                <Button Text="Refresh Friends" 
+                <Button Text="{Binding RefreshFriendsLabel}" 
                         Style="{DynamicResource GlassButton}" 
                         Command="{Binding RefreshFriendsCommand}" />
             </HorizontalStackLayout>
 
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Filter" Style="{DynamicResource GlassLabel}" />
+                    <Label Text="{Binding FilterLabel}" Style="{DynamicResource GlassLabel}" />
                     <Picker ItemsSource="{Binding FriendGroups}" 
                             SelectedItem="{Binding FriendFilterGroup}" 
                             Style="{DynamicResource GlassPicker}" />

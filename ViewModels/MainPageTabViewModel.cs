@@ -7,13 +7,19 @@ namespace LolClientHelper.ViewModels;
 public partial class MainPageTabViewModel : ObservableObject
 {
     private readonly ISettingsService _settings;
+    private readonly ILocalizationService _localization;
 
     [ObservableProperty] private bool autoAcceptInvite;
 
-    public MainPageTabViewModel(ISettingsService settings)
+    public string MainPageLabel => _localization.Get("tab.main_page");
+    public string AutoAcceptInviteLabel => _localization.Get("main_page.auto_accept_invite");
+
+    public MainPageTabViewModel(ISettingsService settings, ILocalizationService localization)
     {
         _settings = settings;
+        _localization = localization;
         LoadSettings();
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void LoadSettings()

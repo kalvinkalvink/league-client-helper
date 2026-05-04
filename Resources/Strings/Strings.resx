@@ -25,4 +25,19 @@
   <data name="setting.language" xml:space="preserve"><value>Language</value></data>
   <data name="setting.reset" xml:space="preserve"><value>Reset to Defaults</value></data>
   <data name="setting.auto_reconnect" xml:space="preserve"><value>Auto Reconnect</value></data>
+  <data name="game_auto.start_game" xml:space="preserve"><value>Auto Start Game</value></data>
+  <data name="game_auto.accept_match" xml:space="preserve"><value>Auto Accept Match</value></data>
+  <data name="game_auto.skip_like" xml:space="preserve"><value>Auto Skip Like</value></data>
+  <data name="game_auto.reenter_lobby" xml:space="preserve"><value>Auto Reenter Lobby</value></data>
+  <data name="game_status.game_mode" xml:space="preserve"><value>Game Mode</value></data>
+  <data name="game_status.ranking" xml:space="preserve"><value>Ranking</value></data>
+  <data name="game_status.level" xml:space="preserve"><value>Level</value></data>
+  <data name="game_status.status" xml:space="preserve"><value>Status</value></data>
+  <data name="game_status.apply" xml:space="preserve"><value>Apply Rank/Status</value></data>
+  <data name="lobby.invite_all" xml:space="preserve"><value>Invite All Friends</value></data>
+  <data name="lobby.refresh_friends" xml:space="preserve"><value>Refresh Friends</value></data>
+  <data name="lobby.filter" xml:space="preserve"><value>Filter</value></data>
+  <data name="tab.logs" xml:space="preserve"><value>Logs</value></data>
+  <data name="logs.clear" xml:space="preserve"><value>Clear Logs</value></data>
+  <data name="main_page.auto_accept_invite" xml:space="preserve"><value>Auto Accept Game Invite</value></data>
 </root>

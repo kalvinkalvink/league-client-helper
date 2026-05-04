@@ -6,11 +6,11 @@
              x:DataType="viewModels:GameStatusViewModel">
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <VerticalStackLayout Spacing="16">
-            <Label Text="Game Status" Style="{DynamicResource GlassTitle}" />
+            <Label Text="{Binding GameStatusLabel}" Style="{DynamicResource GlassTitle}" />
             
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Game Mode" Style="{DynamicResource GlassLabel}" />
+                    <Label Text="{Binding GameModeLabel}" Style="{DynamicResource GlassLabel}" />
                     <Picker ItemsSource="{Binding QueueTypes}" 
                             SelectedItem="{Binding QueueType}" 
                             Style="{DynamicResource GlassPicker}" />
@@ -19,7 +19,7 @@
 
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Ranking" Style="{DynamicResource GlassLabel}" />
+                    <Label Text="{Binding RankingLabel}" Style="{DynamicResource GlassLabel}" />
                     <Picker ItemsSource="{Binding Tiers}" 
                             SelectedItem="{Binding Tier}" 
                             Style="{DynamicResource GlassPicker}" />
@@ -28,7 +28,7 @@
 
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Level" Style="{DynamicResource GlassLabel}" />
+                    <Label Text="{Binding LevelLabel}" Style="{DynamicResource GlassLabel}" />
                     <Picker ItemsSource="{Binding Divisions}" 
                             SelectedItem="{Binding Division}" 
                             Style="{DynamicResource GlassPicker}" />
@@ -37,14 +37,14 @@
 
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Status" Style="{DynamicResource GlassLabel}" />
+                    <Label Text="{Binding StatusLabel}" Style="{DynamicResource GlassLabel}" />
                     <Picker ItemsSource="{Binding StatusOptions}" 
                             SelectedItem="{Binding Status}" 
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="Apply Rank/Status" 
+            <Button Text="{Binding ApplyButtonLabel}" 
                     Style="{DynamicResource GlassButtonPrimary}" 
                     Command="{Binding ApplyFakeRankCommand}" />
         </VerticalStackLayout>

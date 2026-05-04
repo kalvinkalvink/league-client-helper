@@ -11,6 +11,7 @@ public partial class GameStatusViewModel : ObservableObject
     private readonly ISettingsService _settings;
     private readonly ILcuApiService _api;
     private readonly ILoggingService _log;
+    private readonly ILocalizationService _localization;
     private const string LogSource = "GameStatusViewModel";
 
     [ObservableProperty] private string queueType = "RANKED_SOLO_5x5";
@@ -18,17 +19,25 @@ public partial class GameStatusViewModel : ObservableObject
     [ObservableProperty] private string division = "I";
     [ObservableProperty] private string status = "chat";
 
+    public string GameModeLabel => _localization.Get("game_status.game_mode");
+    public string RankingLabel => _localization.Get("game_status.ranking");
+    public string LevelLabel => _localization.Get("game_status.level");
+    public string StatusLabel => _localization.Get("game_status.status");
+    public string ApplyButtonLabel => _localization.Get("game_status.apply");
+
     public ObservableCollection<string> QueueTypes { get; } = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_TFT"];
     public ObservableCollection<string> Tiers { get; } = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
     public ObservableCollection<string> Divisions { get; } = ["IV", "III", "II", "I"];
     public ObservableCollection<string> StatusOptions { get; } = ["chat", "away", "offline", "mobile"];
 
-    public GameStatusViewModel(ISettingsService settings, ILcuApiService api, ILoggingService log)
+    public GameStatusViewModel(ISettingsService settings, ILcuApiService api, ILoggingService log, ILocalizationService localization)
     {
         _settings = settings;
         _api = api;
         _log = log;
+        _localization = localization;
         LoadSettings();
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void LoadSettings()

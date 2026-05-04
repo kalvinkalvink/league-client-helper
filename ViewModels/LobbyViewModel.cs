@@ -11,18 +11,26 @@ public partial class LobbyViewModel : ObservableObject
     private readonly ISettingsService _settings;
     private readonly ILcuApiService _api;
     private readonly ILoggingService _log;
+    private readonly ILocalizationService _localization;
     private const string LogSource = "LobbyViewModel";
 
     [ObservableProperty] private string friendFilterGroup = "All";
 
+    public string LobbyLabel => _localization.Get("tab.lobby");
+    public string InviteAllFriendsLabel => _localization.Get("lobby.invite_all");
+    public string RefreshFriendsLabel => _localization.Get("lobby.refresh_friends");
+    public string FilterLabel => _localization.Get("lobby.filter");
+
     public ObservableCollection<string> FriendGroups { get; } = ["All"];
 
-    public LobbyViewModel(ISettingsService settings, ILcuApiService api, ILoggingService log)
+    public LobbyViewModel(ISettingsService settings, ILcuApiService api, ILoggingService log, ILocalizationService localization)
     {
         _settings = settings;
         _api = api;
         _log = log;
+        _localization = localization;
         LoadSettings();
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void LoadSettings()

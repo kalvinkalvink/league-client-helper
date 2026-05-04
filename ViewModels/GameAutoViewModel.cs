@@ -9,6 +9,7 @@ public partial class GameAutoViewModel : ObservableObject
 {
     private readonly ISettingsService _settings;
     private readonly ILoggingService _log;
+    private readonly ILocalizationService _localization;
     private const string LogSource = "GameAutoViewModel";
 
     [ObservableProperty] private bool autoStartGame;
@@ -16,11 +17,18 @@ public partial class GameAutoViewModel : ObservableObject
     [ObservableProperty] private bool autoSkipLike;
     [ObservableProperty] private bool autoReenterLobby;
 
-    public GameAutoViewModel(ISettingsService settings, ILoggingService log)
+    public string AutoStartGameLabel => _localization.Get("game_auto.start_game");
+    public string AutoAcceptMatchLabel => _localization.Get("game_auto.accept_match");
+    public string AutoSkipLikeLabel => _localization.Get("game_auto.skip_like");
+    public string AutoReenterLobbyLabel => _localization.Get("game_auto.reenter_lobby");
+
+    public GameAutoViewModel(ISettingsService settings, ILoggingService log, ILocalizationService localization)
     {
         _settings = settings;
         _log = log;
+        _localization = localization;
         LoadSettings();
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void LoadSettings()

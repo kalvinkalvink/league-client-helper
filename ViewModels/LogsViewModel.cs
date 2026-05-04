@@ -9,6 +9,7 @@ namespace LolClientHelper.ViewModels;
 public partial class LogsViewModel : ObservableObject
 {
     private readonly ILoggingService _log;
+    private readonly ILocalizationService _localization;
     private const string LogSource = "LogsViewModel";
     private const int MaxLogEntries = 1000;
 
@@ -16,12 +17,17 @@ public partial class LogsViewModel : ObservableObject
 
     [ObservableProperty] private string logText = string.Empty;
 
+    public string LogsLabel => _localization.Get("tab.logs");
+    public string ClearLogsLabel => _localization.Get("logs.clear");
+
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
-    public LogsViewModel(ILoggingService log)
+    public LogsViewModel(ILoggingService log, ILocalizationService localization)
     {
         _log = log;
+        _localization = localization;
         _log.LogEntryWritten += OnLogEntryWritten;
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void OnLogEntryWritten(object? sender, LogEntry entry)

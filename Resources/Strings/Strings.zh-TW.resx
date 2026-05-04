@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="app.title" xml:space="preserve"><value>LolClientHelper</value></data>
+  <data name="menu.file" xml:space="preserve"><value>檔案</value></data>
+  <data name="menu.settings" xml:space="preserve"><value>設定</value></data>
+  <data name="tab.game_auto" xml:space="preserve"><value>遊戲自動</value></data>
+  <data name="tab.main_page" xml:space="preserve"><value>主頁</value></data>
+  <data name="tab.lobby" xml:space="preserve"><value>大廳</value></data>
+  <data name="tab.game_status" xml:space="preserve"><value>遊戲狀態</value></data>
+  <data name="setting.poll_interval" xml:space="preserve"><value>輪詢間隔(毫秒)</value></data>
+  <data name="setting.theme" xml:space="preserve"><value>主題</value></data>
+  <data name="setting.change_ranking_on_start" xml:space="preserve"><value>啟動時更改排名</value></data>
+  <data name="setting.language" xml:space="preserve"><value>語言</value></data>
+  <data name="setting.reset" xml:space="preserve"><value>恢復預設設定</value></data>
+  <data name="setting.auto_reconnect" xml:space="preserve"><value>自動重連</value></data>
+  <data name="game_auto.start_game" xml:space="preserve"><value>自動開始遊戲</value></data>
+  <data name="game_auto.accept_match" xml:space="preserve"><value>自動接受匹配</value></data>
+  <data name="game_auto.skip_like" xml:space="preserve"><value>自動跳過點讚</value></data>
+  <data name="game_auto.reenter_lobby" xml:space="preserve"><value>自動重新進入大廳</value></data>
+  <data name="game_status.game_mode" xml:space="preserve"><value>遊戲模式</value></data>
+  <data name="game_status.ranking" xml:space="preserve"><value>段位</value></data>
+  <data name="game_status.level" xml:space="preserve"><value>等級</value></data>
+  <data name="game_status.status" xml:space="preserve"><value>狀態</value></data>
+  <data name="game_status.apply" xml:space="preserve"><value>應用段位/狀態</value></data>
+  <data name="lobby.invite_all" xml:space="preserve"><value>邀請所有好友</value></data>
+  <data name="lobby.refresh_friends" xml:space="preserve"><value>刷新好友</value></data>
+  <data name="lobby.filter" xml:space="preserve"><value>篩選</value></data>
+  <data name="tab.logs" xml:space="preserve"><value>日誌</value></data>
+  <data name="logs.clear" xml:space="preserve"><value>清除日誌</value></data>
+  <data name="main_page.auto_accept_invite" xml:space="preserve"><value>自動接受遊戲邀請</value></data>
+</root>

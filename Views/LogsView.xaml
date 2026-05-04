@@ -6,12 +6,12 @@
              x:DataType="viewModels:LogsViewModel">
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <VerticalStackLayout Spacing="16">
-            <Label Text="Logs" Style="{DynamicResource GlassTitle}" />
+            <Label Text="{Binding LogsLabel}" Style="{DynamicResource GlassTitle}" />
             
-            <Button Text="Clear Logs" 
+            <Button Text="{Binding ClearLogsLabel}" 
                     Style="{DynamicResource GlassButton}" 
                     Command="{Binding ClearLogsCommand}" />
-
+            
             <Border Style="{DynamicResource GlassItem}">
                 <ScrollView>
                     <Editor IsReadOnly="True" 
