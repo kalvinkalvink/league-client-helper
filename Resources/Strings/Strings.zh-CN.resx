@@ -68,4 +68,5 @@
   <data name="tab.logs" xml:space="preserve"><value>日志</value></data>
   <data name="logs.clear" xml:space="preserve"><value>清除日志</value></data>
   <data name="main_page.auto_accept_invite" xml:space="preserve"><value>自动接受游戏邀请</value></data>
-</root>
+  <data name="main_page.auto_join_friend_party" xml:space="preserve"><value>自动加入好友队伍</value></data>
+ </root>

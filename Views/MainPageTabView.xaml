@@ -14,6 +14,13 @@
                     <Label VerticalOptions="Center" Text="{Binding AutoAcceptInviteLabel}" Style="{DynamicResource GlassLabel}" />
                 </HorizontalStackLayout>
             </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoJoinFriendParty}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoJoinFriendPartyLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </Border>
 </ContentView>

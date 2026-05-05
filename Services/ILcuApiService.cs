@@ -28,4 +28,6 @@ public interface ILcuApiService
     Task<JsonDocument> GetLoginSessionAsync(CancellationToken ct = default);
     Task<JsonDocument> GetRankedStatsAsync(string puuid, CancellationToken ct = default);
     Task<JsonDocument> GetMatchHistoryAsync(string puuid, CancellationToken ct = default);
+    Task JoinPartyAsync(string partyId, CancellationToken ct = default);
+    Task<bool> IsInPartyAsync(CancellationToken ct = default);
 }

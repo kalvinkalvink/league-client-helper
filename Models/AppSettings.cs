@@ -42,6 +42,9 @@ public sealed class AppSettings
     /// <summary>Automatically accept incoming game invitations.</summary>
     public bool AutoAcceptInvite { get; set; } = true;
 
+    /// <summary>Automatically join any friend's open party via webhook.</summary>
+    public bool AutoJoinFriendParty { get; set; } = false;
+
     // -------------------------------------------------------------------------
     // Lobby
     // -------------------------------------------------------------------------

@@ -173,6 +173,43 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         return JsonDocument.Parse(json);
     }
 
+    public async Task JoinPartyAsync(string partyId, CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(partyId))
+            throw new ArgumentException("Party id is required.", nameof(partyId));
+        
+        try 
+        { 
+            var success = await SendNoBodyAsync(HttpMethod.Post, $"/lol-lobby/v2/party/{Uri.EscapeDataString(partyId)}/join", ct).ConfigureAwait(false);
+            if (!success)
+            {
+                _log.Debug(LogSource, $"Join party failed: API returned error for party {partyId}");
+            }
+        }
+        catch (Exception ex) 
+        { 
+            // Don't warn for expected errors when already in party
+            if (ex.Message.Contains("INVALID_WHILE_PARTY_IN_ACTION") || ex.Message.Contains("400"))
+                _log.Debug(LogSource, $"Join party skipped: already in party or party action in progress");
+            else
+                _log.Warning(LogSource, $"JoinPartyAsync failed: {ex.Message}"); 
+        }
+    }
+
+    public async Task<bool> IsInPartyAsync(CancellationToken ct = default)
+    {
+        try
+        {
+            var result = await SendJsonAsync(HttpMethod.Get, "/lol-lobby/v2/lobby", "", ct).ConfigureAwait(false);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _log.Debug(LogSource, $"IsInPartyAsync check failed: {ex.Message}");
+            return false;
+        }
+    }
+
     private async Task<string> GetStringAsync(string endpoint, CancellationToken ct)
     {
         EnsureConfigured();
@@ -186,8 +223,11 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         return content;
     }
 
-    private Task<bool> SendNoBodyAsync(HttpMethod method, string endpoint, CancellationToken ct) =>
-        SendJsonAsync(method, endpoint, "{}", ct);
+    private async Task<bool> SendNoBodyAsync(HttpMethod method, string endpoint, CancellationToken ct)
+    {
+        var result = await SendJsonAsync(method, endpoint, "{}", ct).ConfigureAwait(false);
+        return result;
+    }
 
     private Task<bool> SendJsonAsync(HttpMethod method, string endpoint, byte[] payload, CancellationToken ct) =>
         SendJsonAsync(method, endpoint, Encoding.UTF8.GetString(payload), ct);
@@ -203,7 +243,13 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         if (!rsp.IsSuccessStatusCode)
         {
             var body = await rsp.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
-            _log.Warning(LogSource, $"{method} {endpoint} -> {(int)rsp.StatusCode} {rsp.StatusCode} | {body}");
+            var isPartyEndpoint = endpoint.StartsWith("/lol-lobby/v2/party/", StringComparison.OrdinalIgnoreCase);
+            var isBadRequest = rsp.StatusCode == System.Net.HttpStatusCode.BadRequest;
+            
+            if (isPartyEndpoint && isBadRequest)
+                _log.Debug(LogSource, $"Party action skipped: {body}");
+            else
+                _log.Warning(LogSource, $"{method} {endpoint} -> {(int)rsp.StatusCode} {rsp.StatusCode} | {body}");
             return false;
         }
         _log.Debug(LogSource, $"{method} {endpoint} -> {(int)rsp.StatusCode}");

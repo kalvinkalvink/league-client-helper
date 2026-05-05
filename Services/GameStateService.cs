@@ -8,6 +8,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     private const string LogSource = "GameStateService";
     private const string TopicAllEvents = "OnJsonApiEvent";
     private const int MaxPollingFailuresBeforeRefresh = 5;
+    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
 
     private readonly ILoggingService _log;
     private readonly ISettingsService _settings;
@@ -19,6 +20,9 @@ public sealed class GameStateService : IGameStateService, IDisposable
     private Task? _wsReceiveTask;
     private bool _disposed;
     private int _consecutivePollingFailures;
+    private string? _currentSummonerPuuid;
+    private readonly HashSet<string> _recentPartyJoins = new();
+    private DateTime _lastPartyJoinTime = DateTime.MinValue;
 
     public GameStateService(
         ILoggingService log,
@@ -66,6 +70,18 @@ public sealed class GameStateService : IGameStateService, IDisposable
         var credentials = await _leagueProcessService.WaitForCredentialsAsync(ct: ct).ConfigureAwait(false);
         _lcuApiService.Configure(credentials);
         ApiConfigured?.Invoke(this, EventArgs.Empty);
+
+        // Fetch current summoner's puuid to filter out own events
+        try
+        {
+            var summoner = await _lcuApiService.GetCurrentSummonerAsync(ct).ConfigureAwait(false);
+            _currentSummonerPuuid = summoner?.Puuid;
+            _log.Info(LogSource, $"Current summoner puuid: {_currentSummonerPuuid}");
+        }
+        catch (Exception ex)
+        {
+            _log.Warning(LogSource, $"Failed to get current summoner: {ex.Message}");
+        }
     }
 
     public async Task StopAsync(CancellationToken ct = default)
@@ -182,6 +198,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
             if (!eventPayload.TryGetProperty("uri", out var uriElement))
                 return;
 
+            // parse game state
             var uri = uriElement.GetString() ?? string.Empty;
             if (uri.Contains("/lol-gameflow/v1/gameflow-phase", StringComparison.OrdinalIgnoreCase) &&
                 eventPayload.TryGetProperty("data", out var dataElement) &&
@@ -191,15 +208,129 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 UpdateState(state);
             }
 
-            if (uri.Contains("/lol-lobby/v2/received-invitations", StringComparison.OrdinalIgnoreCase))
+
+
+
+            if (uri.Contains("/lol-lobby/v2/received-invitations", StringComparison.OrdinalIgnoreCase) && CurrentState == GameState.MainMenu)
             {
                 _log.Debug(LogSource, $"WS: Received invitation event");
                 InvitationReceived?.Invoke(this, EventArgs.Empty);
+            }
+
+            // Handle friend info events for auto-join party
+            if (uri.Contains("/lol-hovercard/v1/friend-info/", StringComparison.OrdinalIgnoreCase) && CurrentState == GameState.MainMenu)
+            {
+                _log.Debug(LogSource, $"WS: Friend info event received for {uri}");
+                ProcessFriendInfoEvent(eventPayload);
             }
         }
         catch (Exception ex)
         {
             _log.Debug(LogSource, $"Ignored WS message: {ex.Message}");
+        }
+    }
+
+    private void ProcessFriendInfoEvent(JsonElement eventPayload)
+    {
+        try
+        {
+            // Check if auto-join is enabled
+            if (!_settings.Current.AutoJoinFriendParty)
+                return;
+
+            // Deserialize the event payload
+            var payload = JsonSerializer.Deserialize<FriendInfoEventPayload>(eventPayload.GetRawText(), JsonOptions);
+            if (payload == null)
+                return;
+
+            // Check event type is Update
+            if (!string.Equals(payload.EventType, "Update", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            var friendData = payload.Data;
+            var friendPuuid = friendData.Puuid;
+
+            // Filter out current summoner's own events
+            if (!string.IsNullOrEmpty(_currentSummonerPuuid) && 
+                string.Equals(friendPuuid, _currentSummonerPuuid, StringComparison.OrdinalIgnoreCase))
+            {
+                _log.Debug(LogSource, "Skipping own friend info event");
+                return;
+            }
+
+            // Check if lol info exists
+            var lolInfo = friendData.Lol;
+            if (lolInfo == null)
+                return;
+
+            // Parse party info from pty string
+            if (string.IsNullOrEmpty(lolInfo.Pty))
+                return;
+
+            var partyInfo = JsonSerializer.Deserialize<PartyInfo>(lolInfo.Pty, JsonOptions);
+            if (partyInfo == null)
+                return;
+
+            // Check if party is open and has a valid party ID
+            if (!partyInfo.IsPartyOpen || string.IsNullOrEmpty(partyInfo.PartyId))
+                return;
+
+            // Check if we're in a state where joining is allowed
+            if (CurrentState != GameState.MainMenu && CurrentState != GameState.Lobby)
+            {
+                _log.Debug(LogSource, $"Skipping party join - current state is {CurrentState}");
+                return;
+            }
+
+            // Prevent duplicate join attempts to the same party
+            var partyId = partyInfo.PartyId;
+            if (_recentPartyJoins.Contains(partyId))
+            {
+                _log.Debug(LogSource, $"Skipping party join - already attempted to join {partyId} recently");
+                return;
+            }
+
+            // Prevent rapid successive join attempts (debounce 5 seconds)
+            if ((DateTime.Now - _lastPartyJoinTime).TotalSeconds < 5)
+            {
+                _log.Debug(LogSource, "Skipping party join - too many join attempts");
+                return;
+            }
+
+            // Join the party
+            _log.Info(LogSource, $"Auto-joining friend {friendData.GameName}'s party {partyId}");
+            _lastPartyJoinTime = DateTime.Now;
+            _recentPartyJoins.Add(partyId);
+            
+            // Clean up old entries after 30 seconds
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(30000).ConfigureAwait(false);
+                _recentPartyJoins.Remove(partyId);
+            });
+
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    // Check if we're already in a party before joining
+                    if (await _lcuApiService.IsInPartyAsync().ConfigureAwait(false))
+                    {
+                        _log.Debug(LogSource, "Skipping party join - already in a party");
+                        return;
+                    }
+                    
+                    await _lcuApiService.JoinPartyAsync(partyId).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    _log.Warning(LogSource, $"Failed to join party: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            _log.Warning(LogSource, $"Failed to process friend info event: {ex.Message}");
         }
     }
 
@@ -255,7 +386,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
             {
                 try
                 {
-                    await Task.Delay(500).ConfigureAwait(false);
+                    //await Task.Delay(500).ConfigureAwait(false);
                     await _lcuApiService.PlayAgainAsync().ConfigureAwait(false);
                     _log.Info(LogSource, "Play again queued");
                 }
