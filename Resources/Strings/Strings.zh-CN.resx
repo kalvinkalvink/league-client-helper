@@ -69,4 +69,10 @@
   <data name="logs.clear" xml:space="preserve"><value>清除日志</value></data>
   <data name="main_page.auto_accept_invite" xml:space="preserve"><value>自动接受游戏邀请</value></data>
   <data name="main_page.auto_join_friend_party" xml:space="preserve"><value>自动加入好友队伍</value></data>
+  <data name="main_page.friends" xml:space="preserve"><value>好友</value></data>
+  <data name="main_page.selected_friends" xml:space="preserve"><value>已选好友</value></data>
+  <data name="main_page.add" xml:space="preserve"><value>添加 &gt;</value></data>
+  <data name="main_page.remove" xml:space="preserve"><value>&lt; 移除</value></data>
+  <data name="main_page.search_friends" xml:space="preserve"><value>搜索好友...</value></data>
+  <data name="main_page.refresh_friends" xml:space="preserve"><value>刷新好友</value></data>
  </root>

@@ -2,12 +2,21 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             xmlns:models="clr-namespace:LolClientHelper.Models"
+             xmlns:converters="clr-namespace:LolClientHelper.Converters"
              x:Class="LolClientHelper.Views.MainPageTabView"
              x:DataType="viewModels:MainPageTabViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <VerticalStackLayout Spacing="16">
             <Label Text="{Binding MainPageLabel}" Style="{DynamicResource GlassTitle}" />
             
+            <!-- Auto Accept Invite -->
             <Border Style="{DynamicResource GlassItem}">
                 <HorizontalStackLayout Spacing="12">
                     <CheckBox IsChecked="{Binding AutoAcceptInvite}" />
@@ -15,11 +24,197 @@
                 </HorizontalStackLayout>
             </Border>
 
+            <!-- Auto Join Friend Party -->
             <Border Style="{DynamicResource GlassItem}">
                 <HorizontalStackLayout Spacing="12">
                     <CheckBox IsChecked="{Binding AutoJoinFriendParty}" />
                     <Label VerticalOptions="Center" Text="{Binding AutoJoinFriendPartyLabel}" Style="{DynamicResource GlassLabel}" />
                 </HorizontalStackLayout>
+            </Border>
+
+            <!-- Friend Selection Section -->
+            <Border Style="{DynamicResource GlassCard}" Padding="12">
+                <VerticalStackLayout Spacing="12">
+                    <!-- Search Box -->
+                    <HorizontalStackLayout Spacing="8">
+                        <SearchBar 
+                            Text="{Binding SearchText, Mode=TwoWay}"
+                            Placeholder="{Binding SearchFriendsPlaceholder}"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="40" />
+                        <Button 
+                            Text="{Binding RefreshFriendsLabel}"
+                            Command="{Binding RefreshFriendsCommand}"
+                            Style="{DynamicResource GlassButton}"
+                            HeightRequest="40"
+                            IsVisible="{Binding IsRefreshingFriends, Converter={StaticResource InverseBoolConverter}}" />
+                        <ActivityIndicator 
+                            IsRunning="{Binding IsRefreshingFriends}"
+                            IsVisible="{Binding IsRefreshingFriends}"
+                            HeightRequest="40" />
+                    </HorizontalStackLayout>
+
+                    <!-- Two Lists Side by Side -->
+                    <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="12">
+                        <!-- Left List: All Friends -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="8">
+                            <Label Text="{Binding FriendsLabel}" Style="{DynamicResource GlassLabel}" FontAttributes="Bold" />
+                            <CollectionView 
+                                ItemsSource="{Binding FilteredFriends}"
+                                SelectedItem="{Binding SelectedFriendInAllList, Mode=TwoWay}"
+                                HeightRequest="200"
+                                SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Friend">
+                                        <Grid Padding="8" ColumnDefinitions="*,Auto">
+                                            <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="online">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="chat">
+                                                        <Setter Property="TextColor" Value="LightGreen" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="away">
+                                                        <Setter Property="TextColor" Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="offline">
+                                                        <Setter Property="TextColor" Value="DarkGrey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="mobile">
+                                                        <Setter Property="TextColor" Value="Grey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="inGame">
+                                                        <Setter Property="TextColor" Value="Orange" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="hosting">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding EffectiveAvailability}" 
+                                                   VerticalOptions="Center"
+                                                   FontSize="12"
+                                                   Opacity="0.7">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="online">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="chat">
+                                                        <Setter Property="TextColor" Value="LightGreen" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="away">
+                                                        <Setter Property="TextColor" Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="offline">
+                                                        <Setter Property="TextColor" Value="DarkGrey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="mobile">
+                                                        <Setter Property="TextColor" Value="Grey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="inGame">
+                                                        <Setter Property="TextColor" Value="Orange" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="hosting">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+
+                        <!-- Middle Buttons -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="12" VerticalOptions="Center">
+                            <Button 
+                                Text="{Binding AddFriendLabel}"
+                                Command="{Binding AddFriendCommand}"
+                                Style="{DynamicResource GlassButtonPrimary}"
+                                WidthRequest="80"
+                                IsEnabled="{Binding SelectedFriendInAllList, Converter={StaticResource NullToBoolConverter}}" />
+                            <Button 
+                                Text="{Binding RemoveFriendLabel}"
+                                Command="{Binding RemoveFriendCommand}"
+                                Style="{DynamicResource GlassButton}"
+                                WidthRequest="80"
+                                IsEnabled="{Binding SelectedFriendInSelectedList, Converter={StaticResource NullToBoolConverter}}" />
+                        </VerticalStackLayout>
+
+                        <!-- Right List: Selected Friends -->
+                        <VerticalStackLayout Grid.Column="2" Spacing="8">
+                            <Label Text="{Binding SelectedFriendsLabel}" Style="{DynamicResource GlassLabel}" FontAttributes="Bold" />
+                            <CollectionView 
+                                ItemsSource="{Binding SelectedFriends}"
+                                SelectedItem="{Binding SelectedFriendInSelectedList, Mode=TwoWay}"
+                                HeightRequest="200"
+                                SelectionMode="Single">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Friend">
+                                        <Grid Padding="8" ColumnDefinitions="*,Auto">
+                                            <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="online">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="chat">
+                                                        <Setter Property="TextColor" Value="LightGreen" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="away">
+                                                        <Setter Property="TextColor" Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="offline">
+                                                        <Setter Property="TextColor" Value="DarkGrey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="mobile">
+                                                        <Setter Property="TextColor" Value="Grey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="inGame">
+                                                        <Setter Property="TextColor" Value="Orange" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="hosting">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding EffectiveAvailability}" 
+                                                   VerticalOptions="Center"
+                                                   FontSize="12"
+                                                   Opacity="0.7">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="online">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="chat">
+                                                        <Setter Property="TextColor" Value="LightGreen" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="away">
+                                                        <Setter Property="TextColor" Value="Red" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="offline">
+                                                        <Setter Property="TextColor" Value="DarkGrey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="mobile">
+                                                        <Setter Property="TextColor" Value="Grey" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="inGame">
+                                                        <Setter Property="TextColor" Value="Orange" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding EffectiveAvailability}" Value="hosting">
+                                                        <Setter Property="TextColor" Value="Green" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
     </Border>

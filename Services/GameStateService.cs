@@ -43,6 +43,10 @@ public sealed class GameStateService : IGameStateService, IDisposable
     public event EventHandler<GameState>? GameStateChanged;
     public event EventHandler? ApiConfigured;
     public event EventHandler? InvitationReceived;
+    public event Action<string, string, string>? FriendGameStatusChanged;
+
+    private readonly Dictionary<string, string> _friendGameStatuses = new();
+    private readonly Dictionary<string, string> _friendProducts = new();
 
     public async Task StartAsync(CancellationToken ct = default)
     {
@@ -211,14 +215,14 @@ public sealed class GameStateService : IGameStateService, IDisposable
 
 
 
-            if (uri.Contains("/lol-lobby/v2/received-invitations", StringComparison.OrdinalIgnoreCase) && CurrentState == GameState.MainMenu)
+            if (uri.Contains("/lol-lobby/v2/received-invitations", StringComparison.OrdinalIgnoreCase))
             {
                 _log.Debug(LogSource, $"WS: Received invitation event");
                 InvitationReceived?.Invoke(this, EventArgs.Empty);
             }
 
             // Handle friend info events for auto-join party
-            if (uri.Contains("/lol-hovercard/v1/friend-info/", StringComparison.OrdinalIgnoreCase) && CurrentState == GameState.MainMenu)
+            if (uri.Contains("/lol-hovercard/v1/friend-info/", StringComparison.OrdinalIgnoreCase))
             {
                 _log.Debug(LogSource, $"WS: Friend info event received for {uri}");
                 ProcessFriendInfoEvent(eventPayload);
@@ -261,7 +265,47 @@ public sealed class GameStateService : IGameStateService, IDisposable
             // Check if lol info exists
             var lolInfo = friendData.Lol;
             if (lolInfo == null)
+            {
+                _log.Debug(LogSource, $"Friend {friendData.GameName}: lol info is NULL");
                 return;
+            }
+
+            // Debug: log what we received
+            _log.Info(LogSource, $"Friend {friendData.GameName}: availability={friendData.Availability}, gameStatus=[{lolInfo.GameStatus}], product={friendData.Product}");
+
+            // Track game status AND product for UI updates
+            var gameStatusChanged = false;
+            var productChanged = false;
+
+            if (!string.IsNullOrEmpty(lolInfo.GameStatus))
+            {
+                var previousStatus = _friendGameStatuses.TryGetValue(friendPuuid, out var status) ? status : string.Empty;
+                if (!string.Equals(previousStatus, lolInfo.GameStatus, StringComparison.OrdinalIgnoreCase))
+                {
+                    _log.Info(LogSource, $"FIRING event: {friendPuuid} gameStatus={lolInfo.GameStatus}");
+                    _friendGameStatuses[friendPuuid] = lolInfo.GameStatus;
+                    gameStatusChanged = true;
+                }
+            }
+
+            // Track product from friend data
+            if (!string.IsNullOrEmpty(friendData.Product))
+            {
+                var previousProduct = _friendProducts.TryGetValue(friendPuuid, out var prod) ? prod : string.Empty;
+                if (!string.Equals(previousProduct, friendData.Product, StringComparison.OrdinalIgnoreCase))
+                {
+                    _friendProducts[friendPuuid] = friendData.Product;
+                    productChanged = true;
+                }
+            }
+
+            // Fire event if either changed
+            if (gameStatusChanged || productChanged)
+            {
+                var currentStatus = _friendGameStatuses.TryGetValue(friendPuuid, out var s) ? s : string.Empty;
+                var currentProduct = _friendProducts.TryGetValue(friendPuuid, out var p) ? p : string.Empty;
+                FriendGameStatusChanged?.Invoke(friendPuuid, currentStatus, currentProduct);
+            }
 
             // Parse party info from pty string
             if (string.IsNullOrEmpty(lolInfo.Pty))
@@ -275,8 +319,20 @@ public sealed class GameStateService : IGameStateService, IDisposable
             if (!partyInfo.IsPartyOpen || string.IsNullOrEmpty(partyInfo.PartyId))
                 return;
 
+            // Check if this friend is in the selected list (only if list is not empty)
+            // If no friends selected, allow random joins to any friend's party
+            var selectedPuuids = _settings.Current.SelectedFriendPuuids;
+            if (selectedPuuids != null && selectedPuuids.Count > 0)
+            {
+                if (!selectedPuuids.Contains(friendPuuid, StringComparer.OrdinalIgnoreCase))
+                {
+                    _log.Debug(LogSource, $"Skipping party join - friend {friendData.GameName} is not in selected list");
+                    return;
+                }
+            }
+
             // Check if we're in a state where joining is allowed
-            if (CurrentState != GameState.MainMenu && CurrentState != GameState.Lobby)
+            if (CurrentState != GameState.MainMenu)
             {
                 _log.Debug(LogSource, $"Skipping party join - current state is {CurrentState}");
                 return;

@@ -69,4 +69,10 @@
   <data name="logs.clear" xml:space="preserve"><value>Clear Logs</value></data>
   <data name="main_page.auto_accept_invite" xml:space="preserve"><value>Auto Accept Game Invite</value></data>
   <data name="main_page.auto_join_friend_party" xml:space="preserve"><value>Auto Join Friend Party</value></data>
+  <data name="main_page.friends" xml:space="preserve"><value>Friends</value></data>
+  <data name="main_page.selected_friends" xml:space="preserve"><value>Selected Friends</value></data>
+  <data name="main_page.add" xml:space="preserve"><value>Add &gt;</value></data>
+  <data name="main_page.remove" xml:space="preserve"><value>&lt; Remove</value></data>
+  <data name="main_page.search_friends" xml:space="preserve"><value>Search friends...</value></data>
+  <data name="main_page.refresh_friends" xml:space="preserve"><value>Refresh Friends</value></data>
 </root>
