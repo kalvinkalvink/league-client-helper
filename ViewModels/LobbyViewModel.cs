@@ -15,11 +15,15 @@ public partial class LobbyViewModel : ObservableObject
     private const string LogSource = "LobbyViewModel";
 
     [ObservableProperty] private LocalizedItem? selectedFriendGroupItem;
+    [ObservableProperty] private bool autoSendLobbyMessage;
+    [ObservableProperty] private string lobbyMessage = string.Empty;
 
     public string LobbyLabel => _localization.Get("tab.lobby");
     public string InviteAllFriendsLabel => _localization.Get("lobby.invite_all");
     public string RefreshFriendsLabel => _localization.Get("lobby.refresh_friends");
     public string FilterLabel => _localization.Get("lobby.filter");
+    public string AutoSendLabel => _localization.Get("lobby.auto_send");
+    public string MessagePlaceholder => _localization.Get("lobby.message_placeholder");
 
     public ObservableCollection<LocalizedItem> FriendGroupItems { get; } = [
         new() { Display = "All", Value = "All" }
@@ -46,6 +50,8 @@ public partial class LobbyViewModel : ObservableObject
     {
         var s = _settings.Current;
         SelectedFriendGroupItem = FriendGroupItems.FirstOrDefault(x => x.Value == s.FriendFilterGroup) ?? FriendGroupItems[0];
+        AutoSendLobbyMessage = s.AutoSendLobbyMessage;
+        LobbyMessage = s.LobbyMessage;
     }
 
     partial void OnSelectedFriendGroupItemChanged(LocalizedItem? value)
@@ -53,6 +59,9 @@ public partial class LobbyViewModel : ObservableObject
         if (value is null) return;
         Save(s => s.FriendFilterGroup = value.Value);
     }
+
+    partial void OnAutoSendLobbyMessageChanged(bool value) => Save(s => s.AutoSendLobbyMessage = value);
+    partial void OnLobbyMessageChanged(string value) => Save(s => s.LobbyMessage = value);
 
     private void Save(Action<AppSettings> mutate)
     {

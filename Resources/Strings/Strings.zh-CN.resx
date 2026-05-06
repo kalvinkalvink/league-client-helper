@@ -81,4 +81,6 @@
 <data name="champ_select.message_placeholder" xml:space="preserve"><value>输入要发送的消息...</value></data>
 <data name="end_of_game.auto_send" xml:space="preserve"><value>进入时自动发送消息</value></data>
 <data name="end_of_game.message_placeholder" xml:space="preserve"><value>输入要发送的消息...</value></data>
+<data name="lobby.auto_send" xml:space="preserve"><value>进入时自动发送消息</value></data>
+<data name="lobby.message_placeholder" xml:space="preserve"><value>输入要发送的消息...</value></data>
 </root>

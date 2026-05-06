@@ -478,6 +478,17 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 _ = Task.Run(async () => await SendAutoMessageAsync("postGame", message));
             }
         }
+
+        // Auto-send message on Lobby
+        if (nextState == GameState.Lobby && _settings.Current.AutoSendLobbyMessage)
+        {
+            var message = _settings.Current.LobbyMessage;
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                _log.Info(LogSource, "Lobby entered, starting auto-send...");
+                _ = Task.Run(async () => await SendLobbyAutoMessageAsync(message));
+            }
+        }
     }
 
     private static GameState ParseGameState(string raw)
@@ -576,6 +587,32 @@ public sealed class GameStateService : IGameStateService, IDisposable
         catch (Exception ex)
         {
             _log.Warning(LogSource, $"Auto-send failed: {ex.Message}");
+        }
+    }
+
+    private async Task SendLobbyAutoMessageAsync(string message)
+    {
+        try
+        {
+            // Small delay to allow lobby chat to initialize
+            await Task.Delay(500).ConfigureAwait(false);
+
+            var conversations = await _lcuApiService.GetConversationsAsync(CancellationToken.None).ConfigureAwait(false);
+            var lobbyConv = conversations.FirstOrDefault(c => c.Type == "lobby");
+            
+            if (lobbyConv != null)
+            {
+                await _lcuApiService.SendChatMessageAsync(lobbyConv.Id, message, CancellationToken.None).ConfigureAwait(false);
+                _log.Info(LogSource, "Auto-sent message to lobby");
+            }
+            else
+            {
+                _log.Warning(LogSource, "Lobby conversation not found");
+            }
+        }
+        catch (Exception ex)
+        {
+            _log.Warning(LogSource, $"Lobby auto-send failed: {ex.Message}");
         }
     }
 

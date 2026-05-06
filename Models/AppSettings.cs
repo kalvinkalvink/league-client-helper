@@ -106,6 +106,12 @@ public sealed class AppSettings
     /// <summary>Message to send when entering End Of Game.</summary>
     public string EndOfGameMessage { get; set; } = string.Empty;
 
+    /// <summary>Auto-send message when joining lobby.</summary>
+    public bool AutoSendLobbyMessage { get; set; } = false;
+
+    /// <summary>Message to send when joining lobby.</summary>
+    public string LobbyMessage { get; set; } = string.Empty;
+
     // -------------------------------------------------------------------------
     // Debug
     // -------------------------------------------------------------------------

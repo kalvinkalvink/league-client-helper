@@ -26,6 +26,21 @@
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoSendLobbyMessage}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoSendLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{DynamicResource GlassItem}" Padding="12">
+                <Editor 
+                    Text="{Binding LobbyMessage, Mode=TwoWay}"
+                    Placeholder="{Binding MessagePlaceholder}"
+                    AutoSize="TextChanges"
+                    HeightRequest="100" />
+            </Border>
         </VerticalStackLayout>
     </Border>
 </ContentView>
