@@ -26,6 +26,12 @@
         <DataTemplate x:Key="SettingsTemplate">
             <views:SettingsView />
         </DataTemplate>
+        <DataTemplate x:Key="ChampSelectTemplate">
+            <views:ChampSelectView />
+        </DataTemplate>
+        <DataTemplate x:Key="EndOfGameTemplate">
+            <views:EndOfGameView />
+        </DataTemplate>
     </ContentPage.Resources>
 
     <Grid RowDefinitions="*">
@@ -84,6 +90,28 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
+                        <Button Text="{Binding ChampSelectTabText}" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="ChampSelect">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsChampSelectTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="{Binding EndOfGameTabText}" 
+                                Style="{DynamicResource GlassSidebarButton}" 
+                                Command="{Binding SetTabCommand}" 
+                                CommandParameter="EndOfGame">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsEndOfGameTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Button Text="{Binding LogsTabText}" 
                                 Style="{DynamicResource GlassSidebarButton}" 
                                 Command="{Binding SetTabCommand}" 
@@ -126,6 +154,14 @@
 
                         <ContentView IsVisible="{Binding IsGameStatusTab}">
                             <views:GameStatusView BindingContext="{Binding GameStatusVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsChampSelectTab}">
+                            <views:ChampSelectView BindingContext="{Binding ChampSelectVM}" />
+                        </ContentView>
+
+                        <ContentView IsVisible="{Binding IsEndOfGameTab}">
+                            <views:EndOfGameView BindingContext="{Binding EndOfGameVM}" />
                         </ContentView>
 
                         <ContentView IsVisible="{Binding IsLogsTab}">

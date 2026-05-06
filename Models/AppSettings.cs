@@ -92,6 +92,21 @@ public sealed class AppSettings
     public string Language { get; set; } = "en";
 
     // -------------------------------------------------------------------------
+    // Auto Send Messages
+    // -------------------------------------------------------------------------
+    /// <summary>Auto-send message when entering Champ Select.</summary>
+    public bool AutoSendChampSelectMessage { get; set; } = false;
+
+    /// <summary>Message to send when entering Champ Select.</summary>
+    public string ChampSelectMessage { get; set; } = string.Empty;
+
+    /// <summary>Auto-send message when entering End Of Game.</summary>
+    public bool AutoSendEndOfGameMessage { get; set; } = false;
+
+    /// <summary>Message to send when entering End Of Game.</summary>
+    public string EndOfGameMessage { get; set; } = string.Empty;
+
+    // -------------------------------------------------------------------------
     // Debug
     // -------------------------------------------------------------------------
     /// <summary>Enable DEBUG-level log entries (spec section 7.2).</summary>

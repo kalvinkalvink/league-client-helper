@@ -210,6 +210,36 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         }
     }
 
+    public async Task<IReadOnlyList<Conversation>> GetConversationsAsync(CancellationToken ct = default)
+    {
+        try
+        {
+            var json = await GetStringAsync("/lol-chat/v1/conversations", ct).ConfigureAwait(false);
+            return JsonSerializer.Deserialize<List<Conversation>>(json, JsonOptions) ?? new List<Conversation>();
+        }
+        catch (Exception ex) { _log.Warning(LogSource, $"GetConversationsAsync failed: {ex.Message}"); }
+        return new List<Conversation>();
+    }
+
+    public async Task SendChatMessageAsync(string conversationId, string message, CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(conversationId) || string.IsNullOrWhiteSpace(message))
+            return;
+        try
+        {
+            var payload = JsonSerializer.Serialize(new { body = message, type = "chat" });
+            await SendJsonAsync(HttpMethod.Post, $"/lol-chat/v1/conversations/{Uri.EscapeDataString(conversationId)}/messages", payload, ct).ConfigureAwait(false);
+            _log.Info(LogSource, $"Sent chat message to {conversationId}");
+        }
+        catch (Exception ex) { _log.Warning(LogSource, $"SendChatMessageAsync failed: {ex.Message}"); }
+    }
+
+    public async Task<JsonDocument> GetGameFlowSessionAsync(CancellationToken ct = default)
+    {
+        var json = await GetStringAsync("/lol-gameflow/v1/session", ct).ConfigureAwait(false);
+        return JsonDocument.Parse(json);
+    }
+
     private async Task<string> GetStringAsync(string endpoint, CancellationToken ct)
     {
         EnsureConfigured();

@@ -75,4 +75,10 @@
   <data name="main_page.remove" xml:space="preserve"><value>&lt; 移除</value></data>
   <data name="main_page.search_friends" xml:space="preserve"><value>搜尋好友...</value></data>
   <data name="main_page.refresh_friends" xml:space="preserve"><value>刷新好友</value></data>
- </root>
+ <data name="tab.champ_select" xml:space="preserve"><value>英雄選擇</value></data>
+<data name="tab.end_of_game" xml:space="preserve"><value>遊戲結束</value></data>
+<data name="champ_select.auto_send" xml:space="preserve"><value>進入時自動發送消息</value></data>
+<data name="champ_select.message_placeholder" xml:space="preserve"><value>輸入要發送的消息...</value></data>
+<data name="end_of_game.auto_send" xml:space="preserve"><value>進入時自動發送消息</value></data>
+<data name="end_of_game.message_placeholder" xml:space="preserve"><value>輸入要發送的消息...</value></data>
+</root>

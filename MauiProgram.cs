@@ -44,6 +44,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<GameStatusViewModel>();
         builder.Services.AddSingleton<LogsViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddSingleton<ChampSelectViewModel>();
+        builder.Services.AddSingleton<EndOfGameViewModel>();
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<SettingsWindow>();

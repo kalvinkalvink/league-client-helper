@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.Json;
 using LolClientHelper.Models;
 
@@ -455,6 +456,28 @@ public sealed class GameStateService : IGameStateService, IDisposable
             _log.Info(LogSource, "Auto-reconnecting to game...");
             _ = _lcuApiService.ReconnectAsync().ConfigureAwait(false);
         }
+
+        // Auto-send message on Champ Select
+        if (nextState == GameState.ChampSelect && _settings.Current.AutoSendChampSelectMessage)
+        {
+            var message = _settings.Current.ChampSelectMessage;
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                _log.Info(LogSource, "Champ Select entered, starting auto-send...");
+                _ = Task.Run(async () => await SendAutoMessageAsync("champSelect", message));
+            }
+        }
+
+        // Auto-send message on End Of Game
+        if (nextState == GameState.EndOfGame && _settings.Current.AutoSendEndOfGameMessage)
+        {
+            var message = _settings.Current.EndOfGameMessage;
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                _log.Info(LogSource, "End Of Game entered, starting auto-send...");
+                _ = Task.Run(async () => await SendAutoMessageAsync("postGame", message));
+            }
+        }
     }
 
     private static GameState ParseGameState(string raw)
@@ -473,6 +496,87 @@ public sealed class GameStateService : IGameStateService, IDisposable
             "Reconnect" => GameState.Reconnect,
             _ => GameState.Unknown
         };
+    }
+
+    private async Task SendAutoMessageAsync(string conversationType, string message)
+    {
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+        try
+        {
+            // Get game session players
+            JsonDocument? sessionDoc = null;
+            try
+            {
+                sessionDoc = await _lcuApiService.GetGameFlowSessionAsync(cts.Token).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _log.Warning(LogSource, $"Failed to get game session: {ex.Message}");
+                return;
+            }
+
+            var playerPuuids = new List<string>();
+            if (sessionDoc.RootElement.TryGetProperty("gameData", out var gameData) &&
+                gameData.TryGetProperty("teamPlayers", out var teamPlayers))
+            {
+                foreach (var player in teamPlayers.EnumerateArray())
+                {
+                    if (player.TryGetProperty("puuid", out var puuidProp))
+                    {
+                        var puuid = puuidProp.GetString();
+                        if (!string.IsNullOrEmpty(puuid))
+                            playerPuuids.Add(puuid);
+                    }
+                }
+            }
+
+            if (playerPuuids.Count == 0)
+            {
+                _log.Warning(LogSource, "No players found in game session");
+                return;
+            }
+
+            // Poll for conversation and check participants
+            for (int i = 0; i < 10; i++)
+            {
+                if (cts.Token.IsCancellationRequested)
+                    break;
+
+                var conversations = await _lcuApiService.GetConversationsAsync(cts.Token).ConfigureAwait(false);
+                var targetConversation = conversations.FirstOrDefault(c => c.Type == conversationType);
+
+                if (targetConversation == null)
+                {
+                    _log.Debug(LogSource, $"Conversation {conversationType} not found, retry {i + 1}/10");
+                    await Task.Delay(500, cts.Token).ConfigureAwait(false);
+                    continue;
+                }
+
+                var allPlayersPresent = playerPuuids.All(puuid => 
+                    targetConversation.Participants.Contains(puuid, StringComparer.OrdinalIgnoreCase));
+                if (allPlayersPresent)
+                {
+                    await _lcuApiService.SendChatMessageAsync(targetConversation.Id, message, cts.Token).ConfigureAwait(false);
+                    _log.Info(LogSource, $"Auto-sent message to {conversationType}");
+                    return;
+                }
+                else
+                {
+                    _log.Debug(LogSource, $"Not all players in chat, retry {i + 1}/10");
+                    await Task.Delay(500, cts.Token).ConfigureAwait(false);
+                }
+            }
+
+            _log.Warning(LogSource, $"Timeout waiting for players to join {conversationType} chat");
+        }
+        catch (OperationCanceledException)
+        {
+            _log.Warning(LogSource, $"Timeout waiting for players to join {conversationType} chat");
+        }
+        catch (Exception ex)
+        {
+            _log.Warning(LogSource, $"Auto-send failed: {ex.Message}");
+        }
     }
 
     public void Dispose()

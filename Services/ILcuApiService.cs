@@ -30,4 +30,8 @@ public interface ILcuApiService
     Task<JsonDocument> GetMatchHistoryAsync(string puuid, CancellationToken ct = default);
     Task JoinPartyAsync(string partyId, CancellationToken ct = default);
     Task<bool> IsInPartyAsync(CancellationToken ct = default);
+
+    Task<IReadOnlyList<Conversation>> GetConversationsAsync(CancellationToken ct = default);
+    Task SendChatMessageAsync(string conversationId, string message, CancellationToken ct = default);
+    Task<JsonDocument> GetGameFlowSessionAsync(CancellationToken ct = default);
 }

@@ -75,4 +75,10 @@
   <data name="main_page.remove" xml:space="preserve"><value>&lt; Remove</value></data>
   <data name="main_page.search_friends" xml:space="preserve"><value>Search friends...</value></data>
   <data name="main_page.refresh_friends" xml:space="preserve"><value>Refresh Friends</value></data>
+<data name="tab.champ_select" xml:space="preserve"><value>Champ Select</value></data>
+<data name="tab.end_of_game" xml:space="preserve"><value>End Of Game</value></data>
+<data name="champ_select.auto_send" xml:space="preserve"><value>Auto Send Message on Enter</value></data>
+<data name="champ_select.message_placeholder" xml:space="preserve"><value>Enter message to send...</value></data>
+<data name="end_of_game.auto_send" xml:space="preserve"><value>Auto Send Message on Enter</value></data>
+<data name="end_of_game.message_placeholder" xml:space="preserve"><value>Enter message to send...</value></data>
 </root>
