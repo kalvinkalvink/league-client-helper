@@ -2,36 +2,89 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
+             xmlns:services="clr-namespace:LolClientHelper.Services"
              x:Class="LolClientHelper.Views.LogsView"
              x:DataType="viewModels:LogsViewModel">
     <Border Style="{DynamicResource GlassCard}" Padding="16">
-        <VerticalStackLayout Spacing="16">
-            <Label Text="{Binding LogsLabel}" Style="{DynamicResource GlassTitle}" />
-            
-            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                <SearchBar 
-                    Text="{Binding SearchText, Mode=TwoWay}" 
-                    Placeholder="{Binding SearchLogsPlaceholder}"
-                    HorizontalOptions="FillAndExpand" />
-                <Button 
-                    Text="{Binding OpenLogsFolderLabel}" 
-                    Command="{Binding OpenLogsFolderCommand}" 
-                    Style="{DynamicResource GlassButton}" />
-                <Button 
-                    Text="{Binding ClearLogsLabel}" 
-                    Command="{Binding ClearLogsCommand}" 
-                    Style="{DynamicResource GlassButton}" />
-            </HorizontalStackLayout>
-            
-            <Border Style="{DynamicResource GlassItem}">
-                <ScrollView>
-                    <Editor IsReadOnly="True" 
-                            Text="{Binding FilteredLogText, Mode=OneWay}" 
-                            AutoSize="TextChanges" 
-                            FontSize="10"
-                            Style="{DynamicResource GlassEditor}" />
-                </ScrollView>
+        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="16">
+            <Label Grid.Row="0"
+                   Text="{Binding LogsLabel}"
+                   Style="{DynamicResource GlassTitle}" />
+
+            <!-- Toolbar: search + action buttons -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <SearchBar Grid.Column="0"
+                           Text="{Binding SearchText, Mode=TwoWay}"
+                           Placeholder="{Binding SearchLogsPlaceholder}"
+                           VerticalOptions="Center" />
+                <Button Grid.Column="1"
+                        Text="{Binding OpenLogsFolderLabel}"
+                        Command="{Binding OpenLogsFolderCommand}"
+                        Style="{DynamicResource GlassButton}" />
+                <Button Grid.Column="2"
+                        Text="{Binding ClearLogsLabel}"
+                        Command="{Binding ClearLogsCommand}"
+                        Style="{DynamicResource GlassButton}" />
+            </Grid>
+
+            <!--
+                Log display: virtualized CollectionView replaces the old
+                Editor+AutoSize+ScrollView approach.
+                AutoSize="TextChanges" was causing a full measure/layout pass on
+                every log append; CollectionView virtualizes and recycles rows instead.
+            -->
+            <Border Grid.Row="2" Style="{DynamicResource GlassItem}" Padding="0">
+                <CollectionView ItemsSource="{Binding FilteredLogs}"
+                                x:DataType="viewModels:LogsViewModel">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="services:LogEntry">
+                            <Grid Padding="8,3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+                                <!-- Timestamp -->
+                                <Label Grid.Column="0"
+                                       Text="{Binding Timestamp, StringFormat='{0:HH:mm:ss}'}"
+                                       FontFamily="Consolas, OpenSansRegular"
+                                       FontSize="11"
+                                       Opacity="0.6"
+                                       VerticalOptions="Center" />
+                                <!-- Level badge -->
+                                <Border Grid.Column="1"
+                                        StrokeShape="RoundRectangle 4"
+                                        StrokeThickness="0"
+                                        Padding="4,1"
+                                        VerticalOptions="Center">
+                                    <Border.Triggers>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Level}" Value="ERROR">
+                                            <Setter Property="BackgroundColor" Value="#EF4444" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Level}" Value="WARNING">
+                                            <Setter Property="BackgroundColor" Value="#F97316" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Level}" Value="INFO">
+                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Border" Binding="{Binding Level}" Value="DEBUG">
+                                            <Setter Property="BackgroundColor" Value="#6B7280" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label Text="{Binding Level}"
+                                           FontFamily="Consolas, OpenSansRegular"
+                                           FontSize="10"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           VerticalOptions="Center" />
+                                </Border>
+                                <!-- Message -->
+                                <Label Grid.Column="2"
+                                       Text="{Binding Message}"
+                                       FontFamily="Consolas, OpenSansRegular"
+                                       FontSize="11"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="WordWrap" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Border>
-        </VerticalStackLayout>
+        </Grid>
     </Border>
 </ContentView>

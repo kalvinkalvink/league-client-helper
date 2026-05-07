@@ -6,180 +6,178 @@
              x:Class="LolClientHelper.MainPage"
              x:DataType="viewModels:MainViewModel"
              Title="LolClientHelper">
-    
+
     <ContentPage.Resources>
-        <DataTemplate x:Key="GameAutoTemplate">
-            <views:GameAutoView />
-        </DataTemplate>
-        <DataTemplate x:Key="MainPageTemplate">
-            <views:MainPageTabView />
-        </DataTemplate>
-        <DataTemplate x:Key="LobbyTemplate">
-            <views:LobbyView />
-        </DataTemplate>
-        <DataTemplate x:Key="GameStatusTemplate">
-            <views:GameStatusView />
-        </DataTemplate>
-        <DataTemplate x:Key="LogsTemplate">
-            <views:LogsView />
-        </DataTemplate>
-        <DataTemplate x:Key="SettingsTemplate">
-            <views:SettingsView />
-        </DataTemplate>
-        <DataTemplate x:Key="ChampSelectTemplate">
-            <views:ChampSelectView />
-        </DataTemplate>
-        <DataTemplate x:Key="EndOfGameTemplate">
-            <views:EndOfGameView />
-        </DataTemplate>
+        <!--
+            TabTemplateSelector: only the active tab's DataTemplate is instantiated.
+            Each template sets the child view's BindingContext to the matching sub-ViewModel
+            so every tab view is fully decoupled and bound independently.
+        -->
+        <views:TabTemplateSelector x:Key="TabSelector">
+            <views:TabTemplateSelector.GameAutoTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:GameAutoView BindingContext="{Binding GameAutoVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.GameAutoTemplate>
+            <views:TabTemplateSelector.MainPageTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:MainPageTabView BindingContext="{Binding MainPageTabVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.MainPageTemplate>
+            <views:TabTemplateSelector.LobbyTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:LobbyView BindingContext="{Binding LobbyVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.LobbyTemplate>
+            <views:TabTemplateSelector.GameStatusTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:GameStatusView BindingContext="{Binding GameStatusVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.GameStatusTemplate>
+            <views:TabTemplateSelector.ChampSelectTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:ChampSelectView BindingContext="{Binding ChampSelectVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.ChampSelectTemplate>
+            <views:TabTemplateSelector.EndOfGameTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:EndOfGameView BindingContext="{Binding EndOfGameVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.EndOfGameTemplate>
+            <views:TabTemplateSelector.LogsTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:LogsView BindingContext="{Binding LogsVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.LogsTemplate>
+            <views:TabTemplateSelector.SettingsTemplate>
+                <DataTemplate x:DataType="viewModels:MainViewModel">
+                    <views:SettingsView BindingContext="{Binding SettingsVM}" />
+                </DataTemplate>
+            </views:TabTemplateSelector.SettingsTemplate>
+        </views:TabTemplateSelector>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="*">
-        <!-- Main Content -->
-        <Grid Grid.Row="0" Margin="16" RowDefinitions="*,Auto">
+    <Grid>
+        <Grid Margin="16" RowDefinitions="*,Auto">
             <Grid ColumnDefinitions="200,*" ColumnSpacing="16">
+
                 <!-- Sidebar -->
-                <Border Grid.Column="0" 
-        BackgroundColor="{AppThemeBinding Light={DynamicResource GlassSurface}, Dark={DynamicResource GlassSurfaceDark}}"
-        Stroke="{AppThemeBinding Light={DynamicResource GlassBorderBrush}, Dark={DynamicResource GlassBorderDarkBrush}}"
-        StrokeThickness="1"
-        StrokeShape="Rectangle"
-        Padding="8">
+                <Border Grid.Column="0"
+                        Style="{DynamicResource GlassCard}"
+                        Padding="8">
                     <VerticalStackLayout Spacing="4">
-                        <Button Text="{Binding GameAutoTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding GameAutoTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="GameAuto">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsGameAutoTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGameAutoTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding MainPageTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding MainPageTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="MainPage">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsMainPageTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsMainPageTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding LobbyTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding LobbyTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="Lobby">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsLobbyTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsLobbyTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding GameStatusTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding GameStatusTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="GameStatus">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsGameStatusTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGameStatusTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding ChampSelectTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding ChampSelectTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="ChampSelect">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsChampSelectTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsChampSelectTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding EndOfGameTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding EndOfGameTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="EndOfGame">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsEndOfGameTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsEndOfGameTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding LogsTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding LogsTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="Logs">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsLogsTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsLogsTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding SettingsTabText}" 
-                                Style="{DynamicResource GlassSidebarButton}" 
-                                Command="{Binding SetTabCommand}" 
+                        <Button Text="{Binding SettingsTabText}"
+                                Command="{Binding SetTabCommand}"
                                 CommandParameter="Settings">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsSettingsTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButtonSelected}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsSettingsTab}" Value="False">
+                                    <Setter Property="Style" Value="{DynamicResource GlassSidebarButton}" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Content Area -->
+                <!-- Content Area: lazy-loaded via TabTemplateSelector.
+                     The ContentView's Content is swapped in code-behind when SelectedTab
+                     changes, so only the active tab's View is instantiated at any time. -->
                 <ScrollView Grid.Column="1">
-                    <Grid>
-                        <ContentView IsVisible="{Binding IsGameAutoTab}">
-                            <views:GameAutoView BindingContext="{Binding GameAutoVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsMainPageTab}">
-                            <views:MainPageTabView BindingContext="{Binding MainPageTabVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsLobbyTab}">
-                            <views:LobbyView BindingContext="{Binding LobbyVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsGameStatusTab}">
-                            <views:GameStatusView BindingContext="{Binding GameStatusVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsChampSelectTab}">
-                            <views:ChampSelectView BindingContext="{Binding ChampSelectVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsEndOfGameTab}">
-                            <views:EndOfGameView BindingContext="{Binding EndOfGameVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsLogsTab}">
-                            <views:LogsView BindingContext="{Binding LogsVM}" />
-                        </ContentView>
-
-                        <ContentView IsVisible="{Binding IsSettingsTab}">
-                            <views:SettingsView BindingContext="{Binding SettingsVM}" />
-                        </ContentView>
-                    </Grid>
+                    <ContentView x:Name="TabContentView" />
                 </ScrollView>
             </Grid>
 
-            <!-- Footer -->
-            <Label Grid.Row="1" 
-                   HorizontalOptions="End" 
-                   Text="{Binding ConnectionStatus}" 
-                   Style="{DynamicResource GlassLabel}" 
+            <!-- Footer: connection status -->
+            <Label Grid.Row="1"
+                   HorizontalOptions="End"
+                   Text="{Binding ConnectionStatus}"
+                   Style="{DynamicResource GlassLabel}"
                    Margin="0,8,0,0" />
         </Grid>
     </Grid>

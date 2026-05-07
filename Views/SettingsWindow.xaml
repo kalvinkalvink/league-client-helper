@@ -6,29 +6,67 @@
              x:DataType="viewModels:SettingsViewModel"
              Title="Settings">
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16">
-            <Label Text="{Binding PollIntervalLabel}" />
-            <Picker ItemsSource="{Binding PollIntervals}"
-                    SelectedItem="{Binding PollIntervalMs}" />
+        <Border Style="{DynamicResource GlassCard}" Margin="16" Padding="16">
+            <VerticalStackLayout Spacing="16">
+                <Label Text="{Binding SettingsLabel}" Style="{DynamicResource GlassTitle}" />
 
-            <Label Text="{Binding LanguageLabel}" />
-            <Picker ItemsSource="{Binding LanguageItems}"
-                    ItemDisplayBinding="{Binding Display}"
-                    SelectedItem="{Binding SelectedLanguageItem}" />
+                <!-- Poll Interval -->
+                <Border Style="{DynamicResource GlassItem}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding PollIntervalLabel}" Style="{DynamicResource GlassLabel}" />
+                        <Picker ItemsSource="{Binding PollIntervals}"
+                                SelectedItem="{Binding PollIntervalMs}"
+                                Style="{DynamicResource GlassPicker}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Label Text="{Binding ThemeLabel}" />
-            <Picker ItemsSource="{Binding ThemeItems}"
-                    ItemDisplayBinding="{Binding Display}"
-                    SelectedItem="{Binding SelectedThemeItem}" />
+                <!-- Language -->
+                <Border Style="{DynamicResource GlassItem}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding LanguageLabel}" Style="{DynamicResource GlassLabel}" />
+                        <Picker ItemsSource="{Binding LanguageItems}"
+                                ItemDisplayBinding="{Binding Display}"
+                                SelectedItem="{Binding SelectedLanguageItem}"
+                                Style="{DynamicResource GlassPicker}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <HorizontalStackLayout Spacing="8">
-                <CheckBox IsChecked="{Binding ChangeRankingOnStart}" />
-                <Label VerticalOptions="Center"
-                       Text="{Binding ChangeRankingOnStartLabel}" />
-            </HorizontalStackLayout>
+                <!-- Theme -->
+                <Border Style="{DynamicResource GlassItem}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding ThemeLabel}" Style="{DynamicResource GlassLabel}" />
+                        <Picker ItemsSource="{Binding ThemeItems}"
+                                ItemDisplayBinding="{Binding Display}"
+                                SelectedItem="{Binding SelectedThemeItem}"
+                                Style="{DynamicResource GlassPicker}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Button Text="{Binding ResetButtonLabel}"
-                    Command="{Binding ResetToDefaultsCommand}" />
-        </VerticalStackLayout>
+                <!-- Change Ranking on Start -->
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding ChangeRankingOnStart}" />
+                        <Label VerticalOptions="Center"
+                               Text="{Binding ChangeRankingOnStartLabel}"
+                               Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Auto Reconnect (was missing from SettingsWindow) -->
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding AutoReconnect}" />
+                        <Label VerticalOptions="Center"
+                               Text="{Binding AutoReconnectLabel}"
+                               Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- Reset -->
+                <Button Text="{Binding ResetButtonLabel}"
+                        Command="{Binding ResetToDefaultsCommand}"
+                        Style="{DynamicResource GlassButton}" />
+            </VerticalStackLayout>
+        </Border>
     </ScrollView>
 </ContentPage>

@@ -8,7 +8,6 @@ namespace LolClientHelper.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly IGameStateService _gameStateService;
-    private readonly ILoggingService _log;
     private readonly ILocalizationService _localization;
 
     [ObservableProperty] private string selectedTab = "GameAuto";
@@ -23,23 +22,23 @@ public partial class MainViewModel : ObservableObject
     public ChampSelectViewModel ChampSelectVM { get; }
     public EndOfGameViewModel EndOfGameVM { get; }
 
-    public bool IsGameAutoTab => SelectedTab == "GameAuto";
-    public bool IsMainPageTab => SelectedTab == "MainPage";
-    public bool IsLobbyTab => SelectedTab == "Lobby";
-    public bool IsGameStatusTab => SelectedTab == "GameStatus";
-    public bool IsLogsTab => SelectedTab == "Logs";
-    public bool IsSettingsTab => SelectedTab == "Settings";
+    public bool IsGameAutoTab    => SelectedTab == "GameAuto";
+    public bool IsMainPageTab    => SelectedTab == "MainPage";
+    public bool IsLobbyTab       => SelectedTab == "Lobby";
+    public bool IsGameStatusTab  => SelectedTab == "GameStatus";
+    public bool IsLogsTab        => SelectedTab == "Logs";
+    public bool IsSettingsTab    => SelectedTab == "Settings";
     public bool IsChampSelectTab => SelectedTab == "ChampSelect";
-    public bool IsEndOfGameTab => SelectedTab == "EndOfGame";
+    public bool IsEndOfGameTab   => SelectedTab == "EndOfGame";
 
-    public string GameAutoTabText => _localization.Get("tab.game_auto");
-    public string MainPageTabText => _localization.Get("tab.main_page");
-    public string LobbyTabText => _localization.Get("tab.lobby");
-    public string GameStatusTabText => _localization.Get("tab.game_status");
-    public string LogsTabText => _localization.Get("tab.logs");
-    public string SettingsTabText => _localization.Get("menu.settings");
+    public string GameAutoTabText    => _localization.Get("tab.game_auto");
+    public string MainPageTabText    => _localization.Get("tab.main_page");
+    public string LobbyTabText       => _localization.Get("tab.lobby");
+    public string GameStatusTabText  => _localization.Get("tab.game_status");
+    public string LogsTabText        => _localization.Get("tab.logs");
+    public string SettingsTabText    => _localization.Get("menu.settings");
     public string ChampSelectTabText => _localization.Get("tab.champ_select");
-    public string EndOfGameTabText => _localization.Get("tab.end_of_game");
+    public string EndOfGameTabText   => _localization.Get("tab.end_of_game");
 
     public MainViewModel(
         GameAutoViewModel gameAutoVM,
@@ -51,7 +50,6 @@ public partial class MainViewModel : ObservableObject
         ChampSelectViewModel champSelectVM,
         EndOfGameViewModel endOfGameVM,
         IGameStateService gameStateService,
-        ILoggingService log,
         ILocalizationService localization)
     {
         GameAutoVM = gameAutoVM;
@@ -63,75 +61,34 @@ public partial class MainViewModel : ObservableObject
         ChampSelectVM = champSelectVM;
         EndOfGameVM = endOfGameVM;
         _gameStateService = gameStateService;
-        _log = log;
         _localization = localization;
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
         _gameStateService.ApiConfigured += OnApiConfigured;
-        _localization.LanguageChanged += (_, _) =>
-        {
-            OnPropertyChanged(nameof(GameAutoTabText));
-            OnPropertyChanged(nameof(MainPageTabText));
-            OnPropertyChanged(nameof(LobbyTabText));
-            OnPropertyChanged(nameof(GameStatusTabText));
-            OnPropertyChanged(nameof(LogsTabText));
-            OnPropertyChanged(nameof(SettingsTabText));
-            OnPropertyChanged(nameof(ChampSelectTabText));
-            OnPropertyChanged(nameof(EndOfGameTabText));
-        };
+
+        // OnPropertyChanged(string.Empty) notifies all computed properties at once,
+        // avoiding the need to enumerate every tab-text and IsXxxTab property by name.
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
     }
 
     private void OnApiConfigured(object? sender, EventArgs e)
     {
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher?.IsDispatchRequired == true)
-        {
-            dispatcher.Dispatch(() => LobbyVM.RefreshFriendsCommand.ExecuteAsync(null));
-        }
-        else
-        {
-            LobbyVM.RefreshFriendsCommand.ExecuteAsync(null);
-        }
+        // Always marshal to UI thread; Dispatcher.Dispatch is a no-op when already on UI.
+        Application.Current?.Dispatcher.Dispatch(
+            () => LobbyVM.RefreshFriendsCommand.ExecuteAsync(null));
     }
 
     partial void OnSelectedTabChanged(string value)
     {
-        OnPropertyChanged(nameof(IsGameAutoTab));
-        OnPropertyChanged(nameof(IsMainPageTab));
-        OnPropertyChanged(nameof(IsLobbyTab));
-        OnPropertyChanged(nameof(IsGameStatusTab));
-        OnPropertyChanged(nameof(IsLogsTab));
-        OnPropertyChanged(nameof(IsSettingsTab));
-        OnPropertyChanged(nameof(IsChampSelectTab));
-        OnPropertyChanged(nameof(IsEndOfGameTab));
+        // Notify all IsXxxTab computed properties in one call.
+        OnPropertyChanged(string.Empty);
     }
 
     [RelayCommand]
     private void SetTab(string tab) => SelectedTab = tab;
 
     [RelayCommand]
-    private void New()
-    {
-        _log.Info("MainViewModel", "New command executed");
-    }
-
-    [RelayCommand]
-    private void Open()
-    {
-        _log.Info("MainViewModel", "Open command executed");
-    }
-
-    [RelayCommand]
-    private void Save()
-    {
-        _log.Info("MainViewModel", "Save command executed");
-    }
-
-    [RelayCommand]
-    private static void Exit()
-    {
-        Application.Current.Quit();
-    }
+    private static void Exit() => Application.Current?.Quit();
 
     private void OnGameStateChanged(object? sender, GameState state)
     {

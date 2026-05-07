@@ -62,12 +62,13 @@ public partial class SettingsViewModel : ObservableObject
         };
     }
 
-    public string PollIntervalLabel => _localization.Get("setting.poll_interval");
-    public string LanguageLabel => _localization.Get("setting.language");
-    public string ThemeLabel => _localization.Get("setting.theme");
+    public string SettingsLabel            => _localization.Get("menu.settings");
+    public string PollIntervalLabel         => _localization.Get("setting.poll_interval");
+    public string LanguageLabel             => _localization.Get("setting.language");
+    public string ThemeLabel                => _localization.Get("setting.theme");
     public string ChangeRankingOnStartLabel => _localization.Get("setting.change_ranking_on_start");
-    public string AutoReconnectLabel => _localization.Get("setting.auto_reconnect");
-    public string ResetButtonLabel => _localization.Get("setting.reset");
+    public string AutoReconnectLabel        => _localization.Get("setting.auto_reconnect");
+    public string ResetButtonLabel          => _localization.Get("setting.reset");
 
     partial void OnPollIntervalMsChanged(int value) => Save(s => s.PollIntervalMs = value);
 

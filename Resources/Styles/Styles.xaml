@@ -443,7 +443,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource GlassSurface}, Dark={StaticResource GlassSurfaceDark}}" />
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource GlassBorderBrush}, Dark={StaticResource GlassBorderDarkBrush}}" />
         <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="Rectangle" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow Radius="15" Opacity="0.3" Offset="0,4" />
@@ -452,11 +452,15 @@
     </Style>
 
     <!-- Glass Item - Inner container for form elements -->
+    <!-- Opacity removed: a 0.6 element-level opacity bleeds into all child controls,
+         making labels, checkboxes, and pickers appear washed out.
+         Background alpha is now encoded directly in the BackgroundColor. -->
     <Style x:Key="GlassItem" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
-        <Setter Property="StrokeShape" Value="Rectangle" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource GlassBorderBrush}, Dark={StaticResource GlassBorderDarkBrush}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
         <Setter Property="Padding" Value="12" />
-        <Setter Property="Opacity" Value="0.6" />
     </Style>
 
     <!-- Glass Title -->
@@ -499,20 +503,24 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
-    <!-- Glass Editor -->
+    <!-- Glass Editor - monospace log/message editor with cross-platform font fallback -->
     <Style x:Key="GlassEditor" TargetType="Editor">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="Consolas" />
+        <!-- Consolas is Windows-only; OpenSansRegular is the safe cross-platform fallback -->
+        <Setter Property="FontFamily" Value="Consolas, OpenSansRegular" />
         <Setter Property="FontSize" Value="12" />
     </Style>
 
     <!-- Glass Sidebar Button -->
+    <!-- MinimumHeightRequest added to allow buttons to grow on high-DPI or
+         accessibility font-scale settings while keeping a sensible default. -->
     <Style x:Key="GlassSidebarButton" TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource GlassText}, Dark={StaticResource GlassTextDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="Fill" />
         <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="MinimumHeightRequest" Value="44" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="Padding" Value="16,12" />
         <Setter Property="FontSize" Value="14" />

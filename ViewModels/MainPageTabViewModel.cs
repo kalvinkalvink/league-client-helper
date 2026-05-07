@@ -200,8 +200,10 @@ public partial class MainPageTabViewModel : ObservableObject
         AllFriends.Add(friend);
         SelectedFriends.Remove(friend);
         
-        // Re-sort AllFriends
-        var sorted = AllFriends.OrderByDescending(f => GetOnlinePriority(f.Availability)).ThenBy(f => f.Name).ToList();
+        // Re-sort AllFriends using EffectiveAvailability (same as the add/refresh paths)
+        // Bug fix: was using raw f.Availability instead of f.EffectiveAvailability, and
+        // OrderByDescending instead of OrderBy (higher priority = lower int value).
+        var sorted = AllFriends.OrderBy(f => GetOnlinePriority(f.EffectiveAvailability)).ThenBy(f => f.Name).ToList();
         AllFriends.Clear();
         foreach (var f in sorted) AllFriends.Add(f);
         

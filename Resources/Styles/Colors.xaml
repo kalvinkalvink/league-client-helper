@@ -50,7 +50,8 @@
     <!-- Glassmorphism Light Mode Colors -->
     <Color x:Key="GlassBackground">#F5F5F5</Color>
     <Color x:Key="GlassSurface">#CCFFFFFF</Color>
-    <Color x:Key="GlassBorder">#40FFFFFF</Color>
+    <!-- GlassBorder: solid light-gray for visibility on light backgrounds (was #40FFFFFF = near-invisible) -->
+    <Color x:Key="GlassBorder">#D1D5DB</Color>
     <Color x:Key="GlassText">#1F1F1F</Color>
     <Color x:Key="GlassTextSecondary">#666666</Color>
 
@@ -65,6 +66,14 @@
     <Color x:Key="AccentPurple">#8B5CF6</Color>
     <Color x:Key="AccentBlue">#3B82F6</Color>
     <Color x:Key="AccentCyan">#06B6D4</Color>
+
+    <!-- Availability Status Colors (used by AvailabilityColorConverter) -->
+    <Color x:Key="AvailOnline">#22C55E</Color>
+    <Color x:Key="AvailChat">#86EFAC</Color>
+    <Color x:Key="AvailInGame">#F97316</Color>
+    <Color x:Key="AvailAway">#EF4444</Color>
+    <Color x:Key="AvailMobile">#9CA3AF</Color>
+    <Color x:Key="AvailOffline">#6B7280</Color>
 
     <!-- Glassmorphism Brushes Light -->
     <SolidColorBrush x:Key="GlassBackgroundBrush" Color="{StaticResource GlassBackground}"/>

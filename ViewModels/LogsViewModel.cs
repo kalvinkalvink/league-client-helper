@@ -1,10 +1,7 @@
 using System.Collections.ObjectModel;
-using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LolClientHelper.Models;
 using LolClientHelper.Services;
-using Microsoft.Maui.ApplicationModel;
 
 namespace LolClientHelper.ViewModels;
 
@@ -12,21 +9,25 @@ public partial class LogsViewModel : ObservableObject
 {
     private readonly ILoggingService _log;
     private readonly ILocalizationService _localization;
-    private const string LogSource = "LogsViewModel";
     private const int MaxLogEntries = 1000;
 
-    private readonly System.Text.StringBuilder _logBuilder = new();
-
-    [ObservableProperty] private string logText = string.Empty;
-    [ObservableProperty] private string filteredLogText = string.Empty;
     [ObservableProperty] private string searchText = string.Empty;
 
-    public string LogsLabel => _localization.Get("tab.logs");
-    public string ClearLogsLabel => _localization.Get("logs.clear");
-    public string OpenLogsFolderLabel => _localization.Get("logs.open_folder");
+    public string LogsLabel             => _localization.Get("tab.logs");
+    public string ClearLogsLabel        => _localization.Get("logs.clear");
+    public string OpenLogsFolderLabel   => _localization.Get("logs.open_folder");
     public string SearchLogsPlaceholder => _localization.Get("logs.search_placeholder");
 
+    /// <summary>All log entries, capped at MaxLogEntries (newest at end).</summary>
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
+
+    /// <summary>
+    /// Filtered view of LogEntries for the CollectionView.
+    /// Rebuilt when SearchText changes or a new entry arrives.
+    /// Backed by an ObservableCollection so the UI only re-renders changed rows,
+    /// replacing the old single-Editor AutoSize approach that thrashed on every append.
+    /// </summary>
+    public ObservableCollection<LogEntry> FilteredLogs { get; } = [];
 
     public LogsViewModel(ILoggingService log, ILocalizationService localization)
     {
@@ -34,30 +35,34 @@ public partial class LogsViewModel : ObservableObject
         _localization = localization;
         _log.LogEntryWritten += OnLogEntryWritten;
         _localization.LanguageChanged += (_, _) => OnPropertyChanged(string.Empty);
-        UpdateFilteredLogText();
     }
 
     private void OnLogEntryWritten(object? sender, LogEntry entry)
     {
-        var dispatcher = Application.Current?.Dispatcher;
-        dispatcher?.Dispatch(() =>
+        Application.Current?.Dispatcher.Dispatch(() =>
         {
-            _logBuilder.AppendLine(entry.ToString());
-            LogText = _logBuilder.ToString();
-            LogEntries.Add(entry);
-            while (LogEntries.Count > MaxLogEntries)
+            // Enforce cap before adding to avoid unbounded growth
+            while (LogEntries.Count >= MaxLogEntries)
                 LogEntries.RemoveAt(0);
-            UpdateFilteredLogText();
+
+            LogEntries.Add(entry);
+
+            // Only add to FilteredLogs when it passes the current search filter,
+            // so we avoid rebuilding the entire list on every new entry.
+            if (MatchesSearch(entry))
+            {
+                while (FilteredLogs.Count >= MaxLogEntries)
+                    FilteredLogs.RemoveAt(0);
+                FilteredLogs.Add(entry);
+            }
         });
     }
 
     [RelayCommand]
     private void ClearLogs()
     {
-        _logBuilder.Clear();
-        LogText = string.Empty;
         LogEntries.Clear();
-        UpdateFilteredLogText();
+        FilteredLogs.Clear();
     }
 
     [RelayCommand]
@@ -65,29 +70,26 @@ public partial class LogsViewModel : ObservableObject
     {
         var logDir = LoggingService.LogDirectory;
         if (Directory.Exists(logDir))
-        {
             await Launcher.OpenAsync(new Uri(logDir));
-        }
     }
 
-    private void UpdateFilteredLogText()
+    partial void OnSearchTextChanged(string value) => RebuildFilteredLogs();
+
+    private void RebuildFilteredLogs()
+    {
+        FilteredLogs.Clear();
+        foreach (var entry in LogEntries.Where(MatchesSearch))
+            FilteredLogs.Add(entry);
+    }
+
+    private bool MatchesSearch(LogEntry entry)
     {
         if (string.IsNullOrWhiteSpace(SearchText))
-        {
-            FilteredLogText = LogText;
-        }
-        else
-        {
-            var searchLower = SearchText.ToLowerInvariant();
-            var filtered = LogEntries
-                .Where(e => e.ToString().ToLowerInvariant().Contains(searchLower))
-                .Select(e => e.ToString());
-            FilteredLogText = string.Join(Environment.NewLine, filtered);
-        }
-    }
+            return true;
 
-    partial void OnSearchTextChanged(string value)
-    {
-        UpdateFilteredLogText();
+        var needle = SearchText.ToLowerInvariant();
+        return entry.Level.ToLowerInvariant().Contains(needle)
+            || entry.Source.ToLowerInvariant().Contains(needle)
+            || entry.Message.ToLowerInvariant().Contains(needle);
     }
 }
