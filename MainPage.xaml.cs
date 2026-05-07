@@ -35,9 +35,10 @@ public partial class MainPage : ContentPage
     {
         // SelectTemplate instantiates the view declared in the DataTemplate for the
         // current SelectedTab — previous tab's View is discarded (GC-eligible).
+        // Do NOT set BindingContext here: the DataTemplate already binds the correct
+        // sub-ViewModel (e.g. BindingContext="{Binding GameAutoVM}") during CreateContent().
+        // Overwriting it with MainViewModel would break all compiled bindings in each view.
         var template = _tabSelector.SelectTemplate(_viewModel, this);
         TabContentView.Content = template?.CreateContent() as View;
-        if (TabContentView.Content is not null)
-            TabContentView.Content.BindingContext = _viewModel;
     }
 }
