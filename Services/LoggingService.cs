@@ -15,6 +15,8 @@ public sealed class LoggingService : ILoggingService, IDisposable
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                      "LolClientHelper", "logs");
 
+    public static string LogDirectory => LogDir;
+
     private const int RetentionDays = 7;
 
     // -------------------------------------------------------------------------

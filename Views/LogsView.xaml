@@ -8,14 +8,25 @@
         <VerticalStackLayout Spacing="16">
             <Label Text="{Binding LogsLabel}" Style="{DynamicResource GlassTitle}" />
             
-            <Button Text="{Binding ClearLogsLabel}" 
-                    Style="{DynamicResource GlassButton}" 
-                    Command="{Binding ClearLogsCommand}" />
+            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                <SearchBar 
+                    Text="{Binding SearchText, Mode=TwoWay}" 
+                    Placeholder="{Binding SearchLogsPlaceholder}"
+                    HorizontalOptions="FillAndExpand" />
+                <Button 
+                    Text="{Binding OpenLogsFolderLabel}" 
+                    Command="{Binding OpenLogsFolderCommand}" 
+                    Style="{DynamicResource GlassButton}" />
+                <Button 
+                    Text="{Binding ClearLogsLabel}" 
+                    Command="{Binding ClearLogsCommand}" 
+                    Style="{DynamicResource GlassButton}" />
+            </HorizontalStackLayout>
             
             <Border Style="{DynamicResource GlassItem}">
                 <ScrollView>
                     <Editor IsReadOnly="True" 
-                            Text="{Binding LogText, Mode=OneWay}" 
+                            Text="{Binding FilteredLogText, Mode=OneWay}" 
                             AutoSize="TextChanges" 
                             FontSize="10"
                             Style="{DynamicResource GlassEditor}" />

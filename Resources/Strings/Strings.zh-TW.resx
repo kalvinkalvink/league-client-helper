@@ -82,5 +82,7 @@
 <data name="end_of_game.auto_send" xml:space="preserve"><value>進入時自動發送消息</value></data>
 <data name="end_of_game.message_placeholder" xml:space="preserve"><value>輸入要發送的消息...</value></data>
 <data name="lobby.auto_send" xml:space="preserve"><value>進入時自動發送消息</value></data>
-<data name="lobby.message_placeholder" xml:space="preserve"><value>輸入要發送的消息...</value></data>
+  <data name="lobby.message_placeholder" xml:space="preserve"><value>輸入要發送的消息...</value></data>
+  <data name="logs.open_folder" xml:space="preserve"><value>開啟日誌資料夾</value></data>
+  <data name="logs.search_placeholder" xml:space="preserve"><value>搜尋日誌...</value></data>
 </root>
