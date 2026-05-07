@@ -56,6 +56,9 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<!-- TitleBar Icon -->
+		<MauiAsset Include="Resources\AppIcon\LeagueClientHelper.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

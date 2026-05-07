@@ -34,8 +34,19 @@ namespace LolClientHelper
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            var window = new Window(_mainPage);
+            var titleBar = new TitleBar
+            {
+                Title = "LolClientHelper",
+                Icon = "Resources/AppIcon/LeagueClientHelper.ico"
+            };
+
+            var window = new Window(_mainPage)
+            {
+                TitleBar = titleBar
+            };
+
             _settingsService.RestoreWindowPosition(window);
+
             window.Destroying += async (_, _) =>
             {
                 _settingsService.SaveWindowPosition(window);
