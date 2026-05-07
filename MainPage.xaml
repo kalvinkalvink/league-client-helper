@@ -165,9 +165,7 @@
                 <!-- Content Area: lazy-loaded via TabTemplateSelector.
                      The ContentView's Content is swapped in code-behind when SelectedTab
                      changes, so only the active tab's View is instantiated at any time. -->
-                <ScrollView Grid.Column="1">
-                    <ContentView x:Name="TabContentView" />
-                </ScrollView>
+                <ContentView Grid.Column="1" x:Name="TabContentView" />
             </Grid>
 
             <!-- Footer: connection status -->
