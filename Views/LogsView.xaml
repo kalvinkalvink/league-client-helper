@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:LolClientHelper.ViewModels"
              xmlns:services="clr-namespace:LolClientHelper.Services"
+             xmlns:converters="clr-namespace:LolClientHelper.Converters"
              x:Class="LolClientHelper.Views.LogsView"
+             x:Name="RootView"
              x:DataType="viewModels:LogsViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:SearchHighlightConverter x:Key="SearchHighlightConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Border Style="{DynamicResource GlassCard}" Padding="16">
         <Grid RowDefinitions="Auto,Auto,*" RowSpacing="16">
             <Label Grid.Row="0"
@@ -17,18 +24,18 @@
                            Text="{Binding SearchText, Mode=TwoWay}"
                            Placeholder="{Binding SearchLogsPlaceholder}"
                            VerticalOptions="Center" />
-                <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalOptions="Center">
+                 <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalOptions="Center">
                     <Label Text="Max:"
                            VerticalOptions="Center"
                            FontSize="12"
                            Style="{DynamicResource GlassLabel}" />
-                     <Entry x:Name="MaxLogEntriesEntry"
-                            Text="{Binding MaxLogEntriesText, Mode=OneWay}"
-                            Keyboard="Numeric"
-                            WidthRequest="60"
-                            VerticalOptions="Center"
-                            Completed="OnMaxLogEntriesCompleted"
-                            Unfocused="OnMaxLogEntriesUnfocused" />
+                    <Entry x:Name="MaxLogEntriesEntry"
+                           Text="{Binding MaxLogEntriesText, Mode=OneWay}"
+                           Keyboard="Numeric"
+                           WidthRequest="60"
+                           VerticalOptions="Center"
+                           Completed="OnMaxLogEntriesCompleted"
+                           Unfocused="OnMaxLogEntriesUnfocused" />
                 </StackLayout>
                 <Button Grid.Column="2"
                         Text="{Binding OpenLogsFolderLabel}"
@@ -47,11 +54,10 @@
                 every log append; CollectionView virtualizes and recycles rows instead.
             -->
             <Border Grid.Row="2" Style="{DynamicResource GlassItem}" Padding="0">
-                <CollectionView ItemsSource="{Binding FilteredLogs}"
-                                x:DataType="viewModels:LogsViewModel">
+                <CollectionView ItemsSource="{Binding LogEntries}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="services:LogEntry">
-                            <Grid Padding="8,3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+                            <Grid Padding="8,3" ColumnDefinitions="Auto,Auto,Auto,Auto,*" ColumnSpacing="8">
                                 <!-- Timestamp -->
                                 <Label Grid.Column="0"
                                        Text="{Binding Timestamp, StringFormat='{0:HH:mm:ss}'}"
@@ -79,20 +85,38 @@
                                             <Setter Property="BackgroundColor" Value="#6B7280" />
                                         </DataTrigger>
                                     </Border.Triggers>
-                                    <Label Text="{Binding Level}"
-                                           FontFamily="Consolas, OpenSansRegular"
-                                           FontSize="10"
-                                           FontAttributes="Bold"
-                                           TextColor="White"
-                                           VerticalOptions="Center" />
+                                    <Label Grid.Column="1" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <MultiBinding Converter="{StaticResource SearchHighlightConverter}">
+                                                <Binding Path="Level" />
+                                                <Binding Path="BindingContext.SearchText" Source="{x:Reference RootView}" />
+                                            </MultiBinding>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </Border>
-                                <!-- Message -->
+                                <!-- Source -->
                                 <Label Grid.Column="2"
-                                       Text="{Binding Message}"
+                                       VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <MultiBinding Converter="{StaticResource SearchHighlightConverter}">
+                                            <Binding Path="Source" />
+                                            <Binding Path="BindingContext.SearchText" Source="{x:Reference RootView}" />
+                                        </MultiBinding>
+                                    </Label.FormattedText>
+                                </Label>
+                                <!-- Message -->
+                                <Label Grid.Column="3"
                                        FontFamily="Consolas, OpenSansRegular"
                                        FontSize="11"
                                        VerticalOptions="Center"
-                                       LineBreakMode="WordWrap" />
+                                       LineBreakMode="WordWrap">
+                                    <Label.FormattedText>
+                                        <MultiBinding Converter="{StaticResource SearchHighlightConverter}">
+                                            <Binding Path="Message" />
+                                            <Binding Path="BindingContext.SearchText" Source="{x:Reference RootView}" />
+                                        </MultiBinding>
+                                    </Label.FormattedText>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
