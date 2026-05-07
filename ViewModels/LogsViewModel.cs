@@ -9,7 +9,8 @@ public partial class LogsViewModel : ObservableObject
 {
     private readonly ILoggingService _log;
     private readonly ILocalizationService _localization;
-    private const int MaxLogEntries = 1000;
+    [ObservableProperty] private int maxLogEntries = 1000;
+    [ObservableProperty] private string maxLogEntriesText = "1000";
 
     [ObservableProperty] private string searchText = string.Empty;
 
@@ -73,16 +74,33 @@ public partial class LogsViewModel : ObservableObject
             await Launcher.OpenAsync(new Uri(logDir));
     }
 
-    partial void OnSearchTextChanged(string value) => RebuildFilteredLogs();
+        partial void OnSearchTextChanged(string value) => RebuildFilteredLogs();
 
-    private void RebuildFilteredLogs()
-    {
-        FilteredLogs.Clear();
-        foreach (var entry in LogEntries.Where(MatchesSearch))
-            FilteredLogs.Add(entry);
-    }
+        partial void OnMaxLogEntriesChanged(int oldValue, int newValue)
+        {
+            MaxLogEntriesText = newValue.ToString();
+            TrimLogEntries();
+        }
 
-    private bool MatchesSearch(LogEntry entry)
+        private void RebuildFilteredLogs()
+        {
+            FilteredLogs.Clear();
+            foreach (var entry in LogEntries.Where(MatchesSearch))
+                FilteredLogs.Add(entry);
+        }
+
+        private void TrimLogEntries()
+        {
+            Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                while (LogEntries.Count > MaxLogEntries)
+                    LogEntries.RemoveAt(0);
+                while (FilteredLogs.Count > MaxLogEntries)
+                    FilteredLogs.RemoveAt(0);
+            });
+        }
+
+        private bool MatchesSearch(LogEntry entry)
     {
         if (string.IsNullOrWhiteSpace(SearchText))
             return true;

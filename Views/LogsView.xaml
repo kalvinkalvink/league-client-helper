@@ -11,17 +11,30 @@
                    Text="{Binding LogsLabel}"
                    Style="{DynamicResource GlassTitle}" />
 
-            <!-- Toolbar: search + action buttons -->
-            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <!-- Toolbar: search + max lines input + action buttons -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
                 <SearchBar Grid.Column="0"
                            Text="{Binding SearchText, Mode=TwoWay}"
                            Placeholder="{Binding SearchLogsPlaceholder}"
                            VerticalOptions="Center" />
-                <Button Grid.Column="1"
+                <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalOptions="Center">
+                    <Label Text="Max:"
+                           VerticalOptions="Center"
+                           FontSize="12"
+                           Style="{DynamicResource GlassLabel}" />
+                     <Entry x:Name="MaxLogEntriesEntry"
+                            Text="{Binding MaxLogEntriesText, Mode=OneWay}"
+                            Keyboard="Numeric"
+                            WidthRequest="60"
+                            VerticalOptions="Center"
+                            Completed="OnMaxLogEntriesCompleted"
+                            Unfocused="OnMaxLogEntriesUnfocused" />
+                </StackLayout>
+                <Button Grid.Column="2"
                         Text="{Binding OpenLogsFolderLabel}"
                         Command="{Binding OpenLogsFolderCommand}"
                         Style="{DynamicResource GlassButton}" />
-                <Button Grid.Column="2"
+                <Button Grid.Column="3"
                         Text="{Binding ClearLogsLabel}"
                         Command="{Binding ClearLogsCommand}"
                         Style="{DynamicResource GlassButton}" />
