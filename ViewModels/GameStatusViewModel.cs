@@ -113,24 +113,28 @@ public partial class GameStatusViewModel : ObservableObject
     partial void OnSelectedQueueTypeItemChanged(LocalizedItem? value)
     {
         if (value is null) return;
+        _log.Debug(LogSource, $"QueueType changed to {value.Value}");
         Save(s => s.QueueType = value.Value);
     }
 
     partial void OnSelectedTierItemChanged(LocalizedItem? value)
     {
         if (value is null) return;
+        _log.Debug(LogSource, $"Tier changed to {value.Value}");
         Save(s => s.Tier = value.Value);
     }
 
     partial void OnSelectedDivisionItemChanged(LocalizedItem? value)
     {
         if (value is null) return;
+        _log.Debug(LogSource, $"Division changed to {value.Value}");
         Save(s => s.Division = value.Value);
     }
 
     partial void OnSelectedStatusItemChanged(LocalizedItem? value)
     {
         if (value is null) return;
+        _log.Debug(LogSource, $"Status changed to {value.Value}");
         Save(s => s.Status = value.Value);
     }
 

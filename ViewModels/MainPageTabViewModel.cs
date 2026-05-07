@@ -90,8 +90,16 @@ public partial class MainPageTabViewModel : ObservableObject
         // We'll populate SelectedFriends after loading friends
     }
 
-    partial void OnAutoAcceptInviteChanged(bool value) => Save(s => s.AutoAcceptInvite = value);
-    partial void OnAutoJoinFriendPartyChanged(bool value) => Save(s => s.AutoJoinFriendParty = value);
+    partial void OnAutoAcceptInviteChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoAcceptInvite changed to {value}");
+        Save(s => s.AutoAcceptInvite = value);
+    }
+    partial void OnAutoJoinFriendPartyChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoJoinFriendParty changed to {value}");
+        Save(s => s.AutoJoinFriendParty = value);
+    }
 
     partial void OnSearchTextChanged(string value)
     {
@@ -112,6 +120,8 @@ public partial class MainPageTabViewModel : ObservableObject
         
         foreach (var friend in filtered)
             FilteredFriends.Add(friend);
+
+        _log.Debug(LogSource, $"Friend list filtered, visible count: {FilteredFriends.Count}");
     }
 
     private static bool IsOnline(string availability)
@@ -158,11 +168,12 @@ public partial class MainPageTabViewModel : ObservableObject
                     SelectedFriends.Add(friend);
             }
 
+            _log.Debug(LogSource, $"Friend list refreshed, total count: {AllFriends.Count}, selected count: {SelectedFriends.Count}");
             FilterFriends();
         }
         catch (Exception ex)
         {
-            _log.Warning(LogSource, $"Failed to refresh friends: {ex.Message}");
+            _log.Error(LogSource, "Failed to refresh friends", ex);
         }
         finally
         {

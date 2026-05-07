@@ -40,10 +40,26 @@ public partial class GameAutoViewModel : ObservableObject
         AutoReenterLobby = s.AutoReenterLobby;
     }
 
-    partial void OnAutoStartGameChanged(bool value) => Save(s => s.AutoStartGame = value);
-    partial void OnAutoAcceptMatchChanged(bool value) => Save(s => s.AutoAcceptMatch = value);
-    partial void OnAutoSkipLikeChanged(bool value) => Save(s => s.AutoSkipLike = value);
-    partial void OnAutoReenterLobbyChanged(bool value) => Save(s => s.AutoReenterLobby = value);
+    partial void OnAutoStartGameChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoStartGame changed to {value}");
+        Save(s => s.AutoStartGame = value);
+    }
+    partial void OnAutoAcceptMatchChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoAcceptMatch changed to {value}");
+        Save(s => s.AutoAcceptMatch = value);
+    }
+    partial void OnAutoSkipLikeChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoSkipLike changed to {value}");
+        Save(s => s.AutoSkipLike = value);
+    }
+    partial void OnAutoReenterLobbyChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoReenterLobby changed to {value}");
+        Save(s => s.AutoReenterLobby = value);
+    }
 
     private void Save(Action<AppSettings> mutate)
     {

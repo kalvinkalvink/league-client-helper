@@ -57,11 +57,20 @@ public partial class LobbyViewModel : ObservableObject
     partial void OnSelectedFriendGroupItemChanged(LocalizedItem? value)
     {
         if (value is null) return;
+        _log.Debug(LogSource, $"FriendFilterGroup changed to {value.Value}");
         Save(s => s.FriendFilterGroup = value.Value);
     }
 
-    partial void OnAutoSendLobbyMessageChanged(bool value) => Save(s => s.AutoSendLobbyMessage = value);
-    partial void OnLobbyMessageChanged(string value) => Save(s => s.LobbyMessage = value);
+    partial void OnAutoSendLobbyMessageChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoSendLobbyMessage changed to {value}");
+        Save(s => s.AutoSendLobbyMessage = value);
+    }
+    partial void OnLobbyMessageChanged(string value)
+    {
+        _log.Debug(LogSource, $"LobbyMessage changed to '{value}'");
+        Save(s => s.LobbyMessage = value);
+    }
 
     private void Save(Action<AppSettings> mutate)
     {

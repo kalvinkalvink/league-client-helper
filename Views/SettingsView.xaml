@@ -56,6 +56,15 @@
                     </HorizontalStackLayout>
                 </Border>
 
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding DebugLogging}" />
+                        <Label VerticalOptions="Center" 
+                               Text="{Binding DebugLoggingLabel}" 
+                               Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+
                 <Button Text="{Binding ResetButtonLabel}" 
                         Style="{DynamicResource GlassButton}" 
                         Command="{Binding ResetToDefaultsCommand}" />

@@ -145,6 +145,8 @@ public sealed class GameStateService : IGameStateService, IDisposable
             {
                 var phase = await _lcuApiService.GetGameflowPhaseRawAsync(ct).ConfigureAwait(false);
                 var state = ParseGameState(phase);
+                if (state == GameState.Unknown)
+                    _log.Debug(LogSource, $"Unknown game state parsed: {phase}");
                 UpdateState(state);
                 _consecutivePollingFailures = 0;
             }
@@ -184,7 +186,12 @@ public sealed class GameStateService : IGameStateService, IDisposable
     {
         if (string.IsNullOrWhiteSpace(rawMessage))
             return;
-        Console.WriteLine($"Raw Sender {sender}");
+        _log.Debug(LogSource, $"Raw Sender {sender}");
+        if (_log.IsDebugEnabled)
+        {
+            var truncated = rawMessage.Length > 500 ? rawMessage[..500] + "..." : rawMessage;
+            _log.Debug(LogSource, $"Raw WebSocket message: {truncated}");
+        }
         try
         {
             using var doc = JsonDocument.Parse(rawMessage);
@@ -210,6 +217,8 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 dataElement.ValueKind == JsonValueKind.String)
             {
                 var state = ParseGameState(dataElement.GetString() ?? string.Empty);
+                if (state == GameState.Unknown)
+                    _log.Debug(LogSource, $"Unknown game state parsed: {dataElement.GetString()}");
                 UpdateState(state);
             }
 

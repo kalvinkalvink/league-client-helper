@@ -34,8 +34,16 @@ public partial class ChampSelectViewModel : ObservableObject
         ChampSelectMessage = s.ChampSelectMessage;
     }
 
-    partial void OnAutoSendChampSelectMessageChanged(bool value) => Save(s => s.AutoSendChampSelectMessage = value);
-    partial void OnChampSelectMessageChanged(string value) => Save(s => s.ChampSelectMessage = value);
+    partial void OnAutoSendChampSelectMessageChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoSendChampSelectMessage changed to {value}");
+        Save(s => s.AutoSendChampSelectMessage = value);
+    }
+    partial void OnChampSelectMessageChanged(string value)
+    {
+        _log.Debug(LogSource, $"ChampSelectMessage changed to '{value}'");
+        Save(s => s.ChampSelectMessage = value);
+    }
 
     private void Save(Action<AppSettings> mutate)
     {

@@ -85,4 +85,5 @@
   <data name="lobby.message_placeholder" xml:space="preserve"><value>Enter message to send...</value></data>
   <data name="logs.open_folder" xml:space="preserve"><value>Open Logs Folder</value></data>
   <data name="logs.search_placeholder" xml:space="preserve"><value>Search logs...</value></data>
-</root>
+  <data name="setting.debug_logging" xml:space="preserve"><value>Enable Debug Logging</value></data>
+ </root>

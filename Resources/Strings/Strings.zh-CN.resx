@@ -85,4 +85,5 @@
   <data name="lobby.message_placeholder" xml:space="preserve"><value>输入要发送的消息...</value></data>
   <data name="logs.open_folder" xml:space="preserve"><value>打开日志文件夹</value></data>
   <data name="logs.search_placeholder" xml:space="preserve"><value>搜索日志...</value></data>
-</root>
+  <data name="setting.debug_logging" xml:space="preserve"><value>启用调试日志</value></data>
+ </root>

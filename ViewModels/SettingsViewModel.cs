@@ -10,21 +10,24 @@ public partial class SettingsViewModel : ObservableObject
 {
     private readonly ISettingsService _settings;
     private readonly ILocalizationService _localization;
+    private readonly ILoggingService _logging;
 
     [ObservableProperty] private int pollIntervalMs;
     [ObservableProperty] private LocalizedItem? selectedLanguageItem;
     [ObservableProperty] private LocalizedItem? selectedThemeItem;
     [ObservableProperty] private bool changeRankingOnStart;
     [ObservableProperty] private bool autoReconnect;
+    [ObservableProperty] private bool debugLogging;
 
     public ObservableCollection<int> PollIntervals { get; } = [250, 500, 1000, 2000];
     public ObservableCollection<LocalizedItem> LanguageItems { get; } = [];
     public ObservableCollection<LocalizedItem> ThemeItems { get; } = [];
 
-    public SettingsViewModel(ISettingsService settings, ILocalizationService localization)
+    public SettingsViewModel(ISettingsService settings, ILocalizationService localization, ILoggingService logging)
     {
         _settings = settings;
         _localization = localization;
+        _logging = logging;
 
         // Initialize collections with localized display text
         LanguageItems = new ObservableCollection<LocalizedItem>
@@ -44,6 +47,8 @@ public partial class SettingsViewModel : ObservableObject
         PollIntervalMs = s.PollIntervalMs;
         ChangeRankingOnStart = s.ChangeRankingOnStart;
         AutoReconnect = s.AutoReconnect;
+        DebugLogging = s.DebugLogging;
+        _logging.IsDebugEnabled = s.DebugLogging;
 
         // Set selected items based on saved values
         SelectedLanguageItem = LanguageItems.FirstOrDefault(x => x.Value == s.Language) ?? LanguageItems[0];
@@ -68,6 +73,7 @@ public partial class SettingsViewModel : ObservableObject
     public string ThemeLabel                => _localization.Get("setting.theme");
     public string ChangeRankingOnStartLabel => _localization.Get("setting.change_ranking_on_start");
     public string AutoReconnectLabel        => _localization.Get("setting.auto_reconnect");
+    public string DebugLoggingLabel         => _localization.Get("setting.debug_logging");
     public string ResetButtonLabel          => _localization.Get("setting.reset");
 
     partial void OnPollIntervalMsChanged(int value) => Save(s => s.PollIntervalMs = value);
@@ -97,6 +103,11 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnChangeRankingOnStartChanged(bool value) => Save(s => s.ChangeRankingOnStart = value);
     partial void OnAutoReconnectChanged(bool value) => Save(s => s.AutoReconnect = value);
+    partial void OnDebugLoggingChanged(bool value)
+    {
+        Save(s => s.DebugLogging = value);
+        _logging.IsDebugEnabled = value;
+    }
 
     [RelayCommand]
     private void ResetToDefaults()
@@ -105,6 +116,7 @@ public partial class SettingsViewModel : ObservableObject
         PollIntervalMs = defaults.PollIntervalMs;
         ChangeRankingOnStart = defaults.ChangeRankingOnStart;
         AutoReconnect = defaults.AutoReconnect;
+        DebugLogging = defaults.DebugLogging;
         SelectedLanguageItem = LanguageItems.FirstOrDefault(x => x.Value == defaults.Language) ?? LanguageItems[0];
         SelectedThemeItem = ThemeItems.FirstOrDefault(x => x.Value == defaults.Theme) ?? ThemeItems[0];
         _settings.Save(defaults);

@@ -19,7 +19,7 @@
                    Style="{DynamicResource GlassTitle}" />
 
             <!-- Toolbar: search + max lines input + action buttons -->
-            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto,Auto" ColumnSpacing="8">
                 <SearchBar Grid.Column="0"
                            Text="{Binding SearchText, Mode=TwoWay}"
                            Placeholder="{Binding SearchLogsPlaceholder}"
@@ -45,6 +45,12 @@
                         Text="{Binding ClearLogsLabel}"
                         Command="{Binding ClearLogsCommand}"
                         Style="{DynamicResource GlassButton}" />
+                <Button Grid.Column="4"
+                        x:Name="AutoScrollToggleButton"
+                        Text="↓ Auto"
+                        Clicked="OnToggleAutoScrollClicked"
+                        Style="{DynamicResource GlassButton}"
+                        WidthRequest="40" />
             </Grid>
 
             <!--
@@ -54,7 +60,10 @@
                 every log append; CollectionView virtualizes and recycles rows instead.
             -->
             <Border Grid.Row="2" Style="{DynamicResource GlassItem}" Padding="0">
-                <CollectionView ItemsSource="{Binding LogEntries}">
+                <CollectionView x:Name="LogCollectionView"
+                                ItemsSource="{Binding LogEntries}"
+                                Loaded="OnLogCollectionViewLoaded"
+                                VerticalOptions="Fill">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="services:LogEntry">
                             <Grid Padding="8,3" ColumnDefinitions="Auto,Auto,Auto,Auto,*" ColumnSpacing="8">

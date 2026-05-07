@@ -117,4 +117,10 @@ public sealed class AppSettings
     // -------------------------------------------------------------------------
     /// <summary>Enable DEBUG-level log entries (spec section 7.2).</summary>
     public bool DebugLogging { get; set; } = false;
+
+    // -------------------------------------------------------------------------
+    // Log Display
+    // -------------------------------------------------------------------------
+    /// <summary>Maximum number of log entries to keep in the UI.</summary>
+    public int MaxLogEntries { get; set; } = 1000;
 }

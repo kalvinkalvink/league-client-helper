@@ -34,8 +34,16 @@ public partial class EndOfGameViewModel : ObservableObject
         EndOfGameMessage = s.EndOfGameMessage;
     }
 
-    partial void OnAutoSendEndOfGameMessageChanged(bool value) => Save(s => s.AutoSendEndOfGameMessage = value);
-    partial void OnEndOfGameMessageChanged(string value) => Save(s => s.EndOfGameMessage = value);
+    partial void OnAutoSendEndOfGameMessageChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoSendEndOfGameMessage changed to {value}");
+        Save(s => s.AutoSendEndOfGameMessage = value);
+    }
+    partial void OnEndOfGameMessageChanged(string value)
+    {
+        _log.Debug(LogSource, $"EndOfGameMessage changed to '{value}'");
+        Save(s => s.EndOfGameMessage = value);
+    }
 
     private void Save(Action<AppSettings> mutate)
     {

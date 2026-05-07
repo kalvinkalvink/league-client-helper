@@ -56,19 +56,19 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     public async Task AcceptReadyCheckAsync(CancellationToken ct = default)
     {
         try { await SendNoBodyAsync(HttpMethod.Post, "/lol-matchmaking/v1/ready-check/accept", ct).ConfigureAwait(false); }
-        catch (Exception ex) { _log.Warning(LogSource, $"AcceptReadyCheckAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "AcceptReadyCheckAsync failed", ex); }
     }
 
     public async Task StartMatchmakingSearchAsync(CancellationToken ct = default)
     {
         try { await SendNoBodyAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", ct).ConfigureAwait(false); }
-        catch (Exception ex) { _log.Warning(LogSource, $"StartMatchmakingSearchAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "StartMatchmakingSearchAsync failed", ex); }
     }
 
     public async Task ReconnectAsync(CancellationToken ct = default)
     {
         try { await SendNoBodyAsync(HttpMethod.Post, "/lol-gameflow/v1/reconnect", ct).ConfigureAwait(false); }
-        catch (Exception ex) { _log.Warning(LogSource, $"ReconnectAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "ReconnectAsync failed", ex); }
     }
 
     public async Task SkipHonorAsync(CancellationToken ct = default)
@@ -84,13 +84,13 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var payload = JsonSerializer.Serialize(new { gameId = gameId, honorType = "OPT_OUT", summonerId = 0L, puuid = "" });
             await SendJsonAsync(HttpMethod.Post, "/lol-honor-v2/v1/honor-player/", payload, ct).ConfigureAwait(false);
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"SkipHonorAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "SkipHonorAsync failed", ex); }
     }
 
     public async Task PlayAgainAsync(CancellationToken ct = default)
     {
         try { await SendNoBodyAsync(HttpMethod.Post, "/lol-lobby/v2/play-again", ct).ConfigureAwait(false); }
-        catch (Exception ex) { _log.Warning(LogSource, $"PlayAgainAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "PlayAgainAsync failed", ex); }
     }
 
     public async Task<IReadOnlyList<Invitation>> GetReceivedInvitationsAsync(CancellationToken ct = default)
@@ -100,7 +100,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var json = await GetStringAsync("/lol-lobby/v2/received-invitations", ct).ConfigureAwait(false);
             return JsonSerializer.Deserialize<List<Invitation>>(json, JsonOptions) ?? new List<Invitation>();
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"GetReceivedInvitationsAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "GetReceivedInvitationsAsync failed", ex); }
         return new List<Invitation>();
     }
 
@@ -109,7 +109,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         if (string.IsNullOrWhiteSpace(invitationId))
             throw new ArgumentException("Invitation id is required.", nameof(invitationId));
         try { await SendNoBodyAsync(HttpMethod.Post, $"/lol-lobby/v2/received-invitations/{Uri.EscapeDataString(invitationId)}/accept", ct).ConfigureAwait(false); }
-        catch (Exception ex) { _log.Warning(LogSource, $"AcceptInvitationAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "AcceptInvitationAsync failed", ex); }
     }
 
     public async Task InviteFriendsAsync(IEnumerable<long> summonerIds, CancellationToken ct = default)
@@ -120,7 +120,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var payload = JsonSerializer.Serialize(ids.Select(id => new { toSummonerId = id }));
             await SendJsonAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/invitations", payload, ct).ConfigureAwait(false);
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"InviteFriendsAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "InviteFriendsAsync failed", ex); }
     }
 
     public async Task<IReadOnlyList<Friend>> GetFriendsAsync(CancellationToken ct = default)
@@ -130,7 +130,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var json = await GetStringAsync("/lol-chat/v1/friends", ct).ConfigureAwait(false);
             return JsonSerializer.Deserialize<List<Friend>>(json, JsonOptions) ?? new List<Friend>();
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"GetFriendsAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "GetFriendsAsync failed", ex); }
         return new List<Friend>();
     }
 
@@ -141,7 +141,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var json = await GetStringAsync("/lol-summoner/v1/current-summoner", ct).ConfigureAwait(false);
             return JsonSerializer.Deserialize<SummonerInfo>(json, JsonOptions);
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"GetCurrentSummonerAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "GetCurrentSummonerAsync failed", ex); }
         return null;
     }
 
@@ -152,7 +152,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var payload = JsonSerializer.Serialize(new { availability, lol = new { rankedLeagueQueue = queueType, rankedLeagueTier = tier.ToUpperInvariant(), rankedLeagueDivision = division } });
             await SendJsonAsync(HttpMethod.Put, "/lol-chat/v1/me", payload, ct).ConfigureAwait(false);
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"UpdateChatMeAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "UpdateChatMeAsync failed", ex); }
     }
 
     public async Task<JsonDocument> GetLoginSessionAsync(CancellationToken ct = default)
@@ -217,7 +217,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             var json = await GetStringAsync("/lol-chat/v1/conversations", ct).ConfigureAwait(false);
             return JsonSerializer.Deserialize<List<Conversation>>(json, JsonOptions) ?? new List<Conversation>();
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"GetConversationsAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "GetConversationsAsync failed", ex); }
         return new List<Conversation>();
     }
 
@@ -231,7 +231,7 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             await SendJsonAsync(HttpMethod.Post, $"/lol-chat/v1/conversations/{Uri.EscapeDataString(conversationId)}/messages", payload, ct).ConfigureAwait(false);
             _log.Info(LogSource, $"Sent chat message to {conversationId}");
         }
-        catch (Exception ex) { _log.Warning(LogSource, $"SendChatMessageAsync failed: {ex.Message}"); }
+        catch (Exception ex) { _log.Error(LogSource, "SendChatMessageAsync failed", ex); }
     }
 
     public async Task<JsonDocument> GetGameFlowSessionAsync(CancellationToken ct = default)
@@ -247,6 +247,11 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         req.Headers.Authorization = new AuthenticationHeaderValue("Basic", _credentials!.BasicAuthHeader);
         using var rsp = await _httpClient.SendAsync(req, ct).ConfigureAwait(false);
         var content = await rsp.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
+        if (_log.IsDebugEnabled)
+        {
+            var truncated = content.Length > 500 ? content[..500] + "..." : content;
+            _log.Debug(LogSource, $"GET {endpoint} response body: {truncated}");
+        }
         if (!rsp.IsSuccessStatusCode)
             _log.Warning(LogSource, $"GET {endpoint} -> {(int)rsp.StatusCode} {rsp.StatusCode}");
         _log.Debug(LogSource, $"GET {endpoint} -> {(int)rsp.StatusCode}");
@@ -265,6 +270,11 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
     private async Task<bool> SendJsonAsync(HttpMethod method, string endpoint, string jsonPayload, CancellationToken ct)
     {
         EnsureConfigured();
+        if (_log.IsDebugEnabled)
+        {
+            var truncated = jsonPayload.Length > 500 ? jsonPayload[..500] + "..." : jsonPayload;
+            _log.Debug(LogSource, $"{method} {endpoint} request payload: {truncated}");
+        }
         var payload = Encoding.UTF8.GetBytes(jsonPayload);
         using var req = new HttpRequestMessage(method, endpoint) { Content = new ByteArrayContent(payload) };
         req.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -273,6 +283,11 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         if (!rsp.IsSuccessStatusCode)
         {
             var body = await rsp.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
+            if (_log.IsDebugEnabled)
+            {
+                var truncated = body.Length > 500 ? body[..500] + "..." : body;
+                _log.Debug(LogSource, $"{method} {endpoint} error response body: {truncated}");
+            }
             var isPartyEndpoint = endpoint.StartsWith("/lol-lobby/v2/party/", StringComparison.OrdinalIgnoreCase);
             var isBadRequest = rsp.StatusCode == System.Net.HttpStatusCode.BadRequest;
             
@@ -281,6 +296,12 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             else
                 _log.Warning(LogSource, $"{method} {endpoint} -> {(int)rsp.StatusCode} {rsp.StatusCode} | {body}");
             return false;
+        }
+        if (_log.IsDebugEnabled)
+        {
+            var responseBody = await rsp.Content.ReadAsStringAsync(ct).ConfigureAwait(false);
+            var truncated = responseBody.Length > 500 ? responseBody[..500] + "..." : responseBody;
+            _log.Debug(LogSource, $"{method} {endpoint} response body: {truncated}");
         }
         _log.Debug(LogSource, $"{method} {endpoint} -> {(int)rsp.StatusCode}");
         return true;
