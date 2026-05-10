@@ -9,6 +9,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
 {
     private readonly IGameStateService _gameStateService;
     private readonly ILocalizationService _localization;
+    private readonly ISettingsService _settings;
     private bool _disposed;
 
     [ObservableProperty] private string selectedTab = "GameAuto";
@@ -51,7 +52,8 @@ public partial class MainViewModel : ObservableObject, IDisposable
         ChampSelectViewModel champSelectVM,
         EndOfGameViewModel endOfGameVM,
         IGameStateService gameStateService,
-        ILocalizationService localization)
+        ILocalizationService localization,
+        ISettingsService settings)
     {
         GameAutoVM = gameAutoVM;
         MainPageTabVM = mainPageTabVM;
@@ -63,6 +65,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
         EndOfGameVM = endOfGameVM;
         _gameStateService = gameStateService;
         _localization = localization;
+        _settings = settings;
 
         _gameStateService.GameStateChanged += OnGameStateChanged;
         _gameStateService.ApiConfigured += OnApiConfigured;
@@ -75,8 +78,17 @@ public partial class MainViewModel : ObservableObject, IDisposable
     private void OnApiConfigured(object? sender, EventArgs e)
     {
         // Always marshal to UI thread; Dispatcher.Dispatch is a no-op when already on UI.
-        Application.Current?.Dispatcher.Dispatch(
-            () => LobbyVM.RefreshFriendsCommand.ExecuteAsync(null));
+        Application.Current?.Dispatcher.Dispatch(async () =>
+        {
+            // Refresh friends list
+            await LobbyVM.RefreshFriendsCommand.ExecuteAsync(null);
+
+            // Apply fake rank if setting is enabled
+            if (_settings.Current.ChangeRankingOnStart)
+            {
+                await GameStatusVM.ApplyFakeRankCommand.ExecuteAsync(null);
+            }
+        });
     }
 
     partial void OnSelectedTabChanged(string value)
