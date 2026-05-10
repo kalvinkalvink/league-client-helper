@@ -155,22 +155,18 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         catch (Exception ex) { _log.Error(LogSource, "UpdateChatMeAsync failed", ex); }
     }
 
-    public async Task<JsonDocument> GetLoginSessionAsync(CancellationToken ct = default)
+    public async Task<GameFlowSession?> GetGameFlowSessionAsync(CancellationToken ct = default)
     {
-        var json = await GetStringAsync("/lol-login/v1/session", ct).ConfigureAwait(false);
-        return JsonDocument.Parse(json);
-    }
-
-    public async Task<JsonDocument> GetRankedStatsAsync(string puuid, CancellationToken ct = default)
-    {
-        var json = await GetStringAsync($"/lol-ranked/v1/ranked-stats/{Uri.EscapeDataString(puuid)}", ct).ConfigureAwait(false);
-        return JsonDocument.Parse(json);
-    }
-
-    public async Task<JsonDocument> GetMatchHistoryAsync(string puuid, CancellationToken ct = default)
-    {
-        var json = await GetStringAsync($"/lol-match-history/v1/products/lol/{Uri.EscapeDataString(puuid)}/matches", ct).ConfigureAwait(false);
-        return JsonDocument.Parse(json);
+        try
+        {
+            var json = await GetStringAsync("/lol-gameflow/v1/session", ct).ConfigureAwait(false);
+            return JsonSerializer.Deserialize<GameFlowSession>(json, JsonOptions);
+        }
+        catch (Exception ex)
+        {
+            _log.Debug(LogSource, $"GetGameFlowSessionAsync failed: {ex.Message}");
+            return null;
+        }
     }
 
     public async Task JoinPartyAsync(string partyId, CancellationToken ct = default)
@@ -232,12 +228,6 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
             _log.Info(LogSource, $"Sent chat message to {conversationId}");
         }
         catch (Exception ex) { _log.Error(LogSource, "SendChatMessageAsync failed", ex); }
-    }
-
-    public async Task<JsonDocument> GetGameFlowSessionAsync(CancellationToken ct = default)
-    {
-        var json = await GetStringAsync("/lol-gameflow/v1/session", ct).ConfigureAwait(false);
-        return JsonDocument.Parse(json);
     }
 
     private async Task<string> GetStringAsync(string endpoint, CancellationToken ct)

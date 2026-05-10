@@ -281,7 +281,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
             }
 
             // Debug: log what we received
-            _log.Info(LogSource, $"Friend {friendData.GameName}: availability={friendData.Availability}, gameStatus=[{lolInfo.GameStatus}], product={friendData.Product}");
+            _log.Debug(LogSource, $"Friend {friendData.GameName}: availability={friendData.Availability}, gameStatus=[{lolInfo.GameStatus}], product={friendData.Product}");
 
             // Track game status AND product for UI updates
             var gameStatusChanged = false;
@@ -292,7 +292,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
                 var previousStatus = _friendGameStatuses.TryGetValue(friendPuuid, out var status) ? status : string.Empty;
                 if (!string.Equals(previousStatus, lolInfo.GameStatus, StringComparison.OrdinalIgnoreCase))
                 {
-                    _log.Info(LogSource, $"FIRING event: {friendPuuid} gameStatus={lolInfo.GameStatus}");
+                    _log.Debug(LogSource, $"FIRING event: {friendPuuid} gameStatus={lolInfo.GameStatus}");
                     _friendGameStatuses[friendPuuid] = lolInfo.GameStatus;
                     gameStatusChanged = true;
                 }
@@ -523,32 +523,17 @@ public sealed class GameStateService : IGameStateService, IDisposable
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
         try
         {
-            // Get game session players
-            JsonDocument? sessionDoc = null;
-            try
+            var session = await _lcuApiService.GetGameFlowSessionAsync(cts.Token).ConfigureAwait(false);
+            if (session == null)
             {
-                sessionDoc = await _lcuApiService.GetGameFlowSessionAsync(cts.Token).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                _log.Warning(LogSource, $"Failed to get game session: {ex.Message}");
+                _log.Warning(LogSource, "Failed to get game session");
                 return;
             }
 
-            var playerPuuids = new List<string>();
-            if (sessionDoc.RootElement.TryGetProperty("gameData", out var gameData) &&
-                gameData.TryGetProperty("teamPlayers", out var teamPlayers))
-            {
-                foreach (var player in teamPlayers.EnumerateArray())
-                {
-                    if (player.TryGetProperty("puuid", out var puuidProp))
-                    {
-                        var puuid = puuidProp.GetString();
-                        if (!string.IsNullOrEmpty(puuid))
-                            playerPuuids.Add(puuid);
-                    }
-                }
-            }
+            var playerPuuids = session.GameData.TeamPlayers
+                .Select(p => p.Puuid)
+                .Where(p => !string.IsNullOrEmpty(p))
+                .ToList();
 
             if (playerPuuids.Count == 0)
             {

@@ -5,12 +5,13 @@ using LolClientHelper.Services;
 
 namespace LolClientHelper.ViewModels;
 
-public partial class LogsViewModel : ObservableObject
+public partial class LogsViewModel : ObservableObject, IDisposable
 {
     private const string LogSource = "LogsViewModel";
     private readonly ILoggingService _log;
     private readonly ILocalizationService _localization;
     private readonly ISettingsService _settings;
+    private bool _disposed;
     [ObservableProperty] private int maxLogEntries = 1000;
     [ObservableProperty] private string maxLogEntriesText = "1000";
 
@@ -82,7 +83,7 @@ public partial class LogsViewModel : ObservableObject
             _settings.Save(s);
         }
 
-        private void TrimLogEntries()
+private void TrimLogEntries()
         {
             Application.Current?.Dispatcher.Dispatch(() =>
             {
@@ -93,4 +94,12 @@ public partial class LogsViewModel : ObservableObject
                     _log.Debug(LogSource, $"Trimmed {trimCount} log entries via manual trim");
             });
         }
-}
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            _log.LogEntryWritten -= OnLogEntryWritten;
+            _localization.LanguageChanged -= (_, _) => OnPropertyChanged(string.Empty);
+        }
+    }

@@ -7,7 +7,7 @@ using LolClientHelper.Services;
 
 namespace LolClientHelper.ViewModels;
 
-public partial class MainPageTabViewModel : ObservableObject
+public partial class MainPageTabViewModel : ObservableObject, IDisposable
 {
     private readonly ISettingsService _settings;
     private readonly ILocalizationService _localization;
@@ -15,6 +15,7 @@ public partial class MainPageTabViewModel : ObservableObject
     private readonly ILoggingService _log;
     private readonly IGameStateService _gameState;
     private const string LogSource = "MainPageTabViewModel";
+    private bool _disposed;
 
     [ObservableProperty] private bool autoAcceptInvite;
     [ObservableProperty] private bool autoJoinFriendParty;
@@ -51,13 +52,13 @@ public partial class MainPageTabViewModel : ObservableObject
 
     private void OnFriendGameStatusChanged(string puuid, string gameStatus, string product)
     {
-        _log.Info(LogSource, $"RECEIVED: puuid={puuid}, gameStatus={gameStatus}, product={product}");
+        _log.Debug(LogSource, $"RECEIVED: puuid={puuid}, gameStatus={gameStatus}, product={product}");
         
         // Update in AllFriends
         var friend = AllFriends.FirstOrDefault(f => f.Puuid == puuid);
         if (friend != null)
         {
-            _log.Info(LogSource, $"Updating AllFriends: {friend.Name} GameStatus: {friend.GameStatus} -> {gameStatus}");
+            _log.Debug(LogSource, $"Updating AllFriends: {friend.Name} GameStatus: {friend.GameStatus} -> {gameStatus}");
             friend.GameStatus = gameStatus;
             friend.Product = product;
         }
@@ -70,7 +71,7 @@ public partial class MainPageTabViewModel : ObservableObject
         friend = SelectedFriends.FirstOrDefault(f => f.Puuid == puuid);
         if (friend != null)
         {
-            _log.Info(LogSource, $"Updating SelectedFriends: {friend.Name} GameStatus: {friend.GameStatus} -> {gameStatus}");
+            _log.Debug(LogSource, $"Updating SelectedFriends: {friend.Name} GameStatus: {friend.GameStatus} -> {gameStatus}");
             friend.GameStatus = gameStatus;
             friend.Product = product;
         }
@@ -234,5 +235,13 @@ public partial class MainPageTabViewModel : ObservableObject
         var current = _settings.Current;
         mutate(current);
         _settings.Save(current);
+    }
+
+    public void Dispose()
+    {
+        if (_disposed) return;
+        _disposed = true;
+        _localization.LanguageChanged -= (_, _) => OnPropertyChanged(string.Empty);
+        _gameState.FriendGameStatusChanged -= OnFriendGameStatusChanged;
     }
 }

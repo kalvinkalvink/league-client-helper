@@ -5,10 +5,11 @@ using LolClientHelper.Services;
 
 namespace LolClientHelper.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ObservableObject, IDisposable
 {
     private readonly IGameStateService _gameStateService;
     private readonly ILocalizationService _localization;
+    private bool _disposed;
 
     [ObservableProperty] private string selectedTab = "GameAuto";
     [ObservableProperty] private string connectionStatus = "Connecting...";
@@ -93,5 +94,15 @@ public partial class MainViewModel : ObservableObject
     private void OnGameStateChanged(object? sender, GameState state)
     {
         ConnectionStatus = state.ToString();
+    }
+
+    public void Dispose()
+    {
+        if (_disposed) return;
+        _disposed = true;
+
+        _gameStateService.GameStateChanged -= OnGameStateChanged;
+        _gameStateService.ApiConfigured -= OnApiConfigured;
+        _localization.LanguageChanged -= (_, _) => OnPropertyChanged(string.Empty);
     }
 }

@@ -1,4 +1,3 @@
-using System.Text.Json;
 using LolClientHelper.Models;
 
 namespace LolClientHelper.Services;
@@ -25,13 +24,10 @@ public interface ILcuApiService
     Task<SummonerInfo?> GetCurrentSummonerAsync(CancellationToken ct = default);
 
     Task UpdateChatMeAsync(string queueType, string tier, string division, string availability, CancellationToken ct = default);
-    Task<JsonDocument> GetLoginSessionAsync(CancellationToken ct = default);
-    Task<JsonDocument> GetRankedStatsAsync(string puuid, CancellationToken ct = default);
-    Task<JsonDocument> GetMatchHistoryAsync(string puuid, CancellationToken ct = default);
     Task JoinPartyAsync(string partyId, CancellationToken ct = default);
     Task<bool> IsInPartyAsync(CancellationToken ct = default);
 
     Task<IReadOnlyList<Conversation>> GetConversationsAsync(CancellationToken ct = default);
     Task SendChatMessageAsync(string conversationId, string message, CancellationToken ct = default);
-    Task<JsonDocument> GetGameFlowSessionAsync(CancellationToken ct = default);
+    Task<GameFlowSession?> GetGameFlowSessionAsync(CancellationToken ct = default);
 }
