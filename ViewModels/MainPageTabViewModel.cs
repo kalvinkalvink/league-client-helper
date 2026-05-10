@@ -64,7 +64,9 @@ public partial class MainPageTabViewModel : ObservableObject, IDisposable
         }
         else
         {
-            _log.Warning(LogSource, $"Friend {puuid} NOT FOUND in AllFriends");
+            // This is expected during startup - WebSocket may receive status updates
+            // before the friends list is loaded.
+            _log.Debug(LogSource, $"Friend {puuid} NOT FOUND in AllFriends");
         }
 
         // Update in SelectedFriends
