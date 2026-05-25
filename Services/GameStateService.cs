@@ -24,6 +24,7 @@ public sealed class GameStateService : IGameStateService, IDisposable
     private string? _currentSummonerPuuid;
     private readonly HashSet<string> _recentPartyJoins = new();
     private DateTime _lastPartyJoinTime = DateTime.MinValue;
+    private CancellationTokenSource? _lobbyDebounceCts;
 
     public GameStateService(
         ILoggingService log,
@@ -116,6 +117,10 @@ public sealed class GameStateService : IGameStateService, IDisposable
         _runCts = null;
         _pollingTask = null;
         _wsReceiveTask = null;
+
+        _lobbyDebounceCts?.Cancel();
+        _lobbyDebounceCts?.Dispose();
+        _lobbyDebounceCts = null;
     }
 
     private async Task<bool> TryConnectWebSocketAsync(LcuCredentials credentials, CancellationToken ct)
@@ -256,10 +261,44 @@ public sealed class GameStateService : IGameStateService, IDisposable
             var convIdEncoded = uri[convStart..convEnd];
             var convId = Uri.UnescapeDataString(convIdEncoded);
 
-            var msg = _settings.Current.LobbyMessage;
-            var ct = _runCts?.Token ?? CancellationToken.None;
-            _log.Info(LogSource, $"WS: Lobby chat joined ({convId}), auto-sending message...");
-            _ = Task.Run(async () => await _lcuApiService.SendChatMessageAsync(convId, msg, ct));
+            // Debounce: cancel any pending timer, start a new 2s countdown.
+            // Multiple rapid joins only trigger one send after silence.
+            _lobbyDebounceCts?.Cancel();
+            _lobbyDebounceCts?.Dispose();
+            _lobbyDebounceCts = CancellationTokenSource.CreateLinkedTokenSource(
+                _runCts?.Token ?? CancellationToken.None);
+            var debounceToken = _lobbyDebounceCts.Token;
+
+            var captureConvId = convId;
+            var captureMsg = _settings.Current.LobbyMessage;
+
+            _log.Debug(LogSource, "Debounce: waiting 2s before sending lobby message...");
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(2000, debounceToken).ConfigureAwait(false);
+
+                    // Safety: only send if we're still in the lobby
+                    if (CurrentState != GameState.Lobby)
+                    {
+                        _log.Debug(LogSource, "Debounce: skipped — no longer in lobby");
+                        return;
+                    }
+
+                    await _lcuApiService.SendChatMessageAsync(captureConvId, captureMsg, CancellationToken.None)
+                        .ConfigureAwait(false);
+                    _log.Info(LogSource, $"Debounce: auto-sent lobby message to {captureConvId}");
+                }
+                catch (OperationCanceledException)
+                {
+                    _log.Debug(LogSource, "Debounce: cancelled — another player joined or service stopped");
+                }
+                catch (Exception ex)
+                {
+                    _log.Warning(LogSource, $"Debounce: lobby send failed: {ex.Message}");
+                }
+            });
         }
         }
         catch (Exception ex)
