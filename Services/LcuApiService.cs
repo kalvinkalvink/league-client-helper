@@ -217,18 +217,25 @@ public sealed class LcuApiService : ILcuApiService, IDisposable
         return new List<Conversation>();
     }
 
-    public async Task SendChatMessageAsync(string conversationId, string message, CancellationToken ct = default)
-    {
-        if (string.IsNullOrWhiteSpace(conversationId) || string.IsNullOrWhiteSpace(message))
-            return;
-        try
-        {
-            var payload = JsonSerializer.Serialize(new { body = message, type = "chat" });
-            await SendJsonAsync(HttpMethod.Post, $"/lol-chat/v1/conversations/{Uri.EscapeDataString(conversationId)}/messages", payload, ct).ConfigureAwait(false);
-            _log.Info(LogSource, $"Sent chat message to {conversationId}");
-        }
-        catch (Exception ex) { _log.Error(LogSource, "SendChatMessageAsync failed", ex); }
-    }
+     public async Task SendChatMessageAsync(string conversationId, string message, CancellationToken ct = default)
+     {
+         if (string.IsNullOrWhiteSpace(conversationId) || string.IsNullOrWhiteSpace(message))
+             return;
+         try
+         {
+             var payload = JsonSerializer.Serialize(new { body = message, type = "chat" });
+             bool success = await SendJsonAsync(HttpMethod.Post, $"/lol-chat/v1/conversations/{Uri.EscapeDataString(conversationId)}/messages", payload, ct).ConfigureAwait(false);
+             if (!success)
+             {
+                 _log.Warning(LogSource, $"Failed to send chat message to {conversationId}");
+             }
+             else
+             {
+                 _log.Info(LogSource, $"Message sent to {conversationId}");
+             }
+         }
+         catch (Exception ex) { _log.Error(LogSource, "SendChatMessageAsync failed", ex); }
+     }
 
     private async Task<string> GetStringAsync(string endpoint, CancellationToken ct)
     {

@@ -62,12 +62,7 @@ public partial class MainPageTabViewModel : ObservableObject, IDisposable
             friend.GameStatus = gameStatus;
             friend.Product = product;
         }
-        else
-        {
-            // This is expected during startup - WebSocket may receive status updates
-            // before the friends list is loaded.
-            _log.Debug(LogSource, $"Friend {puuid} NOT FOUND in AllFriends");
-        }
+        
 
         // Update in SelectedFriends
         friend = SelectedFriends.FirstOrDefault(f => f.Puuid == puuid);
