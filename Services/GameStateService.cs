@@ -234,9 +234,33 @@ public sealed class GameStateService : IGameStateService, IDisposable
             // Handle friend info events for auto-join party
             if (uri.Contains("/lol-hovercard/v1/friend-info/", StringComparison.OrdinalIgnoreCase))
             {
-                _log.Debug(LogSource, $"WS: Friend info event received for {uri}");
-                ProcessFriendInfoEvent(eventPayload);
+            _log.Debug(LogSource, $"WS: Friend info event received for {uri}");
+            ProcessFriendInfoEvent(eventPayload);
             }
+
+        // Auto-send lobby message when someone joins the lobby chat room.
+        // URI format: /lol-chat/v1/conversations/{convId}/messages/{msgId}
+        if (_settings.Current.AutoSendLobbyMessage &&
+            !string.IsNullOrWhiteSpace(_settings.Current.LobbyMessage) &&
+            eventPayload.TryGetProperty("eventType", out var eventTypeElement) &&
+            string.Equals(eventTypeElement.GetString(), "Create", StringComparison.OrdinalIgnoreCase) &&
+            uri.Contains("/lol-chat/v1/conversations/", StringComparison.OrdinalIgnoreCase) &&
+            uri.Contains("/messages/", StringComparison.OrdinalIgnoreCase) &&
+            eventPayload.TryGetProperty("data", out var joinedData) &&
+            joinedData.TryGetProperty("body", out var bodyElement) &&
+            string.Equals(bodyElement.GetString(), "joined_room", StringComparison.OrdinalIgnoreCase))
+        {
+            // Extract conversation ID from URI
+            var convStart = uri.IndexOf("/conversations/", StringComparison.OrdinalIgnoreCase) + "/conversations/".Length;
+            var convEnd = uri.IndexOf("/messages/", StringComparison.OrdinalIgnoreCase);
+            var convIdEncoded = uri[convStart..convEnd];
+            var convId = Uri.UnescapeDataString(convIdEncoded);
+
+            var msg = _settings.Current.LobbyMessage;
+            var ct = _runCts?.Token ?? CancellationToken.None;
+            _log.Info(LogSource, $"WS: Lobby chat joined ({convId}), auto-sending message...");
+            _ = Task.Run(async () => await _lcuApiService.SendChatMessageAsync(convId, msg, ct));
+        }
         }
         catch (Exception ex)
         {
@@ -488,16 +512,6 @@ public sealed class GameStateService : IGameStateService, IDisposable
             }
         }
 
-        // Auto-send message on Lobby
-        if (nextState == GameState.Lobby && _settings.Current.AutoSendLobbyMessage)
-        {
-            var message = _settings.Current.LobbyMessage;
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                _log.Info(LogSource, "Lobby entered, starting auto-send...");
-                _ = Task.Run(async () => await SendLobbyAutoMessageAsync(message));
-            }
-        }
     }
 
     private static GameState ParseGameState(string raw)
@@ -581,32 +595,6 @@ public sealed class GameStateService : IGameStateService, IDisposable
         catch (Exception ex)
         {
             _log.Warning(LogSource, $"Auto-send failed: {ex.Message}");
-        }
-    }
-
-    private async Task SendLobbyAutoMessageAsync(string message)
-    {
-        try
-        {
-            // Small delay to allow lobby chat to initialize
-            await Task.Delay(500).ConfigureAwait(false);
-
-            var conversations = await _lcuApiService.GetConversationsAsync(CancellationToken.None).ConfigureAwait(false);
-            var lobbyConv = conversations.FirstOrDefault(c => c.Type == "lobby");
-            
-            if (lobbyConv != null)
-            {
-                await _lcuApiService.SendChatMessageAsync(lobbyConv.Id, message, CancellationToken.None).ConfigureAwait(false);
-                _log.Info(LogSource, "Auto-sent message to lobby");
-            }
-            else
-            {
-                _log.Warning(LogSource, "Lobby conversation not found");
-            }
-        }
-        catch (Exception ex)
-        {
-            _log.Warning(LogSource, $"Lobby auto-send failed: {ex.Message}");
         }
     }
 
