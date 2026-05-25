@@ -1,0 +1,20 @@
+fetch("https://127.0.0.1:40842/lol-challenges/v2/titles/local-player", {
+  "headers": {
+    "accept": "application/json",
+    "accept-language": "en-US,en;q=0.9",
+    "authorization": "Basic cmlvdDpzZUdvQTZVbExkeXdJazlRSzJHRVlR",
+    "sec-ch-ua": "\"Chromium\";v=\"108\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-riot-source": "rcp-fe-lol-shared-components"
+  },
+  "referrer": "https://127.0.0.1:40842/index.html",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});

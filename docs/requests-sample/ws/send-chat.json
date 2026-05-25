@@ -1,0 +1,21 @@
+[
+  8,
+  "OnJsonApiEvent",
+  {
+    "data": {
+      "body": "test",
+      "fromId": "526ab888-5e9a-5b0f-8a11-0da8bee5ffb7@jp1.pvp.net",
+      "fromObfuscatedPuuid": "",
+      "fromObfuscatedSummonerId": 0,
+      "fromPid": "526ab888-5e9a-5b0f-8a11-0da8bee5ffb7@jp1.pvp.net",
+      "fromPuuid": "526ab888-5e9a-5b0f-8a11-0da8bee5ffb7",
+      "fromSummonerId": 0,
+      "id": "1779707076004:4",
+      "isHistorical": true,
+      "timestamp": "2026-05-25T11:04:36.004Z",
+      "type": "groupchat"
+    },
+    "eventType": "Create",
+    "uri": "/lol-chat/v1/conversations/923fed4f-89ff-4c5a-905f-e82e3bf7c357%40lol-pre-game.sa2.pvp.net/messages/1779707076004%3A4"
+  }
+]

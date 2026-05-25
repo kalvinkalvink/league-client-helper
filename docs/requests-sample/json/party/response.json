@@ -1,0 +1,1094 @@
+[
+    {
+        "eligible": true,
+        "queueId": 400,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 420,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {},
+                "restrictionCode": "TeamDivisionRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 430,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 440,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 450,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 480,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 490,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 700,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamSizeRestriction": "2"
+                },
+                "restrictionCode": "TeamSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 701,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 710,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 720,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamSizeRestriction": "2"
+                },
+                "restrictionCode": "TeamSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 721,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 740,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamSizeRestriction": "2"
+                },
+                "restrictionCode": "TeamSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 741,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 830,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 840,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 843,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueEntryNotEntitledRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 850,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 860,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 870,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 880,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 890,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 900,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 901,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1020,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 1090,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 1091,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1092,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 1100,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 1101,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1102,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1110,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1111,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1130,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1150,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 1160,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 1170,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1180,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1190,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1210,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1220,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1300,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1400,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1700,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1704,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1710,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 1750,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 1810,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1820,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1830,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1840,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 1900,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 2000,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 2010,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 2020,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamMaxSizeRestriction": "1"
+                },
+                "restrictionCode": "TeamMaxSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 2200,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 2300,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 2400,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 3000,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 3010,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 3100,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 3110,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 3120,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 3130,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamSizeRestriction": "2"
+                },
+                "restrictionCode": "TeamSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 3140,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 3150,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 3161,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 3200,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 3210,
+        "restrictions": []
+    },
+    {
+        "eligible": true,
+        "queueId": 3220,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 3230,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [
+                    "985e11ec-d7f4-5f80-ac21-07f8087344df"
+                ],
+                "puuidsString": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+                "restrictionArgs": {
+                    "teamSizeRestriction": "2"
+                },
+                "restrictionCode": "TeamSizeRestriction",
+                "summonerIds": [
+                    3112523603625248,
+                    3112473557337504
+                ],
+                "summonerIdsString": "3112523603625248,3112473557337504"
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 3270,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 4210,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 4220,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 4240,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 4250,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 4260,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": true,
+        "queueId": 6100,
+        "restrictions": []
+    },
+    {
+        "eligible": false,
+        "queueId": 6110,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 6120,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    },
+    {
+        "eligible": false,
+        "queueId": 6130,
+        "restrictions": [
+            {
+                "expiredTimestamp": 0,
+                "puuids": [],
+                "puuidsString": "",
+                "restrictionArgs": {},
+                "restrictionCode": "QueueDisabled",
+                "summonerIds": [],
+                "summonerIdsString": ""
+            }
+        ]
+    }
+]

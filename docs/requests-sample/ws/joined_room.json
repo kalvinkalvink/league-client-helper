@@ -1,0 +1,21 @@
+[
+  8,
+  "OnJsonApiEvent",
+  {
+    "data": {
+      "body": "joined_room",
+      "fromId": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+      "fromObfuscatedPuuid": "",
+      "fromObfuscatedSummonerId": 0,
+      "fromPid": "985e11ec-d7f4-5f80-ac21-07f8087344df@jp1.pvp.net",
+      "fromPuuid": "985e11ec-d7f4-5f80-ac21-07f8087344df",
+      "fromSummonerId": 3112523603625248,
+      "id": "m_0d5960b369b3418f",
+      "isHistorical": false,
+      "timestamp": "2026-05-25T10:55:47.069Z",
+      "type": "system"
+    },
+    "eventType": "Create",
+    "uri": "/lol-chat/v1/conversations/923fed4f-89ff-4c5a-905f-e82e3bf7c357%40lol-pre-game.sa2.pvp.net/messages/m_0d5960b369b3418f"
+  }
+]

@@ -1,0 +1,1864 @@
+[
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "以中路身份贏得對戰",
+      "challengeId": 401304,
+      "challengeName": "中路差距",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/401304/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "99c2087a-6639-d410-0c54-d39dc268ddd0",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40130404,
+    "name": "中路差距",
+    "purchaseDate": "20250607T040939.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "",
+      "challengeId": 0,
+      "challengeName": "水晶",
+      "level": "IRON",
+      "levelToIconPath": {}
+    },
+    "contentId": "1ec141e3-f99d-53fe-98e7-ccf09f12e97b",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 1,
+    "name": "學徒",
+    "purchaseDate": "20220630T122101.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在隨機單中讓一隻普羅爆炸",
+      "challengeId": 101206,
+      "challengeName": "普羅肥到炸",
+      "level": "BRONZE",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101206/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "85ee86b6-b4db-88fb-2d19-69a03ad04970",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10120601,
+    "name": "普羅大餵王",
+    "purchaseDate": "20221019T160129.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "76469c97-cc5e-42dc-9c8d-ff657464af66",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1411_SpiritBlossomBeyond_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1411,
+    "name": "引導之光",
+    "purchaseDate": "20250627T230939.000Z",
+    "titleAcquisitionName": "靈花祭物外之境",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑38"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "39f258bc-223e-4a19-8569-0910253de68c",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000157,
+    "name": "放逐浪人",
+    "purchaseDate": "20240515T034547.000Z",
+    "titleAcquisitionName": "犽宿",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "遊戲時間的 65% 以上，在河道或敵隊側的地圖上有放置一個控域守衛",
+      "challengeId": 302105,
+      "challengeName": "偵察敵情",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302105/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "7614fc8f-3dfd-a987-6511-45e21cabe676",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30210504,
+    "name": "掌控大局",
+    "purchaseDate": "20230421T045406.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「寶物」組別中的挑戰獲得進度",
+      "challengeId": 504000,
+      "challengeName": "寶物",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/504000/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "d703bfa3-e610-2c26-c32a-55a35114d2ed",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 50400005,
+    "name": "寶物收藏家",
+    "purchaseDate": "20240325T141432.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "87f2bfe8-aaad-4aa9-8ccb-d72b57e27b11",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/HoL_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1413,
+    "name": "瘋狂小狗",
+    "purchaseDate": "20250731T234521.000Z",
+    "titleAcquisitionName": "2025傳奇殿堂",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "里程碑98"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在 15 分鐘前，成為傳說（8 個連續擊殺）",
+      "challengeId": 202302,
+      "challengeName": "旗開得勝",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/202302/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "535f8159-bbbf-115f-0855-1594affaa70d",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20230204,
+    "name": "旗開得勝",
+    "purchaseDate": "20230210T154734.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "61584d58-e909-46d0-81cc-af0b4c1975d9",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1411_SpiritBlossomBeyond_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1416,
+    "name": "狂怒化身",
+    "purchaseDate": "20250828T233007.000Z",
+    "titleAcquisitionName": "靈花祭物外之境",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑38"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "16c63711-a77e-4f9e-8bd0-b8a0d5b21887",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1417_TrialsOfTwilight_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1417,
+    "name": "暮光之戒律",
+    "purchaseDate": "20251021T154535.000Z",
+    "titleAcquisitionName": "暮光試煉",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑40"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "1dafe9bd-b4a6-47d8-84e8-108d83a53838",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1417_TrialsOfTwilight_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1420,
+    "name": "我們就是《英雄聯盟》",
+    "purchaseDate": "20251110T125823.000Z",
+    "titleAcquisitionName": "暮光試煉",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑5"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "對戰結束時，在敵方基地與預示者一同跳舞",
+      "challengeId": 301305,
+      "challengeName": "快樂腳",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301305/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "9cd0b2aa-f5df-bb3f-8d8b-2218d005e800",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30130503,
+    "name": "直接在你主堡跳舞",
+    "purchaseDate": "20220803T153254.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在 8 秒內，閃躲 5 個指向性技能（遠程的非指定技能）",
+      "challengeId": 203102,
+      "challengeName": "扭腰擺臀",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203102/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "e94589d7-7816-e0f5-472f-5f01314f305f",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20310203,
+    "name": "凌波微步",
+    "purchaseDate": "20220724T093803.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「堅定不移」組別中的挑戰獲得進度",
+      "challengeId": 301200,
+      "challengeName": "堅定不移",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301200/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "02e53d02-0714-6c4e-1af9-051e5f0024f0",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30120005,
+    "name": "不屈不撓",
+    "purchaseDate": "20221201T155853.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "a8aea2c4-8fe7-4f84-8f44-49f9fdd76533",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/For_Demacia_Icon_Bug.svg",
+    "isPermanentTitle": true,
+    "itemId": 1425,
+    "name": "無畏的蒂瑪西亞人",
+    "purchaseDate": "20260214T071803.000Z",
+    "titleAcquisitionName": "為了蒂瑪西亞",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑40"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「先知卓見」組別中的挑戰獲得進度",
+      "challengeId": 204200,
+      "challengeName": "先知卓見",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/204200/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "336f002a-ec1b-350d-b35a-3e948cfb875c",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20420005,
+    "name": "先知卓見",
+    "purchaseDate": "20250720T053004.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "82b38481-2799-4727-91e9-2a66c0aa04c6",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/For_Demacia_Icon_Bug.svg",
+    "isPermanentTitle": true,
+    "itemId": 1429,
+    "name": "王冠使者",
+    "purchaseDate": "20260505T225539.000Z",
+    "titleAcquisitionName": "為了蒂瑪西亞",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑40"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "094c0907-040e-4b7f-90a4-a05a47302a16",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000011,
+    "name": "無極劍聖",
+    "purchaseDate": "20240515T034547.000Z",
+    "titleAcquisitionName": "易大師",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「革新」組別中的挑戰獲得進度",
+      "challengeId": 103200,
+      "challengeName": "革新",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/103200/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "e0cba5d4-f151-fff6-17fb-0a9cd0b9b785",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10320005,
+    "name": "改革家",
+    "purchaseDate": "20241227T134129.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「神機妙算」組別中的挑戰獲得進度",
+      "challengeId": 302100,
+      "challengeName": "神機妙算",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302100/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "bf51eb9c-9636-16ac-a58a-60b80c38137e",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30210005,
+    "name": "神機妙算",
+    "purchaseDate": "20240311T135024.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "與至少一名友軍在草叢中埋伏至少 3 秒後，擊殺英雄",
+      "challengeId": 302301,
+      "challengeName": "守株待兔",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302301/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "71d878b1-88ca-66b1-2b12-384704f88645",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30230103,
+    "name": "守株待兔",
+    "purchaseDate": "20220803T151312.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「共生共榮」組別中的挑戰獲得進度",
+      "challengeId": 301300,
+      "challengeName": "共生共榮",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301300/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "5c7b4984-32a1-e55c-eb10-e138a685d964",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30130005,
+    "name": "超越",
+    "purchaseDate": "20240509T161835.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "為你的友軍提供有效的治療或護盾（對自己的治療或護盾不算）。有效治療必須實際回復了生命值，有效護盾必須實際阻擋了傷害",
+      "challengeId": 402501,
+      "challengeName": "你覺得舒服多了",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402501/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "269c0182-6a71-5c24-33f6-0b41d146de50",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40250104,
+    "name": "守護者",
+    "purchaseDate": "20250720T053004.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "將敵人擊退至友軍方向，並因此參與其的擊殺",
+      "challengeId": 302305,
+      "challengeName": "Insec 級回傳",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302305/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "f35cc43d-ecfc-327e-68f2-7c4da2457968",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30230504,
+    "name": "Insec 上身",
+    "purchaseDate": "20220731T090524.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「英雄」組別中的挑戰獲得進度",
+      "challengeId": 505000,
+      "challengeName": "英雄",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/505000/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "81256cdb-5f7a-ef5b-141b-9caf49fa2345",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 50500005,
+    "name": "收藏家",
+    "purchaseDate": "20220512T080811.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在硬控場效果開始的0.25秒內，為自身或他人淨化該效果（使用召喚師技能淨化、水銀飾帶或米凱的祝福）",
+      "challengeId": 203103,
+      "challengeName": "光速秒解",
+      "level": "SILVER",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203103/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "0cb4b317-3f2c-3c56-2dd2-6a6935669a47",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20310302,
+    "name": "光速秒解",
+    "purchaseDate": "20220824T162602.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "5f84a83b-e6b3-4413-b77c-8730ec44fd37",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000053,
+    "name": "蒸汽巨神兵",
+    "purchaseDate": "20260417T173725.000Z",
+    "titleAcquisitionName": "布里茨",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "以上路身份贏得對戰",
+      "challengeId": 401305,
+      "challengeName": "上路差距",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/401305/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "1e0c5477-44d7-d8a6-27f5-49666983e29f",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40130504,
+    "name": "上路差距",
+    "purchaseDate": "20230226T090008.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「隨機單中戰士」組別中的挑戰獲得進度",
+      "challengeId": 101100,
+      "challengeName": "隨機單中戰士",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101100/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "10ebe6e9-8e92-30b2-8c65-bbcaa7b3c33d",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10110005,
+    "name": "勢不可擋",
+    "purchaseDate": "20250404T075215.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「行刑者」組別中的挑戰獲得進度",
+      "challengeId": 402100,
+      "challengeName": "行刑者",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402100/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "40175c36-7ad0-bac4-3ff9-d6dc26c67357",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40210005,
+    "name": "行刑者",
+    "purchaseDate": "20240415T142232.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "我方隊伍在27分鐘前擊敗巴龍",
+      "challengeId": 301102,
+      "challengeName": "有巴龍吃",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301102/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "3f932d88-74f6-4799-26a6-ede3f6942e96",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30110203,
+    "name": "早起的鳥兒",
+    "purchaseDate": "20221117T130713.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "取得首殺",
+      "challengeId": 402109,
+      "challengeName": "嗜血獵殺",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402109/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "ba301cb3-71e2-36b9-0fea-b275827b18ab",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40210903,
+    "name": "嗜血",
+    "purchaseDate": "20220727T131054.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在朝一名敵方英雄閃現的短時間後取得連續擊殺",
+      "challengeId": 103203,
+      "challengeName": "黑閃",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/103203/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "910449ad-1994-908d-8ea7-feec2c7ce6b1",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10320303,
+    "name": "黑閃",
+    "purchaseDate": "20221102T124748.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「龐然大物」組別中的挑戰獲得進度",
+      "challengeId": 203200,
+      "challengeName": "龐然大物",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203200/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "3103dbf9-3bba-4ba4-c89c-18cb94b71491",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20320005,
+    "name": "龐然大物",
+    "purchaseDate": "20231119T064745.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在沒被任何敵方英雄擊殺過的情況下（仍可以其他方式死亡）贏得隨機單中對戰",
+      "challengeId": 101306,
+      "challengeName": "我沒那麼好殺",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101306/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "acd49fd9-d9fe-6881-0f20-4dfe0ccef9b4",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10130604,
+    "name": "勝者未亡",
+    "purchaseDate": "20250404T072921.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「協力」組別中的挑戰獲得進度",
+      "challengeId": 302300,
+      "challengeName": "協力",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302300/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "5b4472e8-d672-e89a-d2b2-82f398dd2afe",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30230005,
+    "name": "同心協力",
+    "purchaseDate": "20230714T164026.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「登峰造極」組別中的挑戰獲得進度",
+      "challengeId": 502000,
+      "challengeName": "登峰造極",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/502000/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "dc18a696-4075-1739-2172-e454852302c9",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 50200005,
+    "name": "登峰造極",
+    "purchaseDate": "20260214T071807.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "用不同的神話道具贏得對戰",
+      "challengeId": 402406,
+      "challengeName": "全能武器大師",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402406/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "273fd8ef-b825-71bf-1ea4-281ba93b967d",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40240603,
+    "name": "神話",
+    "purchaseDate": "20221210T063903.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在失去一座兵營的情況下贏得對戰",
+      "challengeId": 301202,
+      "challengeName": "兵臨城下我不怕",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301202/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "f711a38c-aa8d-aec1-9ea9-a2fb6d599dcd",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30120203,
+    "name": "兵臨城下我不怕",
+    "purchaseDate": "20220711T165048.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "取得單殺（沒有來自友方英雄的助攻）",
+      "challengeId": 203301,
+      "challengeName": "無情單殺",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203301/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "b98889bc-a899-796e-bbbe-a7ad517e3b51",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20330103,
+    "name": "無情單殺",
+    "purchaseDate": "20220904T101413.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "71f79ccc-d111-4f4c-8cc6-bc435f8d56a1",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000092,
+    "name": "破刃放逐者",
+    "purchaseDate": "20240515T034547.000Z",
+    "titleAcquisitionName": "雷玟",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "通過終結對方英雄的連殺獲得賞金金錢",
+      "challengeId": 402408,
+      "challengeName": "重賞之下必有勇夫",
+      "level": "SILVER",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402408/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "9cf2746b-c78a-a66a-7925-03c63c015631",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40240802,
+    "name": "賞金獵人",
+    "purchaseDate": "20220702T170417.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「團隊精神」組別中的挑戰獲得進度",
+      "challengeId": 302400,
+      "challengeName": "團隊精神",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302400/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "91cd7b24-d564-f78c-5a15-0bc2cba86031",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30240005,
+    "name": "精神高昂",
+    "purchaseDate": "20240422T123926.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "取得多個召喚師頭像",
+      "challengeId": 504002,
+      "challengeName": "峽谷象徵",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/504002/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "916993a7-b117-6820-df82-40301ae3422e",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 50400204,
+    "name": "頭像收藏家",
+    "purchaseDate": "20220512T080811.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「隨機單中英雄」組別中的挑戰獲得進度",
+      "challengeId": 101300,
+      "challengeName": "隨機單中英雄",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101300/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "92b298c0-4316-9b14-e2f0-9832bb01bc94",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10130005,
+    "name": "深淵",
+    "purchaseDate": "20250712T162952.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "以治療或護盾拯救一名本會受到致命傷害的友軍",
+      "challengeId": 302303,
+      "challengeName": "千鈞一髮",
+      "level": "SILVER",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302303/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "35e857af-e091-62fe-aff7-821894d7a0c4",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30230302,
+    "name": "守護天使",
+    "purchaseDate": "20220701T171006.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從不同挑戰獲得稱號",
+      "challengeId": 502001,
+      "challengeName": "功成名就",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/502001/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "af1ce27f-643f-0fc8-33a0-d623b17254ea",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 50200104,
+    "name": "名震四方",
+    "purchaseDate": "20240517T025321.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "以打野身分，在10分鐘內擊殺上路、中路、下路，或輔助玩家",
+      "challengeId": 302102,
+      "challengeName": "把你當野怪刷",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302102/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "ea6b48fc-c6db-f36c-defe-4faead29e826",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30210203,
+    "name": "英雄農夫",
+    "purchaseDate": "20240915T063110.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在隨機單中，擊殺近期曾獲得治療包的對手",
+      "challengeId": 101104,
+      "challengeName": "沒有解藥",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101104/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "bfe264b0-83d5-d0a2-a438-bc3ff40cd7ce",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10110403,
+    "name": "慈悲天使",
+    "purchaseDate": "20230715T160417.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "e17ed68e-d73f-43da-8dba-870759062516",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000067,
+    "name": "暗夜獵人",
+    "purchaseDate": "20250924T110718.000Z",
+    "titleAcquisitionName": "汎",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在敵人傷害守衛時，待在附近保護守衛，使其留存",
+      "challengeId": 204202,
+      "challengeName": "鐵牢守衛",
+      "level": "SILVER",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/204202/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "bcc76308-9587-1310-fb02-3af7cc9ed5d5",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20420202,
+    "name": "守衛守衛者",
+    "purchaseDate": "20220531T132521.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在單次戰鬥中，自英雄承受 10000 減免前傷害而未死亡",
+      "challengeId": 203201,
+      "challengeName": "沒事我來扛",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203201/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "bdd5c05b-aa7d-a5f3-9fda-789a0f9f73f4",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20320104,
+    "name": "老扛寶了",
+    "purchaseDate": "20220828T065525.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「隨機單中炫技」組別中的挑戰獲得進度",
+      "challengeId": 101200,
+      "challengeName": "隨機單中炫技",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101200/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "7f5173eb-6049-1660-8e5c-41c799ba3125",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10120005,
+    "name": "敏捷步伐",
+    "purchaseDate": "20250722T151444.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在防禦塔護甲卸除前(14分鐘)，摧毀防禦塔",
+      "challengeId": 302202,
+      "challengeName": "為了塔皮",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/302202/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "fa6e156d-78c6-8bec-eeac-42ef16e9c79a",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30220204,
+    "name": "歡樂伐木工",
+    "purchaseDate": "20221230T103218.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在未死亡過的情況下贏得對戰，且至少有 30% 擊殺參與率",
+      "challengeId": 201003,
+      "challengeName": "不死大魔王",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/201003/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "0aba96f9-1e18-e6bc-160a-63c89db5ad9b",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20100304,
+    "name": "不死大魔王",
+    "purchaseDate": "20230429T120836.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「足智多謀」組別中的挑戰獲得進度",
+      "challengeId": 402400,
+      "challengeName": "足智多謀",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402400/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "49575cf8-6ac8-9134-43a1-f4b230a860b2",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40240005,
+    "name": "足智多謀",
+    "purchaseDate": "20241201T062033.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在主堡裸露的情況下贏得對戰",
+      "challengeId": 301201,
+      "challengeName": "絕境逆轉勝",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301201/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "467d7e9e-4074-7864-ad2a-91dcaa4efc9b",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30120104,
+    "name": "守護主堡",
+    "purchaseDate": "20220811T062650.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「秀翻全場」組別中的挑戰獲得進度",
+      "challengeId": 103100,
+      "challengeName": "秀翻全場",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/103100/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "7224afe4-4bec-ab3d-2560-a131e6633bed",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10310005,
+    "name": "秀翻全場",
+    "purchaseDate": "20230718T142024.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在英雄交戰中，以個位數血量存活",
+      "challengeId": 103205,
+      "challengeName": "死裡逃生",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/103205/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "3e3dc4e6-beda-6ed1-1360-7e86729cb316",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10320503,
+    "name": "逃生專家",
+    "purchaseDate": "20220514T141902.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在附近的敵方英雄多過友方英雄的情況下取得擊殺",
+      "challengeId": 203302,
+      "challengeName": "背水一戰",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/203302/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "8207216a-313f-4dc7-6c0c-7cc964193d99",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 20330204,
+    "name": "以寡擊眾",
+    "purchaseDate": "20230706T162621.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「和諧」組別中的挑戰獲得進度",
+      "challengeId": 303400,
+      "challengeName": "和諧",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/303400/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "7a3e599d-acc4-9363-f5f4-7b52225d87d9",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30340005,
+    "name": "和樂融融",
+    "purchaseDate": "20250701T071244.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "970cbd05-4111-4db0-a571-69e9b62b2ea1",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000245,
+    "name": "時空少年",
+    "purchaseDate": "20260425T191934.000Z",
+    "titleAcquisitionName": "艾克",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在敵隊有龍魂的情況下取得遠古巨龍",
+      "challengeId": 301205,
+      "challengeName": "背骨巨龍",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301205/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "909a9d72-4ddc-2b31-0487-9a062f75cf6f",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30120504,
+    "name": "背水的咆哮",
+    "purchaseDate": "20220824T121209.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「祕術」組別中的挑戰獲得進度",
+      "challengeId": 402500,
+      "challengeName": "祕術",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/402500/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "4cbccb18-1dc4-86cd-91ee-df5cc4caf3f5",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40250005,
+    "name": "著魔",
+    "purchaseDate": "20230316T070542.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "在隨機單中對英雄命中雪球",
+      "challengeId": 101203,
+      "challengeName": "雪球大戰",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/101203/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "0d1edb7b-e6ac-2b83-bdfb-3c81ad7094e5",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10120303,
+    "name": "雪球大戰",
+    "purchaseDate": "20230526T063012.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "以輔助身份贏得對戰",
+      "challengeId": 401302,
+      "challengeName": "輔助差距",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/401302/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "a8850549-79a0-d38c-c294-d3434f99e093",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 40130204,
+    "name": "輔助差距",
+    "purchaseDate": "20231007T083100.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "參與擊殺一名在邊線凹地的敵方英雄",
+      "challengeId": 103201,
+      "challengeName": "吸菸區開扁",
+      "level": "GOLD",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/103201/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "68af6c96-9c1f-9ae6-1ec1-3b51d1ae98dd",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 10320103,
+    "name": "吸菸區戰神",
+    "purchaseDate": "20230214T134917.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "3d754ad8-5155-4b2e-bc67-8ce8884a9e10",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000101,
+    "name": "遠古魔導",
+    "purchaseDate": "20240515T034547.000Z",
+    "titleAcquisitionName": "齊勒斯",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "fe85eb1a-e6dd-4d1f-acc1-75bfd9a50c20",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1404_WelcomeToNoxus_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1404,
+    "name": "諾克薩斯戰士",
+    "purchaseDate": "20250307T213641.000Z",
+    "titleAcquisitionName": "歡迎來到諾克薩斯",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑38"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "6833fd6a-1998-42a0-9ef2-cc73493b7475",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 2000099,
+    "name": "光之少女",
+    "purchaseDate": "20250622T140625.000Z",
+    "titleAcquisitionName": "拉克絲",
+    "titleAcquisitionType": "CHAMPION_MASTERY",
+    "titleRequirementDescription": "專精等級10"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "從「野怪獵人」組別中的挑戰獲得進度",
+      "challengeId": 301100,
+      "challengeName": "野怪獵人",
+      "level": "DIAMOND",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/BRONZE.png",
+        "CHALLENGER": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/CHALLENGER.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/GOLD.png",
+        "GRANDMASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/GRANDMASTER.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/301100/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "60411e6c-7d71-4b2a-1dea-a701387eed93",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 30110005,
+    "name": "頂尖獵人",
+    "purchaseDate": "20240929T043502.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": null,
+    "contentId": "db3eefad-d9c5-4885-bc33-f483dafe07eb",
+    "iconPath": "/lol-game-data/assets/ASSETS/PlayerTitles/1404_WelcomeToNoxus_Title_Icon.svg",
+    "isPermanentTitle": true,
+    "itemId": 1407,
+    "name": "黑玫瑰新血",
+    "purchaseDate": "20250429T224424.000Z",
+    "titleAcquisitionName": "歡迎來到諾克薩斯",
+    "titleAcquisitionType": "EVENT",
+    "titleRequirementDescription": "通行證里程碑38"
+  },
+  {
+    "backgroundImagePath": "",
+    "challengeTitleData": {
+      "challengeDescription": "紀念你在2024「魔獸成群」活動服役的百獸特攻隊勳章",
+      "challengeId": 603000,
+      "challengeName": "魔獸成群生存者",
+      "level": "PLATINUM",
+      "levelToIconPath": {
+        "BRONZE": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/BRONZE.png",
+        "DIAMOND": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/DIAMOND.png",
+        "GOLD": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/GOLD.png",
+        "IRON": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/IRON.png",
+        "MASTER": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/MASTER.png",
+        "PLATINUM": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/PLATINUM.png",
+        "SILVER": "/lol-game-data/assets/ASSETS/Challenges/Config/603000/Tokens/SILVER.png"
+      }
+    },
+    "contentId": "41838af6-c43b-47c6-9a6c-e8c2f907a5a7",
+    "iconPath": "",
+    "isPermanentTitle": true,
+    "itemId": 60300007,
+    "name": "魔獸成群生存者",
+    "purchaseDate": "20240720T154844.000Z",
+    "titleAcquisitionName": "",
+    "titleAcquisitionType": "CHALLENGE",
+    "titleRequirementDescription": ""
+  }
+]
