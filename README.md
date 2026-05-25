@@ -201,7 +201,16 @@ If the League client is not running, the app retries process discovery every 10 
 dotnet publish -f net9.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None -p:WindowsAppSDKSelfContained=true
 ```
 
-The output will be in `bin/dev1/{configuration}/net9.0-windows10.0.19041.0/`. Run `LolClientHelper.exe` as Administrator.
+The raw publish output will be in `bin/dev1/{configuration}/net9.0-windows10.0.19041.0/publish/`. Run `LolClientHelper.exe` as Administrator.
+
+### Packaging (auto-zip)
+
+In **Release** mode, the publish automatically creates:
+
+- **Versioned folder**: `bin/dev1/LolClientHelper-v{version}/` — a copy of the publish output
+- **Zip archive**: `bin/dev1/LolClientHelper-v{version}.zip` — ready to distribute
+
+The version comes from `ApplicationDisplayVersion` in the csproj (currently `1.0`).
 
 ### Build (Debug)
 

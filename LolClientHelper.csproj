@@ -70,4 +70,29 @@
 		<PackageReference Include="System.Management" Version="9.0.4" />
 	</ItemGroup>
 
+	<!-- =========================================================================
+		 PackagePublishOutput — runs after every Release publish
+		  1. Copies publish output to a versioned folder (e.g. LolClientHelper-v1.0)
+		  2. Zips it into the same folder (e.g. LolClientHelper-v1.0.zip)
+		 ========================================================================= -->
+	<Target Name="PackagePublishOutput" AfterTargets="Publish" Condition="'$(Configuration)' == 'Release'">
+		<PropertyGroup>
+			<PackageDirName>$(AssemblyName)-v$(ApplicationDisplayVersion)</PackageDirName>
+			<PackageDirPath>$(BaseOutputPath)\$(PackageDirName)</PackageDirPath>
+			<PackageZipPath>$(BaseOutputPath)\$(PackageDirName).zip</PackageZipPath>
+		</PropertyGroup>
+
+		<Message Text="Packaging publish output to $(PackageDirPath)... _" Importance="high" />
+
+		<Copy SourceFiles="$(PublishDir)**\*"
+			  DestinationFiles="$(PackageDirPath)\%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<ZipDirectory SourceDirectory="$(PackageDirPath)"
+					  DestinationFile="$(PackageZipPath)"
+					  Overwrite="true" />
+
+		<Message Text="Created folder: $(PackageDirPath)" Importance="high" />
+		<Message Text="Created zip:    $(PackageZipPath)" Importance="high" />
+	</Target>
+
 </Project>
