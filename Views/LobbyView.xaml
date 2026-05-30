@@ -8,15 +8,21 @@
         <VerticalStackLayout Spacing="16">
             <Label Text="{Binding LobbyLabel}" Style="{DynamicResource GlassTitle}" />
             
-            <HorizontalStackLayout Spacing="12">
-                <Button Text="{Binding InviteAllFriendsLabel}" 
-                        Style="{DynamicResource GlassButtonPrimary}" 
-                        Command="{Binding InviteAllFriendsCommand}" />
-                <Button Text="{Binding RefreshFriendsLabel}" 
-                        Style="{DynamicResource GlassButton}" 
-                        Command="{Binding RefreshFriendsCommand}" />
-            </HorizontalStackLayout>
+            
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoStartGame}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoStartGameLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
 
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoAcceptMatch}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoAcceptMatchLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
+            
             <Border Style="{DynamicResource GlassItem}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="{Binding FilterLabel}" Style="{DynamicResource GlassLabel}" />
@@ -26,7 +32,14 @@
                             Style="{DynamicResource GlassPicker}" />
                 </VerticalStackLayout>
             </Border>
-
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="{Binding InviteAllFriendsLabel}" 
+                    Style="{DynamicResource GlassButtonPrimary}" 
+                    Command="{Binding InviteAllFriendsCommand}" />
+                <Button Text="{Binding RefreshFriendsLabel}" 
+                    Style="{DynamicResource GlassButton}" 
+                    Command="{Binding RefreshFriendsCommand}" />
+            </HorizontalStackLayout>
             <Border Style="{DynamicResource GlassItem}">
                 <HorizontalStackLayout Spacing="12">
                     <CheckBox IsChecked="{Binding AutoSendLobbyMessage}" />
@@ -42,19 +55,7 @@
                     HeightRequest="100" />
             </Border>
 
-            <Border Style="{DynamicResource GlassItem}">
-                <HorizontalStackLayout Spacing="12">
-                    <CheckBox IsChecked="{Binding AutoStartGame}" />
-                    <Label VerticalOptions="Center" Text="{Binding AutoStartGameLabel}" Style="{DynamicResource GlassLabel}" />
-                </HorizontalStackLayout>
-            </Border>
-
-            <Border Style="{DynamicResource GlassItem}">
-                <HorizontalStackLayout Spacing="12">
-                    <CheckBox IsChecked="{Binding AutoAcceptMatch}" />
-                    <Label VerticalOptions="Center" Text="{Binding AutoAcceptMatchLabel}" Style="{DynamicResource GlassLabel}" />
-                </HorizontalStackLayout>
-            </Border>
+            
         </VerticalStackLayout>
     </Border>
 </ContentView>

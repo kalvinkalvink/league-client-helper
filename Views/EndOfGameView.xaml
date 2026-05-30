@@ -11,6 +11,19 @@
             <VerticalStackLayout Spacing="12">
                 <Border Style="{DynamicResource GlassItem}">
                     <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding AutoSkipLike}" />
+                        <Label VerticalOptions="Center" Text="{Binding AutoSkipLikeLabel}" Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
+                        <CheckBox IsChecked="{Binding AutoReenterLobby}" />
+                        <Label VerticalOptions="Center" Text="{Binding AutoReenterLobbyLabel}" Style="{DynamicResource GlassLabel}" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Border Style="{DynamicResource GlassItem}">
+                    <HorizontalStackLayout Spacing="12">
                         <CheckBox IsChecked="{Binding AutoSendEndOfGameMessage}" />
                         <Label VerticalOptions="Center" Text="{Binding AutoSendLabel}" Style="{DynamicResource GlassLabel}" />
                     </HorizontalStackLayout>
@@ -22,20 +35,6 @@
                         Placeholder="{Binding MessagePlaceholder}"
                         AutoSize="TextChanges"
                         HeightRequest="100" />
-                </Border>
-
-                <Border Style="{DynamicResource GlassItem}">
-                    <HorizontalStackLayout Spacing="12">
-                        <CheckBox IsChecked="{Binding AutoSkipLike}" />
-                        <Label VerticalOptions="Center" Text="{Binding AutoSkipLikeLabel}" Style="{DynamicResource GlassLabel}" />
-                    </HorizontalStackLayout>
-                </Border>
-
-                <Border Style="{DynamicResource GlassItem}">
-                    <HorizontalStackLayout Spacing="12">
-                        <CheckBox IsChecked="{Binding AutoReenterLobby}" />
-                        <Label VerticalOptions="Center" Text="{Binding AutoReenterLobbyLabel}" Style="{DynamicResource GlassLabel}" />
-                    </HorizontalStackLayout>
                 </Border>
             </VerticalStackLayout>
         </VerticalStackLayout>
