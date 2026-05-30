@@ -19,8 +19,8 @@
 		<ApplicationId>com.companyname.lolclienthelper</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
+		<ApplicationVersion>1.1</ApplicationVersion>
 
 		<!-- No MSIX packaging (spec section 13) -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -84,8 +84,11 @@
 
 		<Message Text="Packaging publish output to $(PackageDirPath)... _" Importance="high" />
 
-		<Copy SourceFiles="$(PublishDir)**\*"
-			  DestinationFiles="$(PackageDirPath)\%(RecursiveDir)%(Filename)%(Extension)" />
+		<ItemGroup>
+			<_PublishFiles Include="$(PublishDir)**\*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(_PublishFiles)"
+			  DestinationFiles="$(PackageDirPath)\%(_PublishFiles.RecursiveDir)%(_PublishFiles.Filename)%(_PublishFiles.Extension)" />
 
 		<ZipDirectory SourceDirectory="$(PackageDirPath)"
 					  DestinationFile="$(PackageZipPath)"
