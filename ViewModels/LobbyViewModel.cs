@@ -17,6 +17,8 @@ public partial class LobbyViewModel : ObservableObject
     [ObservableProperty] private LocalizedItem? selectedFriendGroupItem;
     [ObservableProperty] private bool autoSendLobbyMessage;
     [ObservableProperty] private string lobbyMessage = string.Empty;
+    [ObservableProperty] private bool autoStartGame;
+    [ObservableProperty] private bool autoAcceptMatch;
 
     public string LobbyLabel => _localization.Get("tab.lobby");
     public string InviteAllFriendsLabel => _localization.Get("lobby.invite_all");
@@ -24,6 +26,8 @@ public partial class LobbyViewModel : ObservableObject
     public string FilterLabel => _localization.Get("lobby.filter");
     public string AutoSendLabel => _localization.Get("lobby.auto_send");
     public string MessagePlaceholder => _localization.Get("lobby.message_placeholder");
+    public string AutoStartGameLabel => _localization.Get("game_auto.start_game");
+    public string AutoAcceptMatchLabel => _localization.Get("game_auto.accept_match");
 
     public ObservableCollection<LocalizedItem> FriendGroupItems { get; } = [
         new() { Display = "All", Value = "All" }
@@ -52,6 +56,8 @@ public partial class LobbyViewModel : ObservableObject
         SelectedFriendGroupItem = FriendGroupItems.FirstOrDefault(x => x.Value == s.FriendFilterGroup) ?? FriendGroupItems[0];
         AutoSendLobbyMessage = s.AutoSendLobbyMessage;
         LobbyMessage = s.LobbyMessage;
+        AutoStartGame = s.AutoStartGame;
+        AutoAcceptMatch = s.AutoAcceptMatch;
     }
 
     partial void OnSelectedFriendGroupItemChanged(LocalizedItem? value)
@@ -65,6 +71,16 @@ public partial class LobbyViewModel : ObservableObject
     {
         _log.Debug(LogSource, $"AutoSendLobbyMessage changed to {value}");
         Save(s => s.AutoSendLobbyMessage = value);
+    }
+    partial void OnAutoStartGameChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoStartGame changed to {value}");
+        Save(s => s.AutoStartGame = value);
+    }
+    partial void OnAutoAcceptMatchChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoAcceptMatch changed to {value}");
+        Save(s => s.AutoAcceptMatch = value);
     }
     partial void OnLobbyMessageChanged(string value)
     {

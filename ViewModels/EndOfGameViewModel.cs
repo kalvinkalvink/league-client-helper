@@ -12,10 +12,14 @@ public partial class EndOfGameViewModel : ObservableObject
     private const string LogSource = "EndOfGameViewModel";
 
     [ObservableProperty] private bool autoSendEndOfGameMessage;
+    [ObservableProperty] private bool autoSkipLike;
+    [ObservableProperty] private bool autoReenterLobby;
     [ObservableProperty] private string endOfGameMessage = string.Empty;
 
     public string EndOfGameTabText => _localization.Get("tab.end_of_game");
     public string AutoSendLabel => _localization.Get("end_of_game.auto_send");
+    public string AutoSkipLikeLabel => _localization.Get("game_auto.skip_like");
+    public string AutoReenterLobbyLabel => _localization.Get("game_auto.reenter_lobby");
     public string MessagePlaceholder => _localization.Get("end_of_game.message_placeholder");
 
     public EndOfGameViewModel(ISettingsService settings, ILoggingService log, ILocalizationService localization)
@@ -31,6 +35,8 @@ public partial class EndOfGameViewModel : ObservableObject
     {
         var s = _settings.Current;
         AutoSendEndOfGameMessage = s.AutoSendEndOfGameMessage;
+        AutoSkipLike = s.AutoSkipLike;
+        AutoReenterLobby = s.AutoReenterLobby;
         EndOfGameMessage = s.EndOfGameMessage;
     }
 
@@ -38,6 +44,16 @@ public partial class EndOfGameViewModel : ObservableObject
     {
         _log.Debug(LogSource, $"AutoSendEndOfGameMessage changed to {value}");
         Save(s => s.AutoSendEndOfGameMessage = value);
+    }
+    partial void OnAutoSkipLikeChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoSkipLike changed to {value}");
+        Save(s => s.AutoSkipLike = value);
+    }
+    partial void OnAutoReenterLobbyChanged(bool value)
+    {
+        _log.Debug(LogSource, $"AutoReenterLobby changed to {value}");
+        Save(s => s.AutoReenterLobby = value);
     }
     partial void OnEndOfGameMessageChanged(string value)
     {

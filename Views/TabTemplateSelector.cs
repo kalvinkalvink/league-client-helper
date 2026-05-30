@@ -10,7 +10,6 @@ namespace LolClientHelper.Views;
 /// </summary>
 public sealed class TabTemplateSelector : DataTemplateSelector
 {
-    public DataTemplate? GameAutoTemplate     { get; set; }
     public DataTemplate? MainPageTemplate     { get; set; }
     public DataTemplate? LobbyTemplate        { get; set; }
     public DataTemplate? GameStatusTemplate   { get; set; }
@@ -28,11 +27,10 @@ public sealed class TabTemplateSelector : DataTemplateSelector
     protected override DataTemplate? OnSelectTemplate(object item, BindableObject container)
     {
         if (item is not MainViewModel vm)
-            return GameAutoTemplate;
+            return LobbyTemplate;
 
         return vm.SelectedTab switch
         {
-            "GameAuto"    => GameAutoTemplate,
             "MainPage"    => MainPageTemplate,
             "Lobby"       => LobbyTemplate,
             "GameStatus"  => GameStatusTemplate,
@@ -40,7 +38,7 @@ public sealed class TabTemplateSelector : DataTemplateSelector
             "EndOfGame"   => EndOfGameTemplate,
             "Logs"        => LogsTemplate,
             "Settings"    => SettingsTemplate,
-            _             => GameAutoTemplate
+            _             => LobbyTemplate
         };
     }
 }

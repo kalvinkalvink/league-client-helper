@@ -14,11 +14,6 @@
             so every tab view is fully decoupled and bound independently.
         -->
         <views:TabTemplateSelector x:Key="TabSelector">
-            <views:TabTemplateSelector.GameAutoTemplate>
-                <DataTemplate x:DataType="viewModels:MainViewModel">
-                    <views:GameAutoView BindingContext="{Binding GameAutoVM}" />
-                </DataTemplate>
-            </views:TabTemplateSelector.GameAutoTemplate>
             <views:TabTemplateSelector.MainPageTemplate>
                 <DataTemplate x:DataType="viewModels:MainViewModel">
                     <views:MainPageTabView BindingContext="{Binding MainPageTabVM}" />
@@ -71,17 +66,6 @@
                              active tab. The Value="False" trigger is intentionally absent —
                              when the trigger condition is no longer met, MAUI automatically
                              reverts each property to the value defined in the base Style. -->
-                        <Button Text="{Binding GameAutoTabText}"
-                                Style="{DynamicResource GlassSidebarButton}"
-                                Command="{Binding SetTabCommand}"
-                                CommandParameter="GameAuto">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding IsGameAutoTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
                         <Button Text="{Binding MainPageTabText}"
                                 Style="{DynamicResource GlassSidebarButton}"
                                 Command="{Binding SetTabCommand}"
@@ -104,17 +88,6 @@
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Text="{Binding GameStatusTabText}"
-                                Style="{DynamicResource GlassSidebarButton}"
-                                Command="{Binding SetTabCommand}"
-                                CommandParameter="GameStatus">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding IsGameStatusTab}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
-                                    <Setter Property="TextColor" Value="White" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
                         <Button Text="{Binding ChampSelectTabText}"
                                 Style="{DynamicResource GlassSidebarButton}"
                                 Command="{Binding SetTabCommand}"
@@ -132,6 +105,17 @@
                                 CommandParameter="EndOfGame">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsEndOfGameTab}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="{Binding GameStatusTabText}"
+                                Style="{DynamicResource GlassSidebarButton}"
+                                Command="{Binding SetTabCommand}"
+                                CommandParameter="GameStatus">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsGameStatusTab}" Value="True">
                                     <Setter Property="BackgroundColor" Value="{DynamicResource AccentPurple}" />
                                     <Setter Property="TextColor" Value="White" />
                                 </DataTrigger>

@@ -41,6 +41,20 @@
                     AutoSize="TextChanges"
                     HeightRequest="100" />
             </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoStartGame}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoStartGameLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border Style="{DynamicResource GlassItem}">
+                <HorizontalStackLayout Spacing="12">
+                    <CheckBox IsChecked="{Binding AutoAcceptMatch}" />
+                    <Label VerticalOptions="Center" Text="{Binding AutoAcceptMatchLabel}" Style="{DynamicResource GlassLabel}" />
+                </HorizontalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </Border>
 </ContentView>

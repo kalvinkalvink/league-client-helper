@@ -12,10 +12,9 @@ public partial class MainViewModel : ObservableObject, IDisposable
     private readonly ISettingsService _settings;
     private bool _disposed;
 
-    [ObservableProperty] private string selectedTab = "GameAuto";
+    [ObservableProperty] private string selectedTab = "Lobby";
     [ObservableProperty] private string connectionStatus = "Connecting...";
 
-    public GameAutoViewModel GameAutoVM { get; }
     public MainPageTabViewModel MainPageTabVM { get; }
     public LobbyViewModel LobbyVM { get; }
     public GameStatusViewModel GameStatusVM { get; }
@@ -24,7 +23,6 @@ public partial class MainViewModel : ObservableObject, IDisposable
     public ChampSelectViewModel ChampSelectVM { get; }
     public EndOfGameViewModel EndOfGameVM { get; }
 
-    public bool IsGameAutoTab    => SelectedTab == "GameAuto";
     public bool IsMainPageTab    => SelectedTab == "MainPage";
     public bool IsLobbyTab       => SelectedTab == "Lobby";
     public bool IsGameStatusTab  => SelectedTab == "GameStatus";
@@ -33,7 +31,6 @@ public partial class MainViewModel : ObservableObject, IDisposable
     public bool IsChampSelectTab => SelectedTab == "ChampSelect";
     public bool IsEndOfGameTab   => SelectedTab == "EndOfGame";
 
-    public string GameAutoTabText    => _localization.Get("tab.game_auto");
     public string MainPageTabText    => _localization.Get("tab.main_page");
     public string LobbyTabText       => _localization.Get("tab.lobby");
     public string GameStatusTabText  => _localization.Get("tab.game_status");
@@ -43,7 +40,6 @@ public partial class MainViewModel : ObservableObject, IDisposable
     public string EndOfGameTabText   => _localization.Get("tab.end_of_game");
 
     public MainViewModel(
-        GameAutoViewModel gameAutoVM,
         MainPageTabViewModel mainPageTabVM,
         LobbyViewModel lobbyVM,
         GameStatusViewModel gameStatusVM,
@@ -55,7 +51,6 @@ public partial class MainViewModel : ObservableObject, IDisposable
         ILocalizationService localization,
         ISettingsService settings)
     {
-        GameAutoVM = gameAutoVM;
         MainPageTabVM = mainPageTabVM;
         LobbyVM = lobbyVM;
         GameStatusVM = gameStatusVM;
